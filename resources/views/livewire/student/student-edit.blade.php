@@ -1,8 +1,8 @@
 <div class="container mt-5">
     <x-mary-card shadow class="border border-dashed">
-        <div class="row">
+        <div class="grid grid-cols-2 gap-10 p-10">
             <!-- Form Section -->
-            <div class="col-md-6 col-12">
+            <div>
                 <x-mary-form wire:submit.prevent="update">
                     @csrf
                     @method('PUT')
@@ -49,7 +49,7 @@
                         value="{{ old('age', $age) }}"
                         error="{{ $errors->first('age') }}" />
 
-                    <div class="d-flex justify-content-center gap-2">
+                    <div class="flex items-center justify-center mt-4 gap-3">
                         <x-mary-button label="Back" wire:click="back" spinner />
                         <x-mary-button type="submit" class="btn btn-primary" spinner="update">Update</x-mary-button>
                     </div>
@@ -61,7 +61,7 @@
                 @endisset
             </div>
             <!-- Image Section -->
-            <div class="col-md-6 d-none d-md-block">
+            <div>
                 <div class="card">
                     <img src="/../update.webp" alt="Student Image" class="img-fluid">
                 </div>

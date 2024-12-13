@@ -2,4 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Active page highlight - Light and Dark Modes */
+.mary-table-pagination span[aria-current="page"] > span {
+    @apply text-error; /* Active page styling */
+}
 
+/* Disabled pages - consistent styling for dark and light modes */
+.mary-table-pagination span[aria-disabled="true"] span {
+    @apply text-base-100; /* Disabled state styling */
+}
+
+/* Pagination buttons - Light Mode */
+.mary-table-pagination button {
+    @apply text-primary;
+}

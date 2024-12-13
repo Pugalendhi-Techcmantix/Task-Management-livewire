@@ -1,4 +1,3 @@
-
 // Display Toast
 function showToast(message, type = "primary") {
     // Create a container for the toast if it doesn't exist

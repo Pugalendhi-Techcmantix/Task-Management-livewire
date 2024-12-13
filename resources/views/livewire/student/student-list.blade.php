@@ -1,57 +1,44 @@
-<div class="container mt-5 ">
-        <x-mary-card shadow class="border border-dashed">
+<div class="container mt-5">
+        <x-mary-card shadow class="shadow-xl p-11">
 
-
-                <div class="d-flex justify-content-between">
-                        <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search" style="width: 400px;" />
+                <div class="flex items-center justify-between">
+                        <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
+                                class="w-96 focus:outline-none" />
                         <x-mary-button label="Add" wire:click="addForm" icon="o-plus" spinner />
                 </div>
                 <div class="container mt-4">
-                        @if($students && count($students) > 0)
-                        <div class="table-responsive">
-                                <table class="table  table-hover">
-                                        <thead class="thead-light table-dark">
-                                                <tr>
-                                                        <th>S.No</th>
-                                                        <th>Name</th>
-                                                        <th>Roll Number</th>
-                                                        <th>Age</th>
-                                                        <th>Action</th>
-                                                </tr>
-                                        </thead>
-                                        <tbody>
-                                                @foreach($students as $student)
-                                                <tr>
-                                                        <td>{{ $student->id }}</td>
-                                                        <td>{{ $student->name }}</td>
-                                                        <td>{{ $student->rollno }}</td>
-                                                        <td>{{ $student->age }}</td>
-                                                        <td>
-                                                                <x-mary-button wire:click="editStudent({{ $student->id }})"
-                                                                        class="btn-circle btn-ghost btn-sm text-primary"
-                                                                        icon="o-pencil"
-                                                                        spinner />
-                                                                <x-mary-button
-                                                                        wire:click="openDeleteModal({{ $student->id }})=true"
-                                                                        class="btn-circle btn-ghost btn-sm text-error"
-                                                                        icon="o-trash"
-                                                                        spinner />
+                        <x-mary-table striped :headers="$headers" :rows="$students" :sort-by="$sortBy"
+                                with-pagination
+                                per-page="perPage"
+                                :per-page-values="[2,3,5]">
 
-                                                        </td>
+                                @if($students->count() > 0)
+                                @foreach($students as $student)
+                                @scope('cell_id',$num)
+                                <x-mary-badge :value="$num->id" class="badge-info " />
+                                @endscope
+                                @scope('cell_actions', $student)
+                                <div class="flex gap-3">
+                                        <x-mary-button wire:click="editStudent({{ $student->id }})"
+                                                class="btn-circle btn-ghost btn-sm text-primary"
+                                                icon="o-pencil"
+                                                spinner />
+                                        <x-mary-button
+                                                wire:click="openDeleteModal({{ $student->id }})=true"
+                                                class="btn-circle btn-ghost btn-sm text-error"
+                                                icon="o-trash"
+                                                spinner />
+                                </div>
+                                @endscope
+                                @endforeach
+                                @else
+                                <tr>
+                                        <td colspan="{{ count($headers) }}" class="text-center py-4">No data available</td>
+                                </tr>
+                                @endif
+                        </x-mary-table>
 
-                                                </tr>
-                                                @endforeach
-                                        </tbody>
-                                </table>
-                        </div>
-                        <!-- Pagination -->
-                        <div class="mt-4">
-                                {{ $students->links() }}
-                        </div>
 
-                        @else
-                        <p class="text-center mt-4">No data available</p>
-                        @endif
                 </div>
         </x-mary-card>
 

@@ -1,7 +1,7 @@
 <div class="container mt-5 ">
     <x-mary-card shadow class="border border-dashed">
-        <div class="row">
-            <div class="col-md-6 col-12">
+        <div class="grid grid-cols-2 gap-10 p-10">
+            <div class="">
                 <x-mary-form wire:submit.prevent="submit">
                     @csrf
                     <x-mary-header title="STUDENT ENTRIES" size="text-xl" class="text-primary" />
@@ -45,13 +45,13 @@
                         name="age"
                         value="{{ old('age') }}"
                         error="{{ $errors->first('age') }}" />
-                    <div class="d-flex justify-center gap-2 mt-4">
+                    <div class="flex items-center justify-center gap-3">
                         <x-mary-button label="Back" wire:click="back" spinner />
                         <x-mary-button type="submit" class="btn-primary" spinner="submit">Register</x-mary-button>
                     </div>
                 </x-mary-form>
             </div>
-            <div class="col-md-6 d-none d-md-block">
+            <div class="">
                 <div class="card">
                     <img src="/../regiter.jpg" alt="Student Image" class="img-fluid">
                 </div>
