@@ -66,12 +66,3 @@ class StudentList extends Component
     }
 }
 
-
-// $students = Student::all();
-        // Filter students based on the search query
-        // $students = Student::query()
-        //     ->where('name', 'like', '%' . $this->search . '%')
-        //     ->orWhere('rollno', 'like', '%' . $this->search . '%')
-        //     ->orWhere('age', 'like', '%' . $this->search . '%')
-        //     ->orderBy('id')
-        //     ->paginate(2);

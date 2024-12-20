@@ -8,11 +8,10 @@
                 </div>
                 <div class="container mt-4">
                         <x-mary-table striped :headers="$headers" :rows="$students" :sort-by="$sortBy"
+                                show-empty-text
                                 with-pagination
                                 per-page="perPage"
                                 :per-page-values="[2,3,5]">
-
-                                @if($students->count() > 0)
                                 @foreach($students as $student)
                                 @scope('cell_id',$num)
                                 <x-mary-badge :value="$num->id" class="badge-info " />
@@ -31,18 +30,9 @@
                                 </div>
                                 @endscope
                                 @endforeach
-                                @else
-                                <tr>
-                                        <td colspan="{{ count($headers) }}" class="text-center py-4">No data available</td>
-                                </tr>
-                                @endif
                         </x-mary-table>
-
-
                 </div>
         </x-mary-card>
-
-
         <x-mary-modal wire:model="confirmDelete" title="Are you sure?">
                 <div>Click 'Confirm' to permanently delete.</div>
                 <x-slot:actions>

@@ -43,15 +43,18 @@
             <!-- Fixed Sidebar -->
             <aside class="bg-white dark:bg-gray-800 p-4 w-64 flex-shrink-0">
                 <x-mary-menu active-bg-color="bg-purple-500/20">
-                    <!-- Dashboard Menu Item -->
                     <x-mary-menu-item
                         :href="route('dashboard')"
                         title="Dashboard"
                         icon="o-home"
                         :active="request()->routeIs('dashboard')"
                         class="{{ request()->routeIs('dashboard') ? 'text-black font-bold' : 'text-purple-500' }}" />
-
-                    <!-- Student Menu Item -->
+                    <x-mary-menu-item
+                        :href="route('employee-list')"
+                        title="Employees"
+                        icon="o-user-group"
+                        :active="request()->routeIs('employee-list')"
+                        class="{{ request()->routeIs('employee-list') ? 'text-black font-bold' : 'text-purple-500' }}" />
                     <x-mary-menu-item
                         :href="route('student-list')"
                         title="Student"

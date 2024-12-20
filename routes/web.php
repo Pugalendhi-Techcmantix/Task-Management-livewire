@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
@@ -19,6 +20,9 @@ Route::get('/dashboard', function () {
 Route::get('student-list', [StudentController::class, 'viewList'])->name('student-list');
 Route::get('student-add', [StudentController::class, 'viewForm'])->name("student-add");
 Route::get('student-edit/{id}', [StudentController::class, 'editForm'])->name("student-edit");
+
+Route::get('employee-list', [EmployeeController::class, 'index'])->name('employee-list');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
