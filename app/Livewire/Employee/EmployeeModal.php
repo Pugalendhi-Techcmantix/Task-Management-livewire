@@ -10,6 +10,17 @@ class EmployeeModal extends ModalComponent
 {
 
     public EmployeeForm $form;
+    public $statusOptions = [
+        [
+            'id' => 1,
+            'name' => 'Active',
+        ],
+        [
+            'id' => 0,
+            'name' => 'In Active',
+
+        ],
+    ];
 
     public function mount($employee_id = null)
     {
@@ -32,7 +43,6 @@ class EmployeeModal extends ModalComponent
     {
         // Example save logic (you can modify according to your needs)
         $this->form->save();
-
         $this->dispatch('refresh-employee-table');
         return $this->closeModal();
     }

@@ -3,25 +3,21 @@
         <div class="flex items-center justify-between">
             <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
                 class="w-96 focus:outline-none" />
-            <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'employee.employee-modal' })"
+            <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'status.status-modal' })"
                 icon="o-plus" spinner />
         </div>
         <div class="container mt-4">
-            <x-mary-table striped :headers="$headers" :rows="$employees" :sort-by="$sortBy" show-empty-text with-pagination
-                per-page="perPage" :per-page-values="[2, 3, 5]">
-                @foreach ($employees as $employee)
+            <x-mary-table striped :headers="$headers" :rows="$statuslist" :sort-by="$sortBy" show-empty-text>
+                @foreach ($statuslist as $status)
                     @scope('cell_id', $num)
                         <x-mary-badge :value="$num->id" class="badge-info " />
                     @endscope
-                    @scope('cell_status', $st)
-                        <x-mary-badge :value="$st->status_label" :class="$st->status === 1 ? 'bg-green-500 text-white' : 'bg-red-500 text-white'" />
-                    @endscope
-                    @scope('cell_actions', $employee)
+                    @scope('cell_actions', $status)
                         <div class="flex gap-3">
                             <x-mary-button
-                                wire:click="$dispatch('openModal', { component: 'employee.employee-modal', arguments: { employee_id: '{{ $employee->id }}' }})"
+                                wire:click="$dispatch('openModal', { component: 'status.status-modal', arguments: { status_id: '{{ $status->id }}' }})"
                                 class=" btn-circle btn-ghost btn-sm text-primary" icon="o-pencil" spinner />
-                            <x-mary-button wire:click="openDeleteModal({{ $employee->id }})=true"
+                            <x-mary-button wire:click="openDeleteModal({{ $status->id }})=true"
                                 class="btn-circle btn-ghost btn-sm text-error" icon="o-trash" spinner />
                         </div>
                     @endscope
@@ -29,6 +25,7 @@
             </x-mary-table>
         </div>
     </x-mary-card>
+
 
     <x-mary-modal wire:model="confirmDelete" title="Are you sure?">
         <div>Click 'Confirm' to permanently delete.</div>

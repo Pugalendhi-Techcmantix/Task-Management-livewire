@@ -31,36 +31,31 @@
 
         <!-- Header Section -->
         @isset($header)
-        <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-10">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
+            <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-10">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
         @endisset
 
         <!-- Main Content Wrapper -->
         <div class="flex flex-grow" style="height: calc(90vh - 100px);">
             <!-- Fixed Sidebar -->
             <aside class="bg-white dark:bg-gray-800 p-4 w-64 flex-shrink-0">
-                <x-mary-menu active-bg-color="bg-purple-500/20">
-                    <x-mary-menu-item
-                        :href="route('dashboard')"
-                        title="Dashboard"
-                        icon="o-home"
-                        :active="request()->routeIs('dashboard')"
-                        class="{{ request()->routeIs('dashboard') ? 'text-black font-bold' : 'text-purple-500' }}" />
-                    <x-mary-menu-item
-                        :href="route('employee-list')"
-                        title="Employees"
-                        icon="o-user-group"
-                        :active="request()->routeIs('employee-list')"
-                        class="{{ request()->routeIs('employee-list') ? 'text-black font-bold' : 'text-purple-500' }}" />
-                    <x-mary-menu-item
-                        :href="route('student-list')"
-                        title="Student"
-                        icon="o-user-group"
-                        :active="request()->routeIs('student-list')"
-                        class="{{ request()->routeIs('student-list') ? 'text-black font-bold' : 'text-purple-500' }}" />
+                <x-mary-menu active-bg-color="bg-info text-white">
+                    <x-mary-menu-item :href="route('dashboard')" title="Dashboard" icon="o-home" :active="request()->routeIs('dashboard')"
+                        class="{{ request()->routeIs('dashboard') ? 'text-black font-bold' : '' }}" />
+                    <x-mary-menu-item :href="route('employee-list')" title="Employees" icon="o-user-group" :active="request()->routeIs('employee-list')"
+                        class="{{ request()->routeIs('employee-list') ? 'text-black font-bold' : '' }}" />
+
+
+                    <x-mary-menu-sub title="Master"  icon="c-square-3-stack-3d">
+                        <x-mary-menu-item :href="route('status-list')" title="Status" icon="o-clock" :active="request()->routeIs('status-list')"
+                            class="{{ request()->routeIs('status-list') ? 'text-black font-bold' : '' }}" />
+                    </x-mary-menu-sub>
+
+                    <x-mary-menu-item :href="route('student-list')" title="Student" icon="o-user-group" :active="request()->routeIs('student-list')"
+                        class="{{ request()->routeIs('student-list') ? 'text-black font-bold' : '' }}" />
                 </x-mary-menu>
             </aside>
 

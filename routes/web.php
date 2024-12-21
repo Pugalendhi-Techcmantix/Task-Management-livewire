@@ -1,9 +1,11 @@
 <?php
 
+
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
 
 
 Route::get('/', function () {
@@ -22,6 +24,7 @@ Route::get('student-add', [StudentController::class, 'viewForm'])->name("student
 Route::get('student-edit/{id}', [StudentController::class, 'editForm'])->name("student-edit");
 
 Route::get('employee-list', [EmployeeController::class, 'index'])->name('employee-list');
+Route::get('status-list', [StatusController::class, 'index'])->name('status-list');
 
 
 Route::middleware('auth')->group(function () {

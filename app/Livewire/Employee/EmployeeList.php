@@ -14,7 +14,6 @@ class EmployeeList extends Component
     public string $search = ''; // Search query
     public bool $confirmOpen = false;
     public bool $confirmDelete = false;
-    public $editEmployee = null; // Track the employee being edited
     public $employee_id = null; // Employee ID for update operations
     public int $perPage = 5; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
@@ -49,7 +48,6 @@ class EmployeeList extends Component
     }
     public function render()
     {
-
         $headers = [
             ['key' => 'id', 'label' => 'S.No', 'sortable' => true, 'class' => 'w-20'],
             ['key' => 'name', 'label' => 'Name', 'sortable' => true],
@@ -57,7 +55,8 @@ class EmployeeList extends Component
             ['key' => 'age', 'label' => 'Age', 'sortable' => true],
             ['key' => 'position', 'label' => 'Position', 'sortable' => true],
             ['key' => 'salary', 'label' => 'Salary', 'sortable' => true],
-            ['key' => 'joining_date', 'label' => 'D.O.J', 'format' => ['date', 'd-m-Y'], 'sortable' => true],
+            ['key' => 'status', 'label' => 'Status', 'sortable' => true,],
+            ['key' => 'joining_date', 'label' => 'D.O.J', 'format' => ['date', 'd-m-Y'], 'sortable' => true,],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting
@@ -67,6 +66,7 @@ class EmployeeList extends Component
             ->orWhere('age', 'like', '%' . $this->search . '%')
             ->orWhere('position', 'like', '%' . $this->search . '%')
             ->orWhere('salary', 'like', '%' . $this->search . '%')
+            ->orWhere('status', 'like', '%' . $this->search . '%')
             ->orWhere('joining_date', 'like', '%' . $this->search . '%')
             ->orderBy(...array_values($this->sortBy))
             ->paginate($this->perPage);

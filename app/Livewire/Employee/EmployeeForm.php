@@ -9,19 +9,17 @@ class EmployeeForm extends Form
 {
     public ?Employee $employee;
     public ?int $employee_id = null;  // ID of the employee to update
-    public  $name = null; // Employee name
-    public  $email = null; // Employee email
-    public  $age = null; // Employee age
-    public  $position = null; // Employee position
-    public $salary = null; // Employee salary
-    public  $joining_date = null; // Employee joining date
-    public ?string $success_message = null;
-    public ?string $error_message = null;
+    public  $name; // Employee name
+    public  $email; // Employee email
+    public  $age; // Employee age
+    public  $position; // Employee position
+    public $salary; // Employee salary
+    public $status;
+    public  $joining_date; // Employee joining date
+    public ?string $success_message;
+    public ?string $error_message;
+    
 
-    public function updating()
-    {
-        return !empty($this->employee);
-    }
     public function rules()
     {
         return [
@@ -45,11 +43,13 @@ class EmployeeForm extends Form
             'position' => $employee->position,
             'salary' => $employee->salary,
             'joining_date' => $employee->joining_date,
+            'status' => $employee->status,
         ]);
     }
 
     public function create()
     {
+        // dd($this->all());
         Employee::create([
             'name' => $this->name,
             'email' => $this->email,
@@ -57,6 +57,7 @@ class EmployeeForm extends Form
             'position' => $this->position,
             'salary' => $this->salary,
             'joining_date' => $this->joining_date,
+            'status' => 1, // Default to Active on create
         ]);
         $this->success_message = "Employee created successfully!";
     }
@@ -69,8 +70,14 @@ class EmployeeForm extends Form
             'position' => $this->position,
             'salary' => $this->salary,
             'joining_date' => $this->joining_date,
+            'status' => $this->status,
         ]);
         $this->success_message = "Employee updated successfully!";
+    }
+
+    public function updating()
+    {
+        return !empty($this->employee);
     }
     public function save()
     {
@@ -84,6 +91,8 @@ class EmployeeForm extends Form
     }
     public function render()
     {
-        return view('livewire.employee.employee-form');
+        return view(
+            'livewire.employee.employee-form'
+        );
     }
 }
