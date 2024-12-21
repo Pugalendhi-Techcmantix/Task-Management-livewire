@@ -4,15 +4,13 @@ namespace App\Livewire\Employee;
 
 use App\Models\Employee;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
-use Ramsey\Uuid\Type\Integer;
 
 class EmployeeList extends Component
 {
     use Toast;
-    use WithPagination, WithFileUploads;
+    use WithPagination;
     public string $search = ''; // Search query
     public bool $confirmOpen = false;
     public bool $confirmDelete = false;
@@ -27,7 +25,6 @@ class EmployeeList extends Component
     public  $position = null; // Employee position
     public $salary = null; // Employee salary
     public  $joining_date = null; // Employee joining date
-    public $profile_image = null; // File for avatar upload
 
     protected $listeners = ['refresh-employee-table' => '$refresh'];
 
@@ -35,71 +32,6 @@ class EmployeeList extends Component
     public function openModal()
     {
         $this->confirmOpen = true;    // Trigger modal visibility
-    }
-
-
-
-    // public function submit()
-    // {
-    //     // Validate the input data
-    //     $validatedData = $this->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email|unique:employees,email',
-    //         'age' => 'required|integer|min:18|max:100',
-    //         'position' => 'required|string|max:255',
-    //         'salary' => 'required|numeric|min:0',
-    //         'joining_date' => 'required|date',
-    //         'profile_image' => 'nullable|file|mimes:jpg,png|max:2048', // File validation
-    //     ]);
-    //     // Handle file upload
-    //     if ($this->profile_image) {
-    //         $validatedData['profile_image'] = $this->profile_image->store('profile_images', 'public');
-    //     }
-    //     // Create new employee
-    //     Employee::create($validatedData);
-    //     session()->flash('success', 'Employee added successfully!');
-    //     // Reset input fields and close the modal
-    //     $this->resetInputFields();
-    // }
-    public function submit()
-    {
-        $validatedData = $this->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:employees,email,' . ($this->editEmployee ? $this->editEmployee->id : ''),
-            'age' => 'required|integer|min:18|max:100',
-            'position' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:0',
-            'joining_date' => 'required|date',
-            'profile_image' => 'nullable|file|mimes:jpg,png|max:2048',
-        ]);
-
-        if ($this->profile_image) {
-            $validatedData['profile_image'] = $this->profile_image->store('profile_images', 'public');
-        }
-
-        if ($this->editEmployee) {
-            // Update the employee
-            $this->editEmployee->update($validatedData);
-            session()->flash('success', 'Employee updated successfully!');
-        } else {
-            // Create a new employee
-            Employee::create($validatedData);
-            session()->flash('success', 'Employee added successfully!');
-        }
-
-        $this->resetInputFields();
-    }
-
-    private function resetInputFields()
-    {
-        $this->name = '';
-        $this->email = '';
-        $this->age = '';
-        $this->position = '';
-        $this->salary = '';
-        $this->joining_date = '';
-        $this->profile_image = null;
-        $this->employee_id = null;
     }
 
     public function openDeleteModal($employee_id)

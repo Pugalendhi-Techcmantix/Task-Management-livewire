@@ -3,16 +3,13 @@
 namespace App\Livewire\Employee;
 
 use App\Models\Employee;
-use Livewire\Component;
-use Livewire\WithFileUploads;
+
 use LivewireUI\Modal\ModalComponent;
 
 class EmployeeModal extends ModalComponent
 {
 
-    use WithFileUploads;  // Ensure file uploads are handled in the modal
     public EmployeeForm $form;
-
 
     public function mount($employee_id = null)
     {
@@ -21,7 +18,6 @@ class EmployeeModal extends ModalComponent
             $this->form->setValue($employee);
         }
     }
-
     protected function rules()
     {
         return $this->form->rules();
@@ -43,7 +39,7 @@ class EmployeeModal extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return 'md';
+        return '4xl';
     }
 
     public static function closeModalOnEscape(): bool

@@ -17,12 +17,6 @@
                 @scope('cell_id',$num)
                 <x-mary-badge :value="$num->id" class="badge-info " />
                 @endscope
-                @scope('cell_name', $employee)
-                <div class="flex items-center gap-2">
-                    <img src="{{ asset('storage/' . $employee->profile_image) }}" alt="Profile Image" class="w-8 h-8 rounded-full">
-                    <span>{{ $employee->name }}</span>
-                </div>
-                @endscope
                 @scope('cell_actions', $employee)
                 <div class="flex gap-3">
                     <x-mary-button

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('position');
             $table->integer('salary');
             $table->date('joining_date');
-            $table->string('profile_image')->nullable(); // Add profile image column
             $table->timestamps();
         });
     }

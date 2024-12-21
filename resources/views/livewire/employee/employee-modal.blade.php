@@ -53,11 +53,6 @@
                 wire:model="form.joining_date"
                 placeholder="Enter your D.O.J"
                 name="joining_date" />
-
-            <x-mary-file label="Avatar"
-                hint="Only Jpg.Png"
-                wire:model="form.profile_image" 
-                accept="image/png, image/jpeg" />
         </div>
         <x-slot:actions>
             <x-mary-button type="button"
