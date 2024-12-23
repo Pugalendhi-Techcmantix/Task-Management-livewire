@@ -16,7 +16,7 @@ class Employee extends Model
     // {
     //     return $this->attributes['status'] == 1 ? 'Active' : 'In Active';
     // }
-    
+
     // public function getStatusLabelAttribute()
     // {
     //     return $this->status === 1 ? 'Active' : 'Suspended';
@@ -31,5 +31,9 @@ class Employee extends Model
             'status' => $statusLabel,
             'role' => $roleLabel,
         ];
+    }
+    public function role()
+    {
+        return $this->belongsTo(Roles::class, 'role_id'); // Use belongsTo and specify the correct foreign key
     }
 }

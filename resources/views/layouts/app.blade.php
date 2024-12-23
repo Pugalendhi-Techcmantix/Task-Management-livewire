@@ -52,6 +52,8 @@
                     <x-mary-menu-sub title="Master"  icon="c-square-3-stack-3d">
                         <x-mary-menu-item :href="route('role-list')" title="Roles" icon="o-user" :active="request()->routeIs('role-list')"
                             class="{{ request()->routeIs('role-list') ? 'text-black font-bold' : '' }}" />
+                        <x-mary-menu-item :href="route('task-list')" title="Tasks" icon="o-clock" :active="request()->routeIs('task-list')"
+                            class="{{ request()->routeIs('task-list') ? 'text-black font-bold' : '' }}" />
                     </x-mary-menu-sub>
 
                     <x-mary-menu-item :href="route('student-list')" title="Student" icon="o-user-group" :active="request()->routeIs('student-list')"

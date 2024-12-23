@@ -15,7 +15,7 @@ class EmployeeForm extends Form
     public  $position; // Employee position
     public $salary; // Employee salary
     public $status;
-    public $role;
+    public $role_id;
     public  $joining_date; // Employee joining date
     public ?string $success_message;
     public ?string $error_message;
@@ -28,7 +28,7 @@ class EmployeeForm extends Form
             'email' => 'required|email|unique:employees,email,' . $this->employee_id,
             'age' => 'required|integer|min:18|max:100',
             'position' => 'required|string|max:255',
-            'role' => 'required',
+            'role_id' => 'required',
             'salary' => 'required|numeric|min:0',
             'joining_date' => 'required|date',
         ];
@@ -44,7 +44,7 @@ class EmployeeForm extends Form
             'age' => $employee->age,
             'position' => $employee->position,
             'salary' => $employee->salary,
-            'role' => $employee->role,
+            'role_id' => $employee->role_id,
             'joining_date' => $employee->joining_date,
             'status' => $employee->status,
         ]);
@@ -59,7 +59,7 @@ class EmployeeForm extends Form
             'age' => $this->age,
             'position' => $this->position,
             'salary' => $this->salary,
-            'role' => $this->role,
+            'role_id' => $this->role_id,
             'joining_date' => $this->joining_date,
             'status' => 1, // Default to Active on create
         ]);

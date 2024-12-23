@@ -22,7 +22,7 @@ class EmployeeSeeder extends Seeder
                 'salary' => 35000,
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 'status'=>'1',
-                'role'=>'1',
+                'role_id'=>'1',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -33,8 +33,8 @@ class EmployeeSeeder extends Seeder
                 'position' => 'Frontend',
                 'salary' => 25000,
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
-                'status'=>'1',
-                'role'=>'2',
+                'status'=>'2',
+                'role_id'=>'2',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -46,7 +46,7 @@ class EmployeeSeeder extends Seeder
                 'salary' => 25000,
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 'status'=>'1',
-                'role'=>'2',
+                'role_id'=>'2',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -58,7 +58,7 @@ class EmployeeSeeder extends Seeder
                 'salary' => 20000,
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 'status'=>'2',
-                'role'=>'2',
+                'role_id'=>'2',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -69,8 +69,8 @@ class EmployeeSeeder extends Seeder
                 'position' => 'Backend',
                 'salary' => 20000,
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
-                'status'=>'2',
-                'role'=>'2',
+                'status'=>'1',
+                'role_id'=>'2',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

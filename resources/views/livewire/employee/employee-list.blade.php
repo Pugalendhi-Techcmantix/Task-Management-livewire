@@ -16,9 +16,6 @@
                     @scope('cell_status', $st)
                         <x-mary-badge :value="$st->statusLabel['status']" :class="$st->status === 1 ? 'bg-green-500 text-white' : 'bg-red-500 text-white'" />
                     @endscope
-                    @scope('cell_role', $role)
-                        <x-mary-badge :value="$role->statusLabel['role']" :class="$role->role === 1 ? 'bg-orange-500 text-white' : 'bg-blue-500 text-white'" />
-                    @endscope
                     @scope('cell_actions', $employee)
                         <div class="flex gap-3">
                             <x-mary-button

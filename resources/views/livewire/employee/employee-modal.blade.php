@@ -24,7 +24,7 @@
             <x-mary-input label="Position" wire:model="form.position" placeholder="Enter your Position"
                 name="position" />
 
-            <x-mary-select label="Role" wire:model="form.role" :options="$roles" placeholder="Select Role"
+            <x-mary-select label="Role" wire:model="form.role_id" :options="$roles" placeholder="Select Role"
                 :disabled="isset($form->employee_id)" />
 
             <x-mary-input label="Salary" type="number" min="0" wire:model="form.salary"
