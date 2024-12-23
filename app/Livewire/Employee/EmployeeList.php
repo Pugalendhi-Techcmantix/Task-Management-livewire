@@ -53,6 +53,7 @@ class EmployeeList extends Component
             ['key' => 'name', 'label' => 'Name', 'sortable' => true],
             ['key' => 'email', 'label' => 'Email', 'sortable' => true],
             ['key' => 'age', 'label' => 'Age', 'sortable' => true],
+            ['key' => 'role', 'label' => 'Role', 'sortable' => true,],
             ['key' => 'position', 'label' => 'Position', 'sortable' => true],
             ['key' => 'salary', 'label' => 'Salary', 'sortable' => true],
             ['key' => 'status', 'label' => 'Status', 'sortable' => true,],

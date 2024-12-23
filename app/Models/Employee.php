@@ -16,8 +16,20 @@ class Employee extends Model
     // {
     //     return $this->attributes['status'] == 1 ? 'Active' : 'In Active';
     // }
+    
+    // public function getStatusLabelAttribute()
+    // {
+    //     return $this->status === 1 ? 'Active' : 'Suspended';
+    // }
+
     public function getStatusLabelAttribute()
     {
-        return $this->status === 1 ? 'Active' : 'In Active';
+        $statusLabel = $this->status === 1 ? 'Active' : 'Suspended';
+        $roleLabel = $this->role === 1 ? 'Admin' : 'Employee';
+
+        return [
+            'status' => $statusLabel,
+            'role' => $roleLabel,
+        ];
     }
 }

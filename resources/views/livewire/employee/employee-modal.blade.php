@@ -24,12 +24,15 @@
             <x-mary-input label="Position" wire:model="form.position" placeholder="Enter your Position"
                 name="position" />
 
+            <x-mary-select label="Role" wire:model="form.role" :options="$roles" placeholder="Select Role"
+                :disabled="isset($form->employee_id)" />
+
             <x-mary-input label="Salary" type="number" min="0" wire:model="form.salary"
                 placeholder="Enter your Salary" name="salary" />
 
             <x-mary-datetime label="D.O.J" wire:model="form.joining_date" placeholder="Enter your D.O.J"
                 name="joining_date" />
-                
+
             @if ($form->employee_id)
                 <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />
             @endif
@@ -40,7 +43,7 @@
                 Cancel
             </x-mary-button>
             <x-mary-button class="btn-primary" type="submit">
-                Save
+                {{ $form->employee_id ? 'Update' : 'Save' }}
             </x-mary-button>
         </x-slot:actions>
     </x-mary-form>

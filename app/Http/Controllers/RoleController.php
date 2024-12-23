@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 
-class StatusController extends Controller
+class RoleController extends Controller
 {
  public function index(){
-    return view('status-list');
+    return view('role-list');
  }
 }

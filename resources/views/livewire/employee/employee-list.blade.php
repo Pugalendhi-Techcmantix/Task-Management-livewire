@@ -2,7 +2,7 @@
     <x-mary-card shadow class="shadow-xl p-11">
         <div class="flex items-center justify-between">
             <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
-                class="w-96 focus:outline-none" />
+                class="w-[450px] focus:outline-none" />
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'employee.employee-modal' })"
                 icon="o-plus" spinner />
         </div>
@@ -14,7 +14,10 @@
                         <x-mary-badge :value="$num->id" class="badge-info " />
                     @endscope
                     @scope('cell_status', $st)
-                        <x-mary-badge :value="$st->status_label" :class="$st->status === 1 ? 'bg-green-500 text-white' : 'bg-red-500 text-white'" />
+                        <x-mary-badge :value="$st->statusLabel['status']" :class="$st->status === 1 ? 'bg-green-500 text-white' : 'bg-red-500 text-white'" />
+                    @endscope
+                    @scope('cell_role', $role)
+                        <x-mary-badge :value="$role->statusLabel['role']" :class="$role->role === 1 ? 'bg-orange-500 text-white' : 'bg-blue-500 text-white'" />
                     @endscope
                     @scope('cell_actions', $employee)
                         <div class="flex gap-3">

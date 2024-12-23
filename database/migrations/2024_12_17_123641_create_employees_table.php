@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('position');
             $table->integer('salary');
             $table->date('joining_date');
-            $table->tinyInteger('status')
-                ->default(1) // Default to 1 (Active)
-                ->nullable()
-                ->comment('1 = Active, 0 = Suspended'); // Add a meaningful comment
+            $table->tinyInteger('status')->default(1)->nullable()->comment('1 = Active, 2 = Suspended'); // Add a meaningful comment
+            $table->tinyInteger('role')->nullable()->comment('1 = Admin, 2 = Employee'); // Add a meaningful comment
             $table->timestamps();
         });
     }

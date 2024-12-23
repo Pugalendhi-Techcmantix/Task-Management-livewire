@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Livewire\Status;
+namespace App\Livewire\Role;
 
-use App\Models\Status;
+use App\Models\Roles;
 use LivewireUI\Modal\ModalComponent;
 
-class StatusModal extends ModalComponent
+class RoleModal extends ModalComponent
 {
 
-    public StatusForm $form;
+    public RoleForm $form;
 
-    public function mount($status_id = null)
+    public function mount($role_id = null)
     {
-        if (!is_null($status_id)) {
-            $status = Status::findOrFail($status_id);
-            $this->form->setValue($status);
+        if (!is_null($role_id)) {
+            $role = Roles::findOrFail($role_id);
+            $this->form->setValue($role);
         }
     }
     protected function rules()
@@ -31,11 +31,11 @@ class StatusModal extends ModalComponent
     {
         // Example save logic (you can modify according to your needs)
         $this->form->save();
-        $this->dispatch('refresh-status-table');
+        $this->dispatch('refresh-role-table');
         return $this->closeModal();
     }
     public function render()
     {
-        return view('livewire.status.status-modal');
+        return view('livewire.role.role-modal');
     }
 }

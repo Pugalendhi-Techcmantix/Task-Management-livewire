@@ -4,7 +4,7 @@
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StatusController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,7 +24,7 @@ Route::get('student-add', [StudentController::class, 'viewForm'])->name("student
 Route::get('student-edit/{id}', [StudentController::class, 'editForm'])->name("student-edit");
 
 Route::get('employee-list', [EmployeeController::class, 'index'])->name('employee-list');
-Route::get('status-list', [StatusController::class, 'index'])->name('status-list');
+Route::get('role-list', [RoleController::class, 'index'])->name('role-list');
 
 
 Route::middleware('auth')->group(function () {

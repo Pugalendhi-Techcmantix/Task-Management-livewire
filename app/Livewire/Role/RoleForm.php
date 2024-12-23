@@ -1,49 +1,49 @@
 <?php
 
-namespace App\Livewire\Status;
+namespace App\Livewire\Role;
 
-use App\Models\Status;
+use App\Models\Roles;
 use Livewire\Form;
 
 
-class StatusForm extends Form
+class RoleForm extends Form
 {
-    public ?Status $status;
-    public ?int $status_id = null;
+    public ?Roles $role;
+    public ?int $role_id = null;
     public  $name = null;
 
 
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:status,name,' . $this->status_id,
+            'name' => 'required|string|max:255|unique:roles,name,' . $this->role_id,
         ];
     }
 
-    public function setValue(Status $status)
+    public function setValue(Roles $role)
     {
-        $this->status = $status;
-        $this->status_id = $status->id;
+        $this->role = $role;
+        $this->role_id = $role->id;
         $this->fill([
-            'name' => $status->name,
+            'name' => $role->name,
         ]);
     }
 
     public function create()
     {
-        Status::create([
+        Roles::create([
             'name' => $this->name,
         ]);
     }
     public function update()
     {
-        $this->status->update([
+        $this->role->update([
             'name' => $this->name,
         ]);
     }
     public function updating()
     {
-        return !empty($this->status);
+        return !empty($this->role);
     }
 
     public function save()
@@ -58,6 +58,6 @@ class StatusForm extends Form
     }
     public function render()
     {
-        return view('livewire.status.status-form');
+        return view('livewire.role.role-form');
     }
 }

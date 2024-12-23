@@ -3,7 +3,7 @@
 namespace App\Livewire\Employee;
 
 use App\Models\Employee;
-
+use App\Models\Roles;
 use LivewireUI\Modal\ModalComponent;
 
 class EmployeeModal extends ModalComponent
@@ -16,14 +16,25 @@ class EmployeeModal extends ModalComponent
             'name' => 'Active',
         ],
         [
-            'id' => 0,
-            'name' => 'In Active',
+            'id' => 2,
+            'name' => 'Suspended',
 
         ],
     ];
 
+    public $roles = [];  // Store roles here as key-value pairs
+
     public function mount($employee_id = null)
     {
+
+        // Fetch roles from the roles table and store them in $roles array
+        $this->roles = Roles::all()->map(function ($role) {
+            return [
+                'id' => $role->id,
+                'name' => $role->name,
+            ];
+        })->toArray();
+
         if (!is_null($employee_id)) {
             $employee = Employee::findOrFail($employee_id);
             $this->form->setValue($employee);

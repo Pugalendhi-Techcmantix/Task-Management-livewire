@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Livewire\Status;
+namespace App\Livewire\Role;
 
-use App\Models\Status;
+use App\Models\Roles;
 use Livewire\Component;
 
-class StatusList extends Component
+class RoleList extends Component
 {
 
-    public $search = '', $name, $status_id, $confirmDelete = false;
+    public $search = '', $name, $role_id, $confirmDelete = false;
     public int $perPage = 5; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
-    protected $listeners = ['refresh-status-table' => '$refresh'];
+    protected $listeners = ['refresh-role-table' => '$refresh'];
 
 
-    public function openDeleteModal($status_id)
+    public function openDeleteModal($role_id)
     {
         $this->confirmDelete = true;    // Trigger modal visibility
-        $this->status_id = $status_id; // Assign the employee ID to delete
+        $this->role_id = $role_id; // Assign the employee ID to delete
     }
 
     public function destroy()
     {
-        Status::findOrfail($this->status_id)->delete();
+        Roles::findOrfail($this->role_id)->delete();
         $this->confirmDelete = false;
-        $this->dispatch('refresh-status-table');
+        $this->dispatch('refresh-role-table');
     }
 
     public function render()
@@ -37,14 +37,16 @@ class StatusList extends Component
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting
-        $statuslist = Status::query()
+        $rolelist = Roles::query()
+            ->where('id', 'like', '%' . $this->search . '%')
+            ->orWhere('name', 'like', '%' . $this->search . '%')
             ->orderBy(...array_values($this->sortBy))
             ->get(); // Fetch data as a collection
         return view(
-            'livewire.status.status-list',
+            'livewire.role.role-list',
             [
                 'headers' => $headers,
-                'statuslist' => $statuslist,
+                'rolelist' => $rolelist,
             ]
         );
     }
