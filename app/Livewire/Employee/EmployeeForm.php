@@ -3,7 +3,9 @@
 namespace App\Livewire\Employee;
 
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Form;
 
 class EmployeeForm extends Form
@@ -44,7 +46,7 @@ class EmployeeForm extends Form
         $this->fill([
             'name' => $employee->name,
             'email' => $employee->email,
-            'password' => Crypt::decrypt($employee->password), // Decrypt the password
+            'password' => Hash::make($employee->password), // Encrypt the password
             'age' => $employee->age,
             'position' => $employee->position,
             'salary' => $employee->salary,
@@ -60,7 +62,7 @@ class EmployeeForm extends Form
         Employee::create([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => Crypt::encrypt($this->password), // Encrypt the password
+            'password' => Hash::make($this->password), // Encrypt the password
             'age' => $this->age,
             'position' => $this->position,
             'salary' => $this->salary,
@@ -75,7 +77,6 @@ class EmployeeForm extends Form
         $this->employee->update([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => Crypt::encrypt($this->password), // Encrypt the password
             'age' => $this->age,
             'position' => $this->position,
             'salary' => $this->salary,

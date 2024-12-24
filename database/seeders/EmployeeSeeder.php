@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Employee;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class EmployeeSeeder extends Seeder
             [
                 'name' => 'Pugal Gamer',
                 'email' => 'pugalgamer@example.com',
-                'password' => Crypt::encrypt('demo1234'), // Encrypt the password
+                'password' => Hash::make('demo1234'), // Encrypt the password
                 'age' => '23',
                 'position' => 'Software Developer',
                 'salary' => 35000,
@@ -31,7 +31,7 @@ class EmployeeSeeder extends Seeder
             [
                 'name' => 'Asim',
                 'email' => 'asim@example.com',
-                'password' => Crypt::encrypt('demo1234'), // Encrypt the password
+                'password' => Hash::make('demo1234'), // Encrypt the password
                 'age' => '22',
                 'position' => 'Frontend',
                 'salary' => 25000,
@@ -44,7 +44,7 @@ class EmployeeSeeder extends Seeder
             [
                 'name' => 'Kevin',
                 'email' => 'kevin@example.com',
-                'password' => Crypt::encrypt('demo1234'), // Encrypt the password
+                'password' => Hash::make('demo1234'), // Encrypt the password
                 'age' => '22',
                 'position' => 'Frontend',
                 'salary' => 25000,
@@ -57,7 +57,7 @@ class EmployeeSeeder extends Seeder
             [
                 'name' => 'Viwin',
                 'email' => 'viwin@example.com',
-                'password' => Crypt::encrypt('demo1234'), // Encrypt the password
+                'password' => Hash::make('demo1234'), // Encrypt the password
                 'age' => '23',
                 'position' => 'Tester',
                 'salary' => 20000,
@@ -70,7 +70,7 @@ class EmployeeSeeder extends Seeder
             [
                 'name' => 'Raja',
                 'email' => 'raja@example.com',
-                'password' => Crypt::encrypt('demo1234'), // Encrypt the password
+                'password' => Hash::make('demo1234'), // Encrypt the password
                 'age' => '23',
                 'position' => 'Backend',
                 'salary' => 20000,

@@ -19,9 +19,9 @@
 
             <x-mary-input label="Age" type="number" min="1" wire:model="form.age"
                 placeholder="Enter your age" />
-
-            <x-mary-password label="Password" wire:model="form.password" right placeholder="Enter your password" />
-
+            @if (!$form->employee_id)
+                <x-mary-password label="Password" wire:model="form.password" right placeholder="Enter your password" />
+            @endif
             <x-mary-input label="Position" wire:model="form.position" placeholder="Enter your Position" />
 
             <x-mary-select label="Role" wire:model="form.role_id" :options="$roles" placeholder="Select Role"
