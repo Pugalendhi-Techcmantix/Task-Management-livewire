@@ -2,7 +2,7 @@
     <x-mary-card shadow class="shadow-xl p-11">
         <div class="flex items-center justify-between">
             <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
-                class="w-[450px] focus:outline-none" />
+                class="w-[450px] focus:outline-none"  />
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'employee.employee-modal' })"
                 icon="o-plus" spinner />
         </div>

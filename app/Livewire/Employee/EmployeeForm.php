@@ -3,6 +3,7 @@
 namespace App\Livewire\Employee;
 
 use App\Models\Employee;
+use Illuminate\Support\Facades\Crypt;
 use Livewire\Form;
 
 class EmployeeForm extends Form
@@ -11,6 +12,7 @@ class EmployeeForm extends Form
     public ?int $employee_id = null;  // ID of the employee to update
     public  $name; // Employee name
     public  $email; // Employee email
+    public  $password; // Employee password
     public  $age; // Employee age
     public  $position; // Employee position
     public $salary; // Employee salary
@@ -19,13 +21,14 @@ class EmployeeForm extends Form
     public  $joining_date; // Employee joining date
     public ?string $success_message;
     public ?string $error_message;
-    
+
 
     public function rules()
     {
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:employees,email,' . $this->employee_id,
+            'password' => 'required|string|min:4',
             'age' => 'required|integer|min:18|max:100',
             'position' => 'required|string|max:255',
             'role_id' => 'required',
@@ -41,6 +44,7 @@ class EmployeeForm extends Form
         $this->fill([
             'name' => $employee->name,
             'email' => $employee->email,
+            'password' => Crypt::decrypt($employee->password), // Decrypt the password
             'age' => $employee->age,
             'position' => $employee->position,
             'salary' => $employee->salary,
@@ -56,6 +60,7 @@ class EmployeeForm extends Form
         Employee::create([
             'name' => $this->name,
             'email' => $this->email,
+            'password' => Crypt::encrypt($this->password), // Encrypt the password
             'age' => $this->age,
             'position' => $this->position,
             'salary' => $this->salary,
@@ -70,6 +75,7 @@ class EmployeeForm extends Form
         $this->employee->update([
             'name' => $this->name,
             'email' => $this->email,
+            'password' => Crypt::encrypt($this->password), // Encrypt the password
             'age' => $this->age,
             'position' => $this->position,
             'salary' => $this->salary,

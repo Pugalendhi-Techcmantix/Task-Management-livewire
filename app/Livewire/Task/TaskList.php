@@ -36,8 +36,8 @@ class TaskList extends Component
             ['key' => 'project_name', 'label' => 'Project Name', 'sortable' => true],
             ['key' => 'area', 'label' => 'Area', 'sortable' => true],
             ['key' => 'task_name', 'label' => 'Task Name', 'sortable' => true],
-            ['key' => 'employee.name', 'label' => 'Employee', 'sortable' => true],
-            ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => true],
+            ['key' => 'employee.name', 'label' => 'Employee', 'sortable' => false],
+            ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => false],
             ['key' => 'status', 'label' => 'Status', 'sortable' => true],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];

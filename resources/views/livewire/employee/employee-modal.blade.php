@@ -13,25 +13,24 @@
     <x-mary-form wire:submit.prevent="save" class="p-5">
         @csrf
         <div class="grid grid-cols-2 gap-3">
-            <x-mary-input label="Name" wire:model="form.name" placeholder="Enter your name" name="name" />
+            <x-mary-input label="Name" wire:model="form.name" placeholder="Enter your name" />
 
-            <x-mary-input label="Email" type="email" wire:model="form.email" placeholder="Enter your email"
-                name="email" />
+            <x-mary-input label="Email" type="email" wire:model="form.email" placeholder="Enter your email" />
 
             <x-mary-input label="Age" type="number" min="1" wire:model="form.age"
-                placeholder="Enter your age" name="age" />
+                placeholder="Enter your age" />
 
-            <x-mary-input label="Position" wire:model="form.position" placeholder="Enter your Position"
-                name="position" />
+            <x-mary-password label="Password" wire:model="form.password" right placeholder="Enter your password" />
+
+            <x-mary-input label="Position" wire:model="form.position" placeholder="Enter your Position" />
 
             <x-mary-select label="Role" wire:model="form.role_id" :options="$roles" placeholder="Select Role"
                 :disabled="isset($form->employee_id)" />
 
             <x-mary-input label="Salary" type="number" min="0" wire:model="form.salary"
-                placeholder="Enter your Salary" name="salary" />
+                placeholder="Enter your Salary" />
 
-            <x-mary-datetime label="D.O.J" wire:model="form.joining_date" placeholder="Enter your D.O.J"
-                name="joining_date" />
+            <x-mary-datetime label="D.O.J" wire:model="form.joining_date" placeholder="Enter your D.O.J" />
 
             @if ($form->employee_id)
                 <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />

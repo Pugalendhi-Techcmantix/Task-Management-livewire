@@ -8,7 +8,7 @@
         </div>
         <div class="container mt-4">
             <x-mary-table striped :headers="$headers" :rows="$tasks" :sort-by="$sortBy" show-empty-text with-pagination
-                per-page="perPage" :per-page-values="[3, 5, 10]">
+                per-page="perPage" :per-page-values="[2, 5, 10]">
                 @foreach ($tasks as $task)
                     @scope('cell_id', $num)
                         <x-mary-badge :value="$num->id" class="badge-info " />
