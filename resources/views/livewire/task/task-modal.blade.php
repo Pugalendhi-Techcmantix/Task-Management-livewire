@@ -12,16 +12,23 @@
 
     <x-mary-form wire:submit.prevent="save" class="p-5">
         @csrf
-        <x-mary-input label="Porject Name" wire:model="form.project_name" placeholder="Enter Project name" />
-        <x-mary-input label="Area" wire:model="form.area" placeholder="Enter Area"  />
-        <x-mary-textarea label="Task Name" wire:model="form.task_name" placeholder="Enter Task "  />
+        <div class="grid grid-cols-2 gap-3">
+            <x-mary-input label="Project Name" wire:model="form.project_name" placeholder="Enter Project name"
+                :disabled="isset($form->task_id)" />
+            <x-mary-input label="Area" wire:model="form.area" placeholder="Enter Area" :disabled="isset($form->task_id)" />
+            <x-mary-select label="Employee" wire:model="form.employee_id" :options="$employee" placeholder="Select"
+                :disabled="isset($form->task_id)" />
+            @if ($form->task_id)
+                <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />
+            @endif
+            <x-mary-textarea label="Task Name" wire:model="form.task_name" placeholder="Enter Task " />
+        </div>
         <x-slot:actions>
             <x-mary-button type="button" wire:click="$dispatch('closeModal', { component: 'task.task-modal' })">
                 Cancel
             </x-mary-button>
             <x-mary-button class="btn-primary" type="submit">
-                {{-- {{ $form->task_id ? 'Update' : 'Save' }} --}}
-                Save
+                {{ $form->task_id ? 'Update' : 'Save' }}
             </x-mary-button>
         </x-slot:actions>
     </x-mary-form>

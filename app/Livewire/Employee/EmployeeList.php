@@ -15,7 +15,7 @@ class EmployeeList extends Component
     public bool $confirmOpen = false;
     public bool $confirmDelete = false;
     public $employee_id = null; // Employee ID for update operations
-    public int $perPage = 5; // Number of items per page
+    public int $perPage = 10; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
 
     public  $name = null; // Employee name

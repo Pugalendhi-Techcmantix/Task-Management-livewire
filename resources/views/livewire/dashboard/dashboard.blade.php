@@ -6,7 +6,7 @@
         </x-mary-card>
 
         <!-- Card 2: Admin Count -->
-        <x-mary-card class="border-r-4 border-b-4 border-orange-300 shadow-xl flex items-center justify-center">
+        {{-- <x-mary-card class="border-r-4 border-b-4 border-orange-300 shadow-xl flex items-center justify-center">
             <div class="text-center">
                 <!-- Icon -->
                 <div class="bg-orange-100 p-4 rounded-full w-fit mx-auto mb-2">
@@ -31,6 +31,6 @@
                 <!-- Count -->
                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ $employeeCount }}</p>
             </div>
-        </x-mary-card>
+        </x-mary-card> --}}
     </div>
 </div>

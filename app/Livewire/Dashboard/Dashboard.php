@@ -13,8 +13,8 @@ class Dashboard extends Component
     public function render()
     {
         // Count the total number of Admins and Employees
-        $this->adminCount = Employee::where('role', 1)->count();
-        $this->employeeCount = Employee::where('role', 2)->count();
+        // $this->adminCount = Employee::where('role', 1)->count();
+        // $this->employeeCount = Employee::where('role', 2)->count();
         return view(
             'livewire.dashboard.dashboard',
             [

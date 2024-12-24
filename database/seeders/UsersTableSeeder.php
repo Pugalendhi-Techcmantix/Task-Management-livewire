@@ -18,9 +18,20 @@ class UsersTableSeeder extends Seeder
         // Insert sample data into the 'users' table
         DB::table('users')->insert([
             [
-                'name' => 'Admin User',
+                'name' => 'Admin',
                 'email' => 'pugal@gmail.com',
                 'password' => Hash::make('demo1234'), // Encrypt the password
+                'role_id'=>'1',
+                'email_verified_at' => now(),
+                'remember_token' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@gmail.com',
+                'password' => Hash::make('demo1234'), // Encrypt the password
+                'role_id'=>'2',
                 'email_verified_at' => now(),
                 'remember_token' => null,
                 'created_at' => now(),

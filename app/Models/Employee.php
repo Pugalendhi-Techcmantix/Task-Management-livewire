@@ -25,11 +25,9 @@ class Employee extends Model
     public function getStatusLabelAttribute()
     {
         $statusLabel = $this->status === 1 ? 'Active' : 'Suspended';
-        $roleLabel = $this->role === 1 ? 'Admin' : 'Employee';
 
         return [
             'status' => $statusLabel,
-            'role' => $roleLabel,
         ];
     }
     public function role()
