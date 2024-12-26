@@ -1,10 +1,5 @@
 <div class="container mt-3">
     <div class="grid grid-cols-3 gap-5">
-
-        @php
-            $role = Auth::user()->role_id;
-        @endphp
-
         @if ($role == 1)
             <x-mary-card class="border-r-4 border-b-4 border-orange-300 shadow-xl flex items-center justify-center">
                 <div class="text-center">
@@ -30,16 +25,41 @@
                     <p class="text-3xl font-bold text-gray-900 mt-2">{{ $employeeCount }}</p>
                 </div>
             </x-mary-card>
-            <x-mary-card class="border-r-4 border-b-4 border-green-300 shadow-xl flex items-center justify-center">
+            <x-mary-card class="border-r-4 border-b-4 border-red-300 shadow-xl flex items-center justify-center">
                 <div class="text-center">
 
-                    <div class="bg-green-100 p-4 rounded-full w-fit mx-auto mb-2">
-                        <x-heroicon-o-users class="w-8 h-8 text-green-500" />
+                    <div class="bg-red-100 p-4 rounded-full w-fit mx-auto mb-2">
+                        <x-heroicon-o-clipboard-document-list class="w-8 h-8 text-red-500" />
                     </div>
 
                     <h2 class="text-xl font-semibold text-gray-800">Tasks</h2>
 
                     <p class="text-3xl font-bold text-gray-900 mt-2">{{ $taskCount }}</p>
+                </div>
+            </x-mary-card>
+
+            <x-mary-card class="border-r-4 border-b-4 border-green-300 shadow-xl flex items-center justify-center">
+                <div class="text-center">
+
+                    <div class="bg-green-100 p-4 rounded-full w-fit mx-auto mb-2">
+                        <x-heroicon-o-check-circle class="w-8 h-8 text-green-500" />
+                    </div>
+
+                    <h2 class="text-xl font-semibold text-gray-800">Completed</h2>
+
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalcompleted }}</p>
+                </div>
+            </x-mary-card>
+            <x-mary-card class="border-r-4 border-b-4 border-yellow-300 shadow-xl flex items-center justify-center">
+                <div class="text-center">
+
+                    <div class="bg-yellow-100 p-4 rounded-full w-fit mx-auto mb-2">
+                        <x-heroicon-c-exclamation-circle class="w-8 h-8 text-yellow-500" />
+                    </div>
+
+                    <h2 class="text-xl font-semibold text-gray-800">In Completed</h2>
+
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalincompleted }}</p>
                 </div>
             </x-mary-card>
         @endif
@@ -49,16 +69,40 @@
 
     @if ($role == 2)
         <div class="grid grid-cols-3 gap-5">
-            <x-mary-card class="border-r-4 border-b-4 border-green-300 shadow-xl flex items-center justify-center">
+            <x-mary-card class="border-r-4 border-b-4 border-blue-300 shadow-xl flex items-center justify-center">
                 <div class="text-center">
 
-                    <div class="bg-green-100 p-4 rounded-full w-fit mx-auto mb-2">
-                        <x-heroicon-o-users class="w-8 h-8 text-green-500" />
+                    <div class="bg-blue-100 p-4 rounded-full w-fit mx-auto mb-2">
+                        <x-heroicon-o-clipboard-document-list class="w-8 h-8 text-blue-500" />
                     </div>
 
                     <h2 class="text-xl font-semibold text-gray-800">My Tasks</h2>
 
                     <p class="text-3xl font-bold text-gray-900 mt-2">{{ $mytaskCount }}</p>
+                </div>
+            </x-mary-card>
+            <x-mary-card class="border-r-4 border-b-4 border-green-300 shadow-xl flex items-center justify-center">
+                <div class="text-center">
+
+                    <div class="bg-green-100 p-4 rounded-full w-fit mx-auto mb-2">
+                        <x-heroicon-o-check-circle class="w-8 h-8 text-green-500" />
+                    </div>
+
+                    <h2 class="text-xl font-semibold text-gray-800">Completed</h2>
+
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $completed }}</p>
+                </div>
+            </x-mary-card>
+            <x-mary-card class="border-r-4 border-b-4 border-yellow-300 shadow-xl flex items-center justify-center">
+                <div class="text-center">
+
+                    <div class="bg-yellow-100 p-4 rounded-full w-fit mx-auto mb-2">
+                        <x-heroicon-c-exclamation-circle class="w-8 h-8 text-yellow-500" />
+                    </div>
+
+                    <h2 class="text-xl font-semibold text-gray-800">In Completed</h2>
+
+                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $incompleted }}</p>
                 </div>
             </x-mary-card>
         </div>
@@ -104,6 +148,16 @@
                         <div class="mt-2 flex items-center">
                             <x-heroicon-o-user class="w-5 h-5 text-gray-500 mr-2" />
                             <strong class="text-gray-700 dark:text-gray-200">Area:</strong> {{ $task->area }}
+                        </div>
+                        <div class="mt-2 flex items-center">
+                            <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
+                            <strong class="text-blue-500">Assigned At:</strong>
+                            {{ $task->created_at->format('d-m-Y') }}
+                        </div>
+                        <div class="mt-2 flex items-center">
+                            <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
+                            <strong class=" text-red-500 ">Due Date:</strong>
+                            {{ $task->due_date->format('d-m-Y') }}
                         </div>
                     </div>
                 </x-mary-card>

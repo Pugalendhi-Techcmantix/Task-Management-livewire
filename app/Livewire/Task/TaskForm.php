@@ -4,7 +4,6 @@ namespace App\Livewire\Task;
 
 use App\Models\Tasks;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Livewire\Form;
 
 class TaskForm extends Form
@@ -17,6 +16,7 @@ class TaskForm extends Form
     public  $task_name;
     public $status;
     public $employee_id;
+    public $due_date;
 
     public function rules()
     {
@@ -25,6 +25,7 @@ class TaskForm extends Form
             'area' => 'required|string|max:255',
             'task_name' => 'required|string',
             'employee_id' => 'required',
+            'due_date' => 'required'
         ];
     }
 
@@ -39,6 +40,7 @@ class TaskForm extends Form
             'task_name' => $tasks->task_name,
             'employee_id' => $tasks->employee_id,
             'status' => $tasks->status,
+            'due_date' => $tasks->due_date,
         ]);
     }
 
@@ -50,6 +52,7 @@ class TaskForm extends Form
             'project_name' => $this->project_name,
             'area' => $this->area,
             'task_name' => $this->task_name,
+            'due_date' => $this->due_date,
             'employee_id' => $this->employee_id,
             'user_id' => $user_id,
             'status' => 1, // Default to Active on create

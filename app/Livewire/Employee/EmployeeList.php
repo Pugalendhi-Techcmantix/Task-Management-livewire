@@ -63,13 +63,18 @@ class EmployeeList extends Component
         ];
         // Fetch students with sorting
         $employees = User::query()
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('email', 'like', '%' . $this->search . '%')
-            ->orWhere('age', 'like', '%' . $this->search . '%')
-            ->orWhere('position', 'like', '%' . $this->search . '%')
-            ->orWhere('salary', 'like', '%' . $this->search . '%')
-            ->orWhere('status', 'like', '%' . $this->search . '%')
-            ->orWhere('joining_date', 'like', '%' . $this->search . '%')
+            ->when($this->search, function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('email', 'like', '%' . $this->search . '%')
+                    ->orWhere('age', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('role', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhere('position', 'like', '%' . $this->search . '%')
+                    ->orWhere('salary', 'like', '%' . $this->search . '%')
+                    ->orWhere('status', 'like', '%' . $this->search . '%')
+                    ->orWhere('joining_date', 'like', '%' . $this->search . '%');
+            })
             ->orderBy(...array_values($this->sortBy))
             ->paginate($this->perPage);
 

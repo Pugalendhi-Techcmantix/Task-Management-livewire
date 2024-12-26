@@ -32,25 +32,19 @@ class TaskList extends Component
     {
 
         $headers = [
-            ['key' => 'id', 'label' => 'S.No', 'sortable' => true, 'class' => 'w-20'],
-            ['key' => 'project_name', 'label' => 'Project Name', 'sortable' => true],
+            ['key' => 'id', 'label' => 'S.No', 'sortable' => true,],
+            ['key' => 'project_name', 'label' => 'Project Name', 'sortable' => true, 'class' => 'truncate'],
             ['key' => 'area', 'label' => 'Area', 'sortable' => true],
-            ['key' => 'task_name', 'label' => 'Task Name', 'sortable' => true],
+            ['key' => 'task_name', 'label' => 'Task Name', 'sortable' => true, 'class' => 'truncate'],
             ['key' => 'employee.name', 'label' => 'Employee', 'sortable' => false],
             ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => false],
+            ['key' => 'due_date', 'label' => 'Due Date ', 'sortable' => true,'format'=>['date','d-m-y']],
             ['key' => 'status', 'label' => 'Status', 'sortable' => true],
+            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true],
+            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
-        // Fetch students with sorting
-        // $tasks = Tasks::query()
-        //     ->where('id', 'like', '%' . $this->search . '%')
-        //     ->orWhere('project_name', 'like', '%' . $this->search . '%')
-        //     ->orWhere('area', 'like', '%' . $this->search . '%')
-        //     ->orWhere('task_name', 'like', '%' . $this->search . '%')
-        //     ->orderBy(...array_values($this->sortBy))
-        //     ->paginate($this->perPage);
-
-
+      
         // Query to fetch tasks with the search applied to multiple columns
         $tasks = Tasks::query()
             ->when($this->search, function ($query) {

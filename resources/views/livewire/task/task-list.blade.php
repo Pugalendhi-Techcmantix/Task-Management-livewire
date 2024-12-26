@@ -6,7 +6,7 @@
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'task.task-modal' })"
                 icon="o-plus" spinner />
         </div>
-        <div class="container mt-4">
+        <div class="mt-4">
             <x-mary-table striped :headers="$headers" :rows="$tasks" :sort-by="$sortBy" show-empty-text with-pagination
                 per-page="perPage" :per-page-values="[2, 5, 10]">
                 @foreach ($tasks as $task)
@@ -17,7 +17,7 @@
                         <x-mary-badge :value="$st->statusLabel['status']" :class="match ($st->status) {
                             1 => 'bg-yellow-500 ',
                             2 => 'bg-blue-500 text-white',
-                            3 => 'bg-orange-500 text-white',
+                            3 => 'bg-red-500 text-white',
                             4 => 'bg-green-500 text-white',
                             default => 'bg-gray-500 text-white',
                         }" />

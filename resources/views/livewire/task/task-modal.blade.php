@@ -22,6 +22,8 @@
                 <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />
             @endif
             <x-mary-textarea label="Task Name" wire:model="form.task_name" placeholder="Enter Task " />
+            <x-mary-datetime label="Due date" wire:model="form.due_date" />
+
         </div>
         <x-slot:actions>
             <x-mary-button type="button" wire:click="$dispatch('closeModal', { component: 'task.task-modal' })">

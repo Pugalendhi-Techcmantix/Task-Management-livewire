@@ -17,6 +17,18 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/pending', function () {
+    return view('pending');
+})->name('pending');
+Route::get('/progress', function () {
+    return view('progress');
+})->name('progress');
+Route::get('/hold', function () {
+    return view('hold');
+})->name('hold');
+Route::get('/completed', function () {
+    return view('completed');
+})->name('completed');
 
 
 

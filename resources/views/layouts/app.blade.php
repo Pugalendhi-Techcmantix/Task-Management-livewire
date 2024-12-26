@@ -37,9 +37,6 @@
                 </div>
             </header>
         @endisset
-        @php
-            $role = Auth::user()->role_id;
-        @endphp
 
         <!-- Main Content Wrapper -->
         <div class="flex flex-grow" style="height: calc(90vh - 100px);">
@@ -51,13 +48,29 @@
                     @if ($role == 1)
                         <x-mary-menu-item :href="route('employee-list')" title="Employees" icon="o-user-group" :active="request()->routeIs('employee-list')"
                             class="{{ request()->routeIs('employee-list') ? 'text-black font-bold' : '' }}" />
-                        <x-mary-menu-sub title="Master" icon="c-square-3-stack-3d">
-                            <x-mary-menu-item :href="route('role-list')" title="Roles" icon="o-user" :active="request()->routeIs('role-list')"
-                                class="{{ request()->routeIs('role-list') ? 'text-black font-bold' : '' }}" />
-                            <x-mary-menu-item :href="route('task-list')" title="Tasks" icon="o-clock" :active="request()->routeIs('task-list')"
-                                class="{{ request()->routeIs('task-list') ? 'text-black font-bold' : '' }}" />
-                        </x-mary-menu-sub>
+                        <x-mary-menu-item :href="route('role-list')" title="Roles" icon="o-user" :active="request()->routeIs('role-list')"
+                            class="{{ request()->routeIs('role-list') ? 'text-black font-bold' : '' }}" />
+                        <x-mary-menu-item :href="route('task-list')" title="Tasks" icon="o-bars-4" :active="request()->routeIs('task-list')"
+                            class="{{ request()->routeIs('task-list') ? 'text-black font-bold' : '' }}" />
                     @endif
+                    @if ($role == 2)
+                        <x-mary-menu-item :href="route('pending')" title="Pending" :badge="$pending"
+                            badge-classes="!badge-warning float-right" icon="o-exclamation-triangle" :active="request()->routeIs('pending')"
+                            class="{{ request()->routeIs('pending') ? 'text-black font-bold' : '' }}" />
+
+                        <x-mary-menu-item :href="route('progress')" title="Progress" :badge="$progress"
+                            badge-classes="!badge-info float-right" icon="o-clock" :active="request()->routeIs('progress')"
+                            class="{{ request()->routeIs('progress') ? 'text-black font-bold' : '' }}" />
+
+                        <x-mary-menu-item :href="route('hold')" title="Hold" :badge="$hold"
+                            badge-classes="!badge-error float-right" icon="o-pause-circle" :active="request()->routeIs('hold')"
+                            class="{{ request()->routeIs('hold') ? 'text-black font-bold' : '' }}" />
+
+                        <x-mary-menu-item :href="route('completed')" title="Completed" :badge="$completed"
+                            badge-classes="!badge-success float-right" icon="o-check-circle" :active="request()->routeIs('completed')"
+                            class="{{ request()->routeIs('completed') ? 'text-black font-bold' : '' }}" />
+                    @endif
+
                 </x-mary-menu>
             </aside>
 

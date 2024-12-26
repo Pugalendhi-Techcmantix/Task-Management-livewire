@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('project_name'); 
             $table->string('area'); 
             $table->text('task_name'); 
+            $table->date('due_date');
             $table->tinyInteger('status')->default(1)->nullable()->comment('1 = Pending, 2 = Progress,3 = Hold,4 = Completed'); // Add a meaningful comment
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
