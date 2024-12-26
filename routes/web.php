@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 
@@ -24,9 +24,13 @@ Route::get('student-list', [StudentController::class, 'viewList'])->name('studen
 Route::get('student-add', [StudentController::class, 'viewForm'])->name("student-add");
 Route::get('student-edit/{id}', [StudentController::class, 'editForm'])->name("student-edit");
 
-Route::get('employee-list', [EmployeeController::class, 'index'])->name('employee-list');
-Route::get('role-list', [RoleController::class, 'index'])->name('role-list');
-Route::get('task-list', [TaskController::class, 'index'])->name('task-list');
+Route::get('employee-list', [EmployeeController::class, 'index'])
+    ->middleware(['auth'])->name('employee-list');
+Route::get('role-list', [RoleController::class, 'index'])
+    ->middleware(['auth'])->name('role-list');
+Route::get('task-list', [TaskController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('task-list');
 
 
 Route::middleware('auth')->group(function () {

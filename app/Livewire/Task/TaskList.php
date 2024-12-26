@@ -42,11 +42,29 @@ class TaskList extends Component
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting
+        // $tasks = Tasks::query()
+        //     ->where('id', 'like', '%' . $this->search . '%')
+        //     ->orWhere('project_name', 'like', '%' . $this->search . '%')
+        //     ->orWhere('area', 'like', '%' . $this->search . '%')
+        //     ->orWhere('task_name', 'like', '%' . $this->search . '%')
+        //     ->orderBy(...array_values($this->sortBy))
+        //     ->paginate($this->perPage);
+
+
+        // Query to fetch tasks with the search applied to multiple columns
         $tasks = Tasks::query()
-            ->where('id', 'like', '%' . $this->search . '%')
-            ->orWhere('project_name', 'like', '%' . $this->search . '%')
-            ->orWhere('area', 'like', '%' . $this->search . '%')
-            ->orWhere('task_name', 'like', '%' . $this->search . '%')
+            ->when($this->search, function ($query) {
+                $query->where('id', 'like', '%' . $this->search . '%')
+                    ->orWhere('project_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('area', 'like', '%' . $this->search . '%')
+                    ->orWhere('task_name', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('employee', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('user', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                    });
+            })
             ->orderBy(...array_values($this->sortBy))
             ->paginate($this->perPage);
         return view(

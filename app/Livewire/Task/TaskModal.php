@@ -5,6 +5,7 @@ namespace App\Livewire\Task;
 use App\Models\Employee;
 use App\Models\Roles;
 use App\Models\Tasks;
+use App\Models\User;
 use LivewireUI\Modal\ModalComponent;
 
 class TaskModal extends ModalComponent
@@ -38,7 +39,7 @@ class TaskModal extends ModalComponent
         // Fetch the admin role ID
         $adminRole = Roles::where('name', 'Admin')->first();
         if ($adminRole) {
-            $this->employee = Employee::where('role_id', '!=', $adminRole->id)->get()->map(function ($employee) {
+            $this->employee = User::where('role_id', '!=', $adminRole->id)->get()->map(function ($employee) {
                 return [
                     'id' => $employee->id,
                     'name' => $employee->name,

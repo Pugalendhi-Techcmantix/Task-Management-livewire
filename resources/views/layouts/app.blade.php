@@ -37,6 +37,9 @@
                 </div>
             </header>
         @endisset
+        @php
+            $role = Auth::user()->role_id;
+        @endphp
 
         <!-- Main Content Wrapper -->
         <div class="flex flex-grow" style="height: calc(90vh - 100px);">
@@ -45,19 +48,16 @@
                 <x-mary-menu active-bg-color="bg-info text-white">
                     <x-mary-menu-item :href="route('dashboard')" title="Dashboard" icon="o-home" :active="request()->routeIs('dashboard')"
                         class="{{ request()->routeIs('dashboard') ? 'text-black font-bold' : '' }}" />
-                    <x-mary-menu-item :href="route('employee-list')" title="Employees" icon="o-user-group" :active="request()->routeIs('employee-list')"
-                        class="{{ request()->routeIs('employee-list') ? 'text-black font-bold' : '' }}" />
-
-
-                    <x-mary-menu-sub title="Master" icon="c-square-3-stack-3d">
-                        <x-mary-menu-item :href="route('role-list')" title="Roles" icon="o-user" :active="request()->routeIs('role-list')"
-                            class="{{ request()->routeIs('role-list') ? 'text-black font-bold' : '' }}" />
-                        <x-mary-menu-item :href="route('task-list')" title="Tasks" icon="o-clock" :active="request()->routeIs('task-list')"
-                            class="{{ request()->routeIs('task-list') ? 'text-black font-bold' : '' }}" />
-                    </x-mary-menu-sub>
-
-                    {{-- <x-mary-menu-item :href="route('student-list')" title="Student" icon="o-user-group" :active="request()->routeIs('student-list')"
-                        class="{{ request()->routeIs('student-list') ? 'text-black font-bold' : '' }}" /> --}}
+                    @if ($role == 1)
+                        <x-mary-menu-item :href="route('employee-list')" title="Employees" icon="o-user-group" :active="request()->routeIs('employee-list')"
+                            class="{{ request()->routeIs('employee-list') ? 'text-black font-bold' : '' }}" />
+                        <x-mary-menu-sub title="Master" icon="c-square-3-stack-3d">
+                            <x-mary-menu-item :href="route('role-list')" title="Roles" icon="o-user" :active="request()->routeIs('role-list')"
+                                class="{{ request()->routeIs('role-list') ? 'text-black font-bold' : '' }}" />
+                            <x-mary-menu-item :href="route('task-list')" title="Tasks" icon="o-clock" :active="request()->routeIs('task-list')"
+                                class="{{ request()->routeIs('task-list') ? 'text-black font-bold' : '' }}" />
+                        </x-mary-menu-sub>
+                    @endif
                 </x-mary-menu>
             </aside>
 

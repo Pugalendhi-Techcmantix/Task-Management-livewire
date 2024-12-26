@@ -3,6 +3,7 @@
 namespace App\Livewire\Employee;
 
 use App\Models\Employee;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
@@ -41,7 +42,7 @@ class EmployeeList extends Component
     public function destroy()
     {
         // Deleting the Employee record
-        Employee::findOrFail($this->employee_id)->delete();
+        User::findOrFail($this->employee_id)->delete();
         $this->confirmDelete = false;
         $this->dispatch('refresh-employee-table');
         $this->success("Deleted Successfully");
@@ -61,7 +62,7 @@ class EmployeeList extends Component
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting
-        $employees = Employee::query()
+        $employees = User::query()
             ->where('name', 'like', '%' . $this->search . '%')
             ->orWhere('email', 'like', '%' . $this->search . '%')
             ->orWhere('age', 'like', '%' . $this->search . '%')

@@ -46,4 +46,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function getStatusLabelAttribute()
+    {
+        $statusLabel = $this->status === 1 ? 'Active' : 'Suspended';
+
+        return [
+            'status' => $statusLabel,
+        ];
+    }
+    public function role()
+    {
+        return $this->belongsTo(Roles::class, 'role_id'); // Use belongsTo and specify the correct foreign key
+    }
 }

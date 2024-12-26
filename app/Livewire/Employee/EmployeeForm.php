@@ -4,13 +4,12 @@ namespace App\Livewire\Employee;
 
 use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Form;
 
 class EmployeeForm extends Form
 {
-    public ?Employee $employee;
+    public ?User $employee;
     public ?int $employee_id = null;  // ID of the employee to update
     public  $name; // Employee name
     public  $email; // Employee email
@@ -29,7 +28,7 @@ class EmployeeForm extends Form
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:employees,email,' . $this->employee_id,
+            'email' => 'required|email|unique:users,email,' . $this->employee_id,
             'password' => 'required|string|min:4',
             'age' => 'required|integer|min:18|max:100',
             'position' => 'required|string|max:255',
@@ -39,7 +38,7 @@ class EmployeeForm extends Form
         ];
     }
 
-    public function setValue(Employee $employee)
+    public function setValue(User $employee)
     {
         $this->employee = $employee;
         $this->employee_id = $employee->id;
@@ -59,7 +58,7 @@ class EmployeeForm extends Form
     public function create()
     {
         // dd($this->all());
-        Employee::create([
+        User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password), // Encrypt the password

@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
+            $table->integer('age');
+            $table->string('position');
+            $table->integer('salary');
+            $table->date('joining_date');
+            $table->tinyInteger('status')->default(1)->nullable()->comment('1 = Active, 2 = Suspended'); // Add a meaningful comment
             $table->unsignedBigInteger('role_id')->nullable()->comment('1 = Admin, 2 = Employee');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

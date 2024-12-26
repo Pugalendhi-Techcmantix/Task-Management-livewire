@@ -13,7 +13,7 @@ class Tasks extends Model
 
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'employee_id'); // Use belongsTo and specify the correct foreign key
+        return $this->belongsTo(User::class, 'employee_id'); // Use belongsTo and specify the correct foreign key
     }
     public function user()
     {

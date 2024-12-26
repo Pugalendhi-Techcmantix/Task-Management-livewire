@@ -1,4 +1,3 @@
-<x-app-layout>
+{{-- <x-app-layout>
     @livewire('student.student-list')
-   
-</x-app-layout>
+</x-app-layout> --}}

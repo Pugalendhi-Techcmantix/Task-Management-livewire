@@ -4,6 +4,7 @@ namespace App\Livewire\Employee;
 
 use App\Models\Employee;
 use App\Models\Roles;
+use App\Models\User;
 use LivewireUI\Modal\ModalComponent;
 
 class EmployeeModal extends ModalComponent
@@ -36,7 +37,7 @@ class EmployeeModal extends ModalComponent
         })->toArray();
 
         if (!is_null($employee_id)) {
-            $employee = Employee::findOrFail($employee_id);
+            $employee = User::findOrFail($employee_id);
             $this->form->setValue($employee);
         }
     }

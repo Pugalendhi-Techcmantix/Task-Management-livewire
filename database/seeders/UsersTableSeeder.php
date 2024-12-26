@@ -18,22 +18,67 @@ class UsersTableSeeder extends Seeder
         // Insert sample data into the 'users' table
         DB::table('users')->insert([
             [
-                'name' => 'Admin',
-                'email' => 'pugal@gmail.com',
+               'name' => 'Admin',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('demo1234'), // Encrypt the password
-                'role_id'=>'1',
-                'email_verified_at' => now(),
-                'remember_token' => null,
+                'age' => '22',
+                'position' => 'Frontend',
+                'salary' => 25000,
+                'joining_date' => '2024-10-14', // Correct date format: Y-m-d
+                'status' => '1',
+                'role_id' => '1',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'User',
-                'email' => 'user@gmail.com',
+                'name' => 'Asim',
+                'email' => 'asim@gmail.com',
                 'password' => Hash::make('demo1234'), // Encrypt the password
-                'role_id'=>'2',
-                'email_verified_at' => now(),
-                'remember_token' => null,
+                'age' => '22',
+                'position' => 'Frontend',
+                'salary' => 25000,
+                'joining_date' => '2024-10-14', // Correct date format: Y-m-d
+                'status' => '2',
+                'role_id' => '2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Kevin',
+                'email' => 'kevin@gmail.com',
+                'password' => Hash::make('demo1234'), // Encrypt the password
+                'age' => '22',
+                'position' => 'Frontend',
+                'salary' => 25000,
+                'joining_date' => '2024-10-14', // Correct date format: Y-m-d
+                'status' => '1',
+                'role_id' => '2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Viwin',
+                'email' => 'viwin@gmail.com',
+                'password' => Hash::make('demo1234'), // Encrypt the password
+                'age' => '23',
+                'position' => 'Tester',
+                'salary' => 20000,
+                'joining_date' => '2024-10-14', // Correct date format: Y-m-d
+                'status' => '2',
+                'role_id' => '2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Raja',
+                'email' => 'raja@gmail.com',
+                'password' => Hash::make('demo1234'), // Encrypt the password
+                'age' => '23',
+                'position' => 'Backend',
+                'salary' => 20000,
+                'joining_date' => '2024-10-14', // Correct date format: Y-m-d
+                'status' => '1',
+                'role_id' => '2',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
