@@ -24,12 +24,12 @@
                         <div class="mt-2 flex items-center">
                             <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
                             <strong class="text-blue-500">Assigned At:</strong>
-                            {{ $task->created_at->format('d-m-Y') }}
+                            {{ \Carbon\Carbon::parse($task->created_at)->format('d-m-Y') }}
                         </div>
                         <div class="mt-2 flex items-center">
                             <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
                             <strong class=" text-red-500 ">Due Date:</strong>
-                            {{ $task->due_date->format('d-m-Y') }}
+                            {{ \Carbon\Carbon::parse($task->due_date)->format('d-m-Y') }}
                         </div>
                     </div>
                 </x-mary-card>

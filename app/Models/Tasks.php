@@ -35,9 +35,4 @@ class Tasks extends Model
             'status' => $statusLabel,
         ];
     }
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'due_date' => 'datetime',
-    ];
 }
