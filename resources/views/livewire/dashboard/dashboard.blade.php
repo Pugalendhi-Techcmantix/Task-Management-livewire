@@ -67,6 +67,47 @@
 
     </div>
 
+
+    @if ($role == 1)
+        <div>
+            <div id="chart"></div>
+            <script>
+                document.addEventListener('livewire:load', function() {
+                    console.log('Livewire component loaded');
+                    var chartOptions = {
+                        series: @js($chartData['series']),
+                        chart: {
+                            type: 'donut',
+                        },
+                        labels: @js($chartData['labels']),
+                        responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                chart: {
+                                    width: 200
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart"), chartOptions);
+                    chart.render();
+
+                    // Listen for Livewire updates to the chart data
+                    Livewire.on('chartDataUpdated', function(newData) {
+                        chart.updateOptions({
+                            series: newData.series,
+                            labels: newData.labels,
+                        });
+                    });
+                });
+            </script>
+        </div>
+    @endif
+
     @if ($role == 2)
         <div class="grid grid-cols-3 gap-5">
             <x-mary-card class="border-r-4 border-b-4 border-blue-300 shadow-xl flex items-center justify-center">

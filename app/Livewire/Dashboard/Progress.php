@@ -10,23 +10,52 @@ class Progress extends Component
 {
     public $myTasks;
     protected $listeners = ['refresh-progress' => '$refresh'];
+    public $confirm = false;
+    public $selectedTaskId, $selectedStatus;
 
-
-    public function updateTaskStatus($taskId, $status)
+    public function openModal($taskId, $status)
     {
-        $task = Tasks::find($taskId);
+        $this->selectedTaskId = $taskId;
+        $this->selectedStatus = $status;
+        $this->confirm = true; // Show the modal
+    }
+
+
+    public function updateTaskStatus()
+    {
+        $task = Tasks::find($this->selectedTaskId);
         if ($task && $task->employee_id === Auth::id()) {
-            $task->status = $status;
+            $task->status = $this->selectedStatus;
             $task->save();
-            $this->myTasks = $this->myTasks->map(function ($t) use ($taskId, $status) {
-                if ($t->id === $taskId) {
-                    $t->status = $status;
+
+            // Update local task list
+            $this->myTasks = $this->myTasks->map(function ($t) {
+                if ($t->id === $this->selectedTaskId) {
+                    $t->status = $this->selectedStatus;
                 }
                 return $t;
             });
-            $this->dispatch('refresh-progress');
+
+            $this->dispatch('refresh-progress');// Notify frontend
         }
+        $this->confirm = false; // Close the modal
     }
+    
+    // public function updateTaskStatus($taskId, $status)
+    // {
+    //     $task = Tasks::find($taskId);
+    //     if ($task && $task->employee_id === Auth::id()) {
+    //         $task->status = $status;
+    //         $task->save();
+    //         $this->myTasks = $this->myTasks->map(function ($t) use ($taskId, $status) {
+    //             if ($t->id === $taskId) {
+    //                 $t->status = $status;
+    //             }
+    //             return $t;
+    //         });
+    //         $this->dispatch('refresh-progress');
+    //     }
+    // }
     public function render()
     {
 

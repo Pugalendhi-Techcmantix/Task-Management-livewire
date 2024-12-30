@@ -10,9 +10,9 @@
                         </div>
                         <x-mary-dropdown icon="o-pencil" class="btn-circle btn-ghost btn-sm">
                             <x-mary-menu-item title="Hold" icon="o-pause-circle"
-                                wire:click="updateTaskStatus({{ $task->id }}, 3)" />
+                                wire:click="openModal({{ $task->id }}, 3)" />
                             <x-mary-menu-item title="Completed" icon="o-check-circle"
-                                wire:click="updateTaskStatus({{ $task->id }}, 4)" />
+                                wire:click="openModal({{ $task->id }}, 4)" />
                         </x-mary-dropdown>
                     </x-slot:menu>
                     <!-- Task Details -->
@@ -44,4 +44,11 @@
             @endforeach
         </div>
     @endif
+    <x-mary-modal wire:model="confirm" title="Are you sure?">
+        <div>Click 'Confirm' to change Status.</div>
+        <x-slot:actions>
+            <x-mary-button label="{{ __('Cancel') }}" wire:click="$set('confirm', false)" spinner />
+            <x-mary-button label="{{ __('Confirm') }}" wire:click="updateTaskStatus" class="btn-primary" spinner />
+        </x-slot>
+    </x-mary-modal>
 </div>

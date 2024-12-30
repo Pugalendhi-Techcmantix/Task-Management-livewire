@@ -19,9 +19,33 @@ class Dashboard extends Component
     public $incompleted;
     public $totalcompleted;
     public $totalincompleted;
+    public $chartData = [];
+
+
+
+    public function mount()
+    {
+        // Prepare data for the donut chart
+        $completed = Tasks::where('status', 4)->count();
+        $incompleted = Tasks::whereIn('status', [1, 2, 3])->count();
+        $pending = Tasks::where('status', 1)->count();
+        $inProgress = Tasks::where('status', 2)->count();
+        $onHold = Tasks::where('status', 3)->count();
+
+        // Debugging the count values
+        // dd($completed, $incompleted, $pending, $inProgress, $onHold);
+
+        // If the data looks correct, assign it to the chartData
+        $this->chartData = [
+            'labels' => ['Completed', 'Incompleted', 'Pending', 'In Progress', 'On Hold'],
+            'series' => [$completed, $incompleted, $pending, $inProgress, $onHold],
+        ];
+    }
+
 
     public function render()
     {
+
         $role = Auth::user()->role_id;
         // Get the authenticated user
         $user = Auth::user();
@@ -63,6 +87,7 @@ class Dashboard extends Component
                 'myTasks' => $this->myTasks,
                 'completed' => $this->completed,
                 'incompleted' => $this->incompleted,
+                'chartData' => $this->chartData,
             ]
         );
     }
