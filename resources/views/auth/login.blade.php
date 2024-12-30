@@ -2,8 +2,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-
-
+    <div class="flex justify-center items-center">
+        <img src="../techc.png" alt="techcmantix">
+    </div>
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <!-- Email Address -->
@@ -47,5 +48,11 @@
             </x-primary-button>
         </div>
     </form>
+    <footer class=" dark:bg-gray-800  py-3">
+        <div class="text-center text-gray-500 dark:text-gray-400">
+            <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Task-Management') }}. All rights reserved.
+            </p>
+        </div>
+    </footer>
 
 </x-guest-layout>

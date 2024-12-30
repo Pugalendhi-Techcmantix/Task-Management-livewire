@@ -5,9 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('dashboard') }}" class="mt-4">
                         <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> -->
-                        <x-mary-icon name="o-home" class="w-12 h-12 bg-info text-white p-2 rounded-full" />
+                        <img src="../techc.png" alt="techcmantix"  >
                     </a>
                 </div>
 

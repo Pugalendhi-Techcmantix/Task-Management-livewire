@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Task-Management') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -45,7 +45,7 @@
         <div class="flex flex-grow" style="height: calc(90vh - 100px);">
             <!-- Fixed Sidebar -->
             <aside class="bg-white dark:bg-gray-800 p-4 w-64 flex-shrink-0">
-                <x-mary-menu active-bg-color="bg-info text-white">
+                <x-mary-menu active-bg-color="bg-error text-white">
                     <x-mary-menu-item :href="route('dashboard')" title="Dashboard" icon="o-home" :active="request()->routeIs('dashboard')"
                         class="{{ request()->routeIs('dashboard') ? 'text-black font-bold' : '' }}" />
                     @if ($role == 1)
