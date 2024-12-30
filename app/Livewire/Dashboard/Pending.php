@@ -10,6 +10,24 @@ class Pending extends Component
 {
 
     public $myTasks;
+    protected $listeners = ['refresh-pending' => '$refresh'];
+
+
+    public function updateTaskStatus($taskId, $status)
+    {
+        $task = Tasks::find($taskId);
+        if ($task && $task->employee_id === Auth::id()) {
+            $task->status = $status;
+            $task->save();
+            $this->myTasks = $this->myTasks->map(function ($t) use ($taskId, $status) {
+                if ($t->id === $taskId) {
+                    $t->status = $status;
+                }
+                return $t;
+            });
+            $this->dispatch('refresh-pending');
+        }
+    }
 
     public function render()
     {

@@ -84,7 +84,7 @@
         <!-- Footer Section (Fixed) -->
         <footer class="bg-white dark:bg-gray-800 shadow py-3">
             <div class="text-center text-gray-500 dark:text-gray-400">
-                <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</p>
+                <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Task-Management') }}. All rights reserved.</p>
             </div>
         </footer>
     </div>

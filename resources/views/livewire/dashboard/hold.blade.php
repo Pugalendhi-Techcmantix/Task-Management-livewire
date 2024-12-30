@@ -2,21 +2,19 @@
     @if ($role == 2)
         <div class="mt-4 grid grid-cols-3 gap-5">
             @foreach ($myTasks as $index => $task)
-                <x-mary-card class="p-4 shadow-lg">
-                    <div class="flex justify-between items-center">
-                        <!-- Task Number with Icon -->
-                        <div class="flex items-center">
-                            <span class="font-semibold text-lg text-gray-800 dark:text-white">Task
-                                #{{ $index + 1 }}</span>
-                        </div>
-                        <!-- Status -->
+                <x-mary-card class="p-4 shadow-lg" title="Task #{{ $index + 1 }}">
+                    <x-slot:menu>
                         <div class="flex items-center">
                             <x-heroicon-o-pause-circle class="w-6 h-6 text-red-500 mr-2" />
                             <span class="text-sm font-semibold text-red-500">Hold</span>
                         </div>
-                    </div>
+                        <x-mary-dropdown icon="o-pencil" class="btn-circle btn-ghost btn-sm">
+                            <x-mary-menu-item title="Progress" icon="o-clock"
+                                wire:click="updateTaskStatus({{ $task->id }}, 2)" />
+                        </x-mary-dropdown>
+                    </x-slot:menu>
                     <!-- Task Details -->
-                    <div class="mt-4">
+                    <div>
                         <div class="flex items-center">
                             <x-heroicon-o-briefcase class="w-5 h-5 text-gray-500 mr-2" />
                             <strong class="text-gray-700 dark:text-gray-200">Project:</strong> {{ $task->project_name }}

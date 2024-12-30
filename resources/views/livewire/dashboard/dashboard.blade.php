@@ -106,7 +106,7 @@
                 </div>
             </x-mary-card>
         </div>
-        <div class="mt-4 grid grid-cols-3 gap-5">
+        {{-- <div class="mt-4 grid grid-cols-3 gap-5">
             @foreach ($myTasks as $index => $task)
                 <x-mary-card class="p-4 shadow-lg  ">
                     <div class="flex justify-between items-center">
@@ -162,7 +162,7 @@
                     </div>
                 </x-mary-card>
             @endforeach
-        </div>
+        </div> --}}
     @endif
 
 </div>

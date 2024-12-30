@@ -40,8 +40,8 @@ class TaskList extends Component
             ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => false],
             ['key' => 'due_date', 'label' => 'Due Date ', 'sortable' => true,'format'=>['date','d-m-y']],
             ['key' => 'status', 'label' => 'Status', 'sortable' => true],
-            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true],
-            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true],
+            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true,'format'=>['date','d-m-y']],
+            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true,'format'=>['date','d-m-y']],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
       
@@ -52,6 +52,9 @@ class TaskList extends Component
                     ->orWhere('project_name', 'like', '%' . $this->search . '%')
                     ->orWhere('area', 'like', '%' . $this->search . '%')
                     ->orWhere('task_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('due_date', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%')
+                    ->orWhere('updated_at', 'like', '%' . $this->search . '%')
                     ->orWhereHas('employee', function ($query) {
                         $query->where('name', 'like', '%' . $this->search . '%');
                     })
