@@ -37,31 +37,6 @@
                     <p class="text-3xl font-bold text-gray-900 mt-2">{{ $taskCount }}</p>
                 </div>
             </x-mary-card>
-
-            <x-mary-card class="border-r-4 border-b-4 border-green-300 shadow-xl flex items-center justify-center">
-                <div class="text-center">
-
-                    <div class="bg-green-100 p-4 rounded-full w-fit mx-auto mb-2">
-                        <x-heroicon-o-check-circle class="w-8 h-8 text-green-500" />
-                    </div>
-
-                    <h2 class="text-xl font-semibold text-gray-800">Completed</h2>
-
-                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalcompleted }}</p>
-                </div>
-            </x-mary-card>
-            <x-mary-card class="border-r-4 border-b-4 border-yellow-300 shadow-xl flex items-center justify-center">
-                <div class="text-center">
-
-                    <div class="bg-yellow-100 p-4 rounded-full w-fit mx-auto mb-2">
-                        <x-heroicon-c-exclamation-circle class="w-8 h-8 text-yellow-500" />
-                    </div>
-
-                    <h2 class="text-xl font-semibold text-gray-800">In Completed</h2>
-
-                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalincompleted }}</p>
-                </div>
-            </x-mary-card>
         @endif
 
 
@@ -69,44 +44,58 @@
 
 
     @if ($role == 1)
-        <div>
-            <div id="chart"></div>
-            <script>
-                document.addEventListener('livewire:load', function() {
-                    console.log('Livewire component loaded');
-                    var chartOptions = {
-                        series: @js($chartData['series']),
-                        chart: {
-                            type: 'donut',
+        <div class="grid grid-cols-2 mt-5 gap-5">
+            <x-mary-card>
+                <canvas id="myChart" class="max-h-96"></canvas>
+                <script>
+                    const ctx = document.getElementById('myChart');
+                    new Chart(ctx, {
+                        type: 'doughnut', // Change the chart type to "doughnut"
+                        data: {
+                            labels: @json($chartData['labels']), // Labels for each segment
+                            datasets: [{
+                                label: 'Task Status', // Optional, appears in the tooltip
+                                data: @json($chartData['series']), // Example data (replace with dynamic data if needed)
+                                backgroundColor: ['#2ECC71', '#E74C3C', '#F4D03F', '#3498DB', '#E67E22'],
+                                hoverOffset: 10
+                            }]
                         },
-                        labels: @js($chartData['labels']),
-                        responsive: [{
-                            breakpoint: 480,
-                            options: {
-                                chart: {
-                                    width: 200
-                                },
+                        options: {
+                            responsive: true,
+                            plugins: {
                                 legend: {
-                                    position: 'bottom'
+                                    position: 'chartArea', // Position of the legend
+                                    onHover: handleHover,
+                                    onLeave: handleLeave
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Overall Task Status'
                                 }
-                            }
-                        }]
-                    };
-
-                    var chart = new ApexCharts(document.querySelector("#chart"), chartOptions);
-                    chart.render();
-
-                    // Listen for Livewire updates to the chart data
-                    Livewire.on('chartDataUpdated', function(newData) {
-                        chart.updateOptions({
-                            series: newData.series,
-                            labels: newData.labels,
-                        });
+                            },
+                        }
                     });
-                });
-            </script>
+                    // Append '4d' to the colors (alpha channel), except for the hovered index
+                    function handleHover(evt, item, legend) {
+                        legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+                            colors[index] = index === item.index || color.length === 9 ? color : color +
+                                '4D'; // Add transparency
+                        });
+                        legend.chart.update();
+                    }
+
+                    // Removes the alpha channel from background colors
+                    function handleLeave(evt, item, legend) {
+                        legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+                            colors[index] = color.length === 9 ? color.slice(0, -2) : color; // Remove transparency
+                        });
+                        legend.chart.update();
+                    }
+                </script>
+            </x-mary-card>
         </div>
     @endif
+
 
     @if ($role == 2)
         <div class="grid grid-cols-3 gap-5">
