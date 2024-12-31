@@ -3,7 +3,6 @@
 namespace App\Livewire\Dashboard;
 
 use App\Mail\ReminderMail;
-use App\Models\Employee;
 use App\Models\Tasks;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,6 +29,7 @@ class Dashboard extends Component
 
     public $confirm = false;
     public $selectedUserId;
+    public $tasksForReminder;
 
 
 
@@ -52,33 +52,62 @@ class Dashboard extends Component
     public function openModal($userId)
     {
         $this->selectedUserId = $userId;
+
+        // Get tasks for the selected employee with today's due date
+        $today = Carbon::today();
+        $this->tasksForReminder = Tasks::with('employee') // Include the project relation if needed
+            ->where('employee_id', $userId)
+            ->whereDate('due_date', $today)
+            ->get();
         $this->confirm = true; // Show the modal
     }
-
 
     public function sendReminder()
     {
         // Find the user by ID
         $user = User::findOrFail($this->selectedUserId);
+        // Ensure tasks for this user exist
+        if ($this->tasksForReminder->isEmpty()) {
+            $this->toast(
+                type: 'error',
+                title: 'Error!',
+                description: 'No tasks due today for this employee.',
+                position: 'toast-top toast-end',
+                icon: 'o-alert-circle',
+                css: 'alert-error',
+                redirectTo: null
+            );
+            return;
+        }
 
-        // Define the reminder content
-        $messageContent = "Hello {$user->name}, this is a reminder about your pending tasks.";
+        // Prepare task details for the email
+        $taskDetails = $this->tasksForReminder->map(function ($task) {
+            return [
+                'task_name' => $task->task_name,
+                'area' => $task->area,
+                'project_name' => $task->project_name,
+                'created_at' => $task->created_at,
+                'due_date' => $task->due_date,
+            ];
+        })->toArray();
 
         // Send the email
-        Mail::to($user->email)->send(new ReminderMail($messageContent));
-        $this->confirm = false; // Show the modal
-        // Notify the user that the email was sent successfully
-        // Toast
+        Mail::to($user->email)->send(new ReminderMail($user->name, $taskDetails));
+
+        $this->confirm = false; // Close the modal
+
+        // Notify the user
         $this->toast(
             type: 'success',
-            title: 'Sended!',
-            description: "Reminder email sent to {$user->email}!",                  // optional (text)
-            position: 'toast-top toast-end',    // optional (daisyUI classes)
-            icon: 'o-check-circle',       // Optional (any icon)
-            css: 'alert-success',                  // Optional (daisyUI classes)
+            title: 'Sent!',
+            description: "Reminder email sent to {$user->email}!",
+            position: 'toast-top toast-end',
+            icon: 'o-check-circle',
+            css: 'alert-info',
             redirectTo: null
         );
     }
+
 
     public function render()
     {

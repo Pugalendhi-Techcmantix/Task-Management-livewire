@@ -14,14 +14,18 @@ class ReminderMail extends Mailable
     use Queueable, SerializesModels;
 
     public $messageContent;
+    public $userName;
+    public $taskDetails;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($messageContent)
+    public function __construct($userName, array $taskDetails)
     {
         //
-        $this->messageContent = $messageContent;
+
+        $this->userName = $userName;
+        $this->taskDetails = $taskDetails;
     }
 
 
@@ -49,7 +53,8 @@ class ReminderMail extends Mailable
         return new Content(
             view: 'mail.reminder',
             with: [
-                'messageContent' => $this->messageContent
+                'userName' => $this->userName,
+                'taskDetails' => $this->taskDetails,
             ]
         );
     }
