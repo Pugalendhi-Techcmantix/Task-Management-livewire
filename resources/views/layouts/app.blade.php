@@ -25,6 +25,7 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+    <x-mary-toast /> 
 
     <!-- Layout Wrapper -->
     <div class="flex flex-col min-h-screen">

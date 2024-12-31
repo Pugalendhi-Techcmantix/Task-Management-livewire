@@ -48,7 +48,7 @@
             </x-primary-button>
         </div>
     </form>
-    <footer class=" dark:bg-gray-800  py-3">
+    <footer class=" dark:bg-gray-800  pt-10">
         <div class="text-center text-gray-500 dark:text-gray-400">
             <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Task-Management') }}. All rights reserved.
             </p>

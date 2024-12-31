@@ -38,15 +38,13 @@
                 </div>
             </x-mary-card>
         @endif
-
-
     </div>
 
 
     @if ($role == 1)
-        <div class="grid grid-cols-2 mt-5 gap-5">
-            <x-mary-card>
-                <canvas id="myChart" class="max-h-96"></canvas>
+        <div class="grid grid-cols-12 mt-5 gap-5">
+            <x-mary-card class="col-span-4">
+                <canvas id="myChart"></canvas>
                 <script>
                     const ctx = document.getElementById('myChart');
                     new Chart(ctx, {
@@ -64,9 +62,7 @@
                             responsive: true,
                             plugins: {
                                 legend: {
-                                    position: 'chartArea', // Position of the legend
-                                    onHover: handleHover,
-                                    onLeave: handleLeave
+                                    position: 'bottom', // Position of the legend
                                 },
                                 title: {
                                     display: true,
@@ -75,27 +71,40 @@
                             },
                         }
                     });
-                    // Append '4d' to the colors (alpha channel), except for the hovered index
-                    function handleHover(evt, item, legend) {
-                        legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
-                            colors[index] = index === item.index || color.length === 9 ? color : color +
-                                '4D'; // Add transparency
-                        });
-                        legend.chart.update();
-                    }
-
-                    // Removes the alpha channel from background colors
-                    function handleLeave(evt, item, legend) {
-                        legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
-                            colors[index] = color.length === 9 ? color.slice(0, -2) : color; // Remove transparency
-                        });
-                        legend.chart.update();
-                    }
                 </script>
             </x-mary-card>
+            <x-mary-card title="Send Task Reminder" class="col-span-8">
+                <x-slot:menu>
+                    <span class="font-semibold">Total:</span>
+                    <span class="text-lg font-semibold text-red-500">{{ $totalCount }}</span>
+                </x-slot:menu>
+                @foreach ($tasks as $task)
+                    <x-mary-list-item :item="$task">
+                        <x-slot:value>
+                            Task: {{ $task->task_name }}
+                        </x-slot:value>
+                        <x-slot:sub-value>
+                            Due Date:{{ $task->due_date }}
+                        </x-slot:sub-value>
+                        <x-slot:avatar>
+                            <x-mary-badge value="{{ $task->employee->name }}" class="badge-info" />
+                        </x-slot:avatar>
+                        <x-slot:actions>
+                            <x-mary-button icon="o-envelope-open" class="text-error btn-sm btn-ghost btn-circle"
+                                wire:click="openModal({{ $task->employee->id }})" spinner />
+                        </x-slot:actions>
+                    </x-mary-list-item>
+                @endforeach
+            </x-mary-card>
+            <x-mary-modal wire:model="confirm" title="Are you sure?">
+                <div>Click 'Confirm' to Sent Task Reminder.</div>
+                <x-slot:actions>
+                    <x-mary-button label="{{ __('Cancel') }}" wire:click="$set('confirm', false)" spinner />
+                    <x-mary-button label="{{ __('Confirm') }}" wire:click="sendReminder" class="btn-primary" spinner />
+                </x-slot>
+            </x-mary-modal>
         </div>
     @endif
-
 
     @if ($role == 2)
         <div class="grid grid-cols-3 gap-5">
