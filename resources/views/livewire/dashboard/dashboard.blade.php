@@ -1,5 +1,5 @@
 <div class="container mt-3">
-    <div class="grid grid-cols-3 gap-5">
+    <div class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         @if ($role == 1)
             <x-mary-card class="border-r-4 border-b-4 border-orange-300 shadow-xl flex items-center justify-center">
                 <div class="text-center">
@@ -42,8 +42,8 @@
 
 
     @if ($role == 1)
-        <div class="grid grid-cols-12 mt-5 gap-5">
-            <x-mary-card wire:ignore class="col-span-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 mt-5 gap-5">
+            <x-mary-card wire:ignore class="col-span-12 lg:col-span-4">
                 <canvas id="myChart"></canvas>
                 <script>
                     const ctx = document.getElementById('myChart');
@@ -93,18 +93,18 @@
             </x-mary-card>
 
 
-            <x-mary-card title="Send Task Reminder" class="col-span-8">
+            <x-mary-card title="Send Task Reminder" class="col-span-12 lg:col-span-8">
                 <x-slot:menu>
                     <span class="font-semibold">Total:</span>
                     <span class="text-lg font-semibold text-red-500">{{ $totalCount }}</span>
                 </x-slot:menu>
                 @foreach ($tasks as $task)
                     <x-mary-list-item :item="$task">
-                        <x-slot:value class="flex justify-between">
+                        <x-slot:value class="flex justify-between flex-wrap">
                             <p>Task: {{ $task->task_name }}</p>
                             <p>Project: {{ $task->project_name }}</p>
                         </x-slot:value>
-                        <x-slot:sub-value class="flex justify-between">
+                        <x-slot:sub-value class="flex justify-between flex-wrap">
                             <p class="text-success">
                                 Assigned:{{ \Carbon\Carbon::parse($task->created_at)->format('d-m-y') }}
                             </p>
@@ -133,7 +133,7 @@
     @endif
 
     @if ($role == 2)
-        <div class="grid grid-cols-3 gap-5">
+        <div class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <x-mary-card class="border-r-4 border-b-4 border-blue-300 shadow-xl flex items-center justify-center">
                 <div class="text-center">
 

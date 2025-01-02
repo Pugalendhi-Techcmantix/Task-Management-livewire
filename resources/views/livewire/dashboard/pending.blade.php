@@ -1,7 +1,9 @@
 <div class="container mt-3">
     @if ($role == 2)
-        <div class="mt-4 grid grid-cols-3 gap-5">
+        <!-- Responsive Grid -->
+        <div class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             @foreach ($myTasks as $index => $task)
+                <!-- Task Card -->
                 <x-mary-card class="p-4 shadow-lg" title="Task #{{ $index + 1 }}">
                     <x-slot:menu>
                         <div class="flex items-center">
@@ -16,27 +18,31 @@
                         </x-mary-dropdown>
                     </x-slot:menu>
                     <div>
-                        <div class="flex items-center">
+                        <!-- Task Details -->
+                        <div class="flex items-center flex-wrap">
                             <x-heroicon-o-briefcase class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-gray-700 dark:text-gray-200">Project:</strong> {{ $task->project_name }}
+                            <strong class="text-gray-700 dark:text-gray-200">Project:</strong>
+                            <span class="truncate">{{ $task->project_name }}</span>
                         </div>
-                        <div class="mt-2 flex items-center">
+                        <div class="mt-2 flex items-center flex-wrap">
                             <x-heroicon-o-document-text class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-gray-700 dark:text-gray-200">Task Name:</strong> {{ $task->task_name }}
+                            <strong class="text-gray-700 dark:text-gray-200">Task Name:</strong>
+                            <span class="truncate">{{ $task->task_name }}</span>
                         </div>
-                        <div class="mt-2 flex items-center">
+                        <div class="mt-2 flex items-center flex-wrap">
                             <x-heroicon-o-code-bracket-square class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-gray-700 dark:text-gray-200">Area:</strong> {{ $task->area }}
+                            <strong class="text-gray-700 dark:text-gray-200">Area:</strong>
+                            <span class="truncate">{{ $task->area }}</span>
                         </div>
-                        <div class="mt-2 flex items-center">
+                        <div class="mt-2 flex items-center flex-wrap">
                             <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
                             <strong class="text-blue-500">Assigned At:</strong>
-                            {{ \Carbon\Carbon::parse($task->created_at)->format('d-m-Y') }}
+                            <span>{{ \Carbon\Carbon::parse($task->created_at)->format('d-m-Y') }}</span>
                         </div>
-                        <div class="mt-2 flex items-center">
+                        <div class="mt-2 flex items-center flex-wrap">
                             <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class=" text-red-500 ">Due Date:</strong>
-                            {{ \Carbon\Carbon::parse($task->due_date)->format('d-m-Y') }}
+                            <strong class="text-red-500">Due Date:</strong>
+                            <span>{{ \Carbon\Carbon::parse($task->due_date)->format('d-m-Y') }}</span>
                         </div>
                     </div>
                 </x-mary-card>
@@ -44,6 +50,7 @@
         </div>
     @endif
 
+    <!-- Modal -->
     <x-mary-modal wire:model="confirm" title="Are you sure?">
         <div>Click 'Confirm' to change Status.</div>
         <x-slot:actions>
@@ -51,5 +58,4 @@
             <x-mary-button label="{{ __('Confirm') }}" wire:click="updateTaskStatus" class="btn-primary" spinner />
         </x-slot>
     </x-mary-modal>
-
 </div>
