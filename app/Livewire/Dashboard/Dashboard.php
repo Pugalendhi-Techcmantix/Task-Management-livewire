@@ -19,7 +19,6 @@ class Dashboard extends Component
     public $employeeCount;
     public $taskCount;
     public $mytaskCount;
-    public $myTasks;
     public $completed;
     public $incompleted;
     public $totalcompleted;
@@ -138,9 +137,6 @@ class Dashboard extends Component
         // Count the number of tasks assigned to the authenticated user
         $this->mytaskCount = Tasks::where('employee_id', $user->id)->count();
 
-        // Get the tasks assigned to the authenticated user
-        $this->myTasks = Tasks::where('employee_id', $user->id)->get(); // Fetch tasks assigned to the current user
-
         $this->completed = Tasks::where('employee_id', $user->id)
             ->where('status', 4)
             ->count();
@@ -159,7 +155,6 @@ class Dashboard extends Component
                 'totalcompleted' => $this->totalcompleted,
                 'totalincompleted' => $this->totalincompleted,
                 'mytaskCount' => $this->mytaskCount,
-                'myTasks' => $this->myTasks,
                 'completed' => $this->completed,
                 'incompleted' => $this->incompleted,
                 'chartData' => $this->chartData,

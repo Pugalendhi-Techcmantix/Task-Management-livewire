@@ -82,6 +82,19 @@ class UsersTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Pugalendhi',
+                'email' => 'pugalendhi@techcmantix.com',
+                'password' => Hash::make('demo1234'), // Encrypt the password
+                'age' => '23',
+                'position' => 'Full-Stack Developer',
+                'salary' => 25000,
+                'joining_date' => '2024-10-14', // Correct date format: Y-m-d
+                'status' => '1',
+                'role_id' => '2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

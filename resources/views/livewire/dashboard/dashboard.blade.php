@@ -171,63 +171,6 @@
                 </div>
             </x-mary-card>
         </div>
-        {{-- <div class="mt-4 grid grid-cols-3 gap-5">
-            @foreach ($myTasks as $index => $task)
-                <x-mary-card class="p-4 shadow-lg  ">
-                    <div class="flex justify-between items-center">
-                        <!-- Task Number with Icon -->
-                        <div class="flex items-center">
-                            <span class="font-semibold text-lg text-gray-800 dark:text-white">Task
-                                #{{ $index + 1 }}</span>
-                        </div>
-                        <!-- Status with Icon -->
-                        <div class="flex items-center">
-                            @if ($task->status == 1)
-                                <x-heroicon-o-exclamation-triangle class="w-6 h-6 text-yellow-500 mr-2" />
-                                <span class="text-sm font-semibold text-yellow-500">Pending</span>
-                            @elseif ($task->status == 2)
-                                <x-heroicon-o-clock class="w-6 h-6 text-blue-500 mr-2" />
-                                <span class="text-sm font-semibold text-blue-500">In Progress</span>
-                            @elseif ($task->status == 3)
-                                <x-heroicon-o-pause-circle class="w-6 h-6 text-red-500 mr-2" />
-                                <span class="text-sm font-semibold text-red-500">On Hold</span>
-                            @elseif ($task->status == 4)
-                                <x-heroicon-o-check-circle class="w-6 h-6 text-green-500 mr-2" />
-                                <span class="text-sm font-semibold text-green-500">Completed</span>
-                            @else
-                                <x-heroicon-o-user class="w-6 h-6 text-gray-500 mr-2" />
-                                <span class="text-sm font-semibold text-gray-500">Unknown</span>
-                            @endif
-                        </div>
-                    </div>
-                    <!-- Task Details -->
-                    <div class="mt-4">
-                        <div class="flex items-center">
-                            <x-heroicon-o-briefcase class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-gray-700 dark:text-gray-200">Project:</strong> {{ $task->project_name }}
-                        </div>
-                        <div class="mt-2 flex items-center">
-                            <x-heroicon-o-document-text class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-gray-700 dark:text-gray-200">Task Name:</strong> {{ $task->task_name }}
-                        </div>
-                        <div class="mt-2 flex items-center">
-                            <x-heroicon-o-user class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-gray-700 dark:text-gray-200">Area:</strong> {{ $task->area }}
-                        </div>
-                        <div class="mt-2 flex items-center">
-                            <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class="text-blue-500">Assigned At:</strong>
-                            {{ $task->created_at->format('d-m-Y') }}
-                        </div>
-                        <div class="mt-2 flex items-center">
-                            <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
-                            <strong class=" text-red-500 ">Due Date:</strong>
-                            {{ $task->due_date->format('d-m-Y') }}
-                        </div>
-                    </div>
-                </x-mary-card>
-            @endforeach
-        </div> --}}
     @endif
 
 </div>

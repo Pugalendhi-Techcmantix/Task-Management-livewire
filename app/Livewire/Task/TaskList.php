@@ -38,10 +38,10 @@ class TaskList extends Component
             ['key' => 'task_name', 'label' => 'Task Name', 'sortable' => true, 'class' => 'truncate'],
             ['key' => 'employee.name', 'label' => 'Employee', 'sortable' => false],
             ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => false],
-            ['key' => 'due_date', 'label' => 'Due Date ', 'sortable' => true,'format'=>['date','d-m-y']],
+            ['key' => 'due_date', 'label' => 'Due Date ', 'sortable' => true,],
             ['key' => 'status', 'label' => 'Status', 'sortable' => true],
-            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true,'format'=>['date','d-m-y']],
-            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true,'format'=>['date','d-m-y']],
+            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true,],
+            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true,],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
       

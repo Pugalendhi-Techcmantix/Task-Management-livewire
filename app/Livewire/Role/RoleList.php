@@ -3,11 +3,13 @@
 namespace App\Livewire\Role;
 
 use App\Models\Roles;
+use App\Models\User;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class RoleList extends Component
 {
-
+    use Toast;
     public $search = '', $name, $role_id, $confirmDelete = false;
     public int $perPage = 5; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
@@ -22,7 +24,50 @@ class RoleList extends Component
 
     public function destroy()
     {
-        Roles::findOrfail($this->role_id)->delete();
+        $role = Roles::find($this->role_id);
+
+        if (!$role) {
+            $this->toast(
+                type: 'error',
+                title: 'Role!',
+                description: 'Role not found.',
+                position: 'toast-top toast-end',
+                icon: 'o-exclamation-circle',
+                css: 'alert-danger',
+                timeout: 5000,
+                redirectTo: null
+            );
+            $this->confirmDelete = false;
+            return;
+        }
+        // Check if any users are associated with this role
+        $associatedUsers = User::where('role_id', $this->role_id)->exists();
+        if ($associatedUsers) {
+            $this->toast(
+                type: 'error',
+                title: 'Role!',
+                description: 'This role is associated with users and cannot be deleted.',
+                position: 'toast-top toast-end',
+                icon: 'o-exclamation-circle',
+                css: 'alert-warning',
+                timeout: 5000,
+                redirectTo: null
+            );
+            $this->confirmDelete = false;
+            return;
+        }
+
+        $role->delete();
+        $this->toast(
+            type: 'success',
+            title: 'Deleted!',
+            description: 'Role deleted successfully.',
+            position: 'toast-top toast-end',
+            icon: 'o-check-circle',
+            timeout: 5000,
+            css: 'alert-success',
+            redirectTo: null
+        );
         $this->confirmDelete = false;
         $this->dispatch('refresh-role-table');
     }
