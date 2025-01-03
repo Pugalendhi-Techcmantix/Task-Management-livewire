@@ -2,7 +2,9 @@
 
 namespace App\View\Components;
 
+use App\Models\Support;
 use App\Models\Tasks;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 use Illuminate\View\View;
@@ -12,7 +14,7 @@ class AppLayout extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public $pending, $progress, $hold, $completed;
+    public $pending, $progress, $hold, $completed, $supportMsg;
     public function render(): View
     {
         $role = Auth::user()->role_id;
@@ -32,12 +34,11 @@ class AppLayout extends Component
             ->where('status', 4)
             ->count();
 
+
+        $this->supportMsg = Support::whereDate('created_at', Carbon::today())->count();
+
         return view('layouts.app', [
             'role' => $role,
-            'pending' => $this->pending,
-            'progress' => $this->progress,
-            'hold' => $this->hold,
-            'completed' => $this->completed
         ]);
     }
 }

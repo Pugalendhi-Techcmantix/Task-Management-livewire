@@ -63,6 +63,7 @@ class TaskForm extends Form
         // dd($this->all());
         $this->tasks->update([
             'task_name' => $this->task_name,
+            'due_date' => $this->due_date,
             'status' => $this->status,
         ]);
     }

@@ -30,6 +30,14 @@ Route::get('/completed', function () {
     return view('completed');
 })->name('completed');
 
+Route::get('/support-page', function () {
+    return view('support-page');
+})->name('support-page');
+
+Route::get('/support-list', function () {
+    return view('support-list');
+})->name('support-list');
+
 
 
 Route::get('student-list', [StudentController::class, 'viewList'])->name('student-list');

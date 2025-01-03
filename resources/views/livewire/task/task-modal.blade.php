@@ -13,11 +13,9 @@
     <x-mary-form wire:submit.prevent="save" class="p-5">
         @csrf
         <div class="grid grid-cols-2 gap-3">
-            <x-mary-input label="Project Name" wire:model="form.project_name" placeholder="Enter Project name"
-                :disabled="isset($form->task_id)" />
-            <x-mary-input label="Area" wire:model="form.area" placeholder="Enter Area" :disabled="isset($form->task_id)" />
-            <x-mary-select label="Employee" wire:model="form.employee_id" :options="$employee" placeholder="Select"
-                :disabled="isset($form->task_id)" />
+            <x-mary-input label="Project Name" wire:model="form.project_name" placeholder="Enter Project name"/>
+            <x-mary-input label="Area" wire:model="form.area" placeholder="Enter Area"  />
+            <x-mary-select label="Employee" wire:model="form.employee_id" :options="$employee" placeholder="Select"/>
             @if ($form->task_id)
                 <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />
             @endif

@@ -25,7 +25,7 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
-    <x-mary-toast /> 
+    <x-mary-toast />
 
     <!-- Layout Wrapper -->
     <div class="flex flex-col min-h-screen">
@@ -56,6 +56,9 @@
                             class="{{ request()->routeIs('role-list') ? 'text-black font-bold' : '' }}" />
                         <x-mary-menu-item :href="route('task-list')" title="Tasks" icon="o-bars-4" :active="request()->routeIs('task-list')"
                             class="{{ request()->routeIs('task-list') ? 'text-black font-bold' : '' }}" />
+                        <x-mary-menu-item :href="route('support-list')" title="Support Messages" :badge="$supportMsg"
+                            badge-classes="!badge-warning float-right" icon="o-phone-arrow-down-left" :active="request()->routeIs('support-list')"
+                            class="{{ request()->routeIs('support-list') ? 'text-black font-bold' : '' }}" />
                     @endif
                     @if ($role == 2)
                         <x-mary-menu-item :href="route('pending')" title="Pending" :badge="$pending"
@@ -73,6 +76,10 @@
                         <x-mary-menu-item :href="route('completed')" title="Completed" :badge="$completed"
                             badge-classes="!badge-success float-right" icon="o-check-circle" :active="request()->routeIs('completed')"
                             class="{{ request()->routeIs('completed') ? 'text-black font-bold' : '' }}" />
+
+                        <x-mary-menu-item :href="route('support-page')" title="Support" badge-classes="!badge-success float-right"
+                            icon="o-phone-arrow-up-right" :active="request()->routeIs('support-page')"
+                            class="{{ request()->routeIs('support-page') ? 'text-black font-bold' : '' }}" />
                     @endif
 
                 </x-mary-menu>
@@ -88,7 +95,8 @@
         <!-- Footer Section (Fixed) -->
         <footer class="bg-white dark:bg-gray-800 shadow py-3">
             <div class="text-center text-gray-500 dark:text-gray-400">
-                <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Task-Management') }}. All rights reserved.</p>
+                <p class="mb-0">© {{ date('Y') }} {{ config('app.name', 'Task-Management') }}. All rights
+                    reserved.</p>
             </div>
         </footer>
     </div>
