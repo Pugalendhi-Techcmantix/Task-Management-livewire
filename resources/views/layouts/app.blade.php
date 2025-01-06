@@ -14,7 +14,6 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -37,8 +36,9 @@
 
         <!-- Main Content Wrapper -->
         <div class="flex flex-grow" style="height: calc(90vh - 100px);">
+
             <!-- Fixed Sidebar -->
-            <aside class="bg-white dark:bg-gray-800 p-4 w-64 flex-shrink-0">
+            <aside class="bg-white dark:bg-gray-800 p-4 w-64 flex-shrink-0 sm:block hidden">
                 <x-mary-menu active-bg-color="bg-error text-white">
                     <x-mary-menu-item :href="route('dashboard')" title="Dashboard" icon="o-home" :active="request()->routeIs('dashboard')"
                         class="{{ request()->routeIs('dashboard') ? 'text-black font-bold' : '' }}" />
