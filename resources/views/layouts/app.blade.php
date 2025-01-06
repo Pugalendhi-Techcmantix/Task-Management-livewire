@@ -33,14 +33,7 @@
         <!-- Navigation Bar -->
         @include('layouts.navigation')
 
-        <!-- Header Section -->
-        @isset($header)
-            <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-10">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
+
 
         <!-- Main Content Wrapper -->
         <div class="flex flex-grow" style="height: calc(90vh - 100px);">

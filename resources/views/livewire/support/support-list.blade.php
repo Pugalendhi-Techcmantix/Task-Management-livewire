@@ -2,8 +2,8 @@
 
     <x-mary-card title="Incoming Support Messages!">
         <x-slot:menu class="flex-wrap">
-            <x-mary-button class="btn-sm" label="OverAll" :badge="$overAllMsg" />
-            <x-mary-button class="btn-sm" label="Today" :badge="$todayMsg" badge-classes="badge-warning" />
+            <x-mary-button class="btn-sm" label="OverAll" :badge="$overAllMsg"  wire:click="fetchMessages" />
+            <x-mary-button class="btn-sm" label="Today" wire:click="todayMsg" :badge="$todayMsgCount" badge-classes="badge-warning" />
             <span class="font-semibold">Priority : </span>
             <x-mary-button wire:click="filterByPriority(1)" class="btn-success btn-xs" label="Low"
                 tooltip="List Low" />
@@ -11,8 +11,6 @@
                 tooltip="List Medium" />
             <x-mary-button wire:click="filterByPriority(3)" class="btn-error btn-xs" label="High"
                 tooltip="List High" />
-            <x-mary-button wire:click="filterByPriority(null)" class="btn-outline btn-xs" label="All"
-                tooltip="List All" />
         </x-slot:menu>
         @foreach ($messages as $msg)
             <x-mary-list-item :item="$msg">
@@ -34,8 +32,6 @@
                         <span class="text-black "> Category:</span>
                         {{ $msg->category == 1 ? 'Bug' : ($msg->category == 2 ? 'Feature Request' : 'General Query') }}
                     </p>
-
-
                 </x-slot:sub-value>
             </x-mary-list-item>
         @endforeach
