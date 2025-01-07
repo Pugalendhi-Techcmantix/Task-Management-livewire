@@ -173,13 +173,7 @@
         </div>
 
         <div class="mt-4">
-          
-              
-      
-
-            <x-mary-calendar :events="$events" sunday-start />
-
-           
+            <x-mary-calendar :events="$events" sunday-start weekend-highlight/>
         </div>
     @endif
 

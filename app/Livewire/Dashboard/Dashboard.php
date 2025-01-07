@@ -47,26 +47,43 @@ class Dashboard extends Component
             'series' => [$completed, $incompleted, $pending, $inProgress, $onHold],
         ];
 
-        $this->events = [
-            [
-                'label' => 'Day off',
-                'description' => 'Playing <u>tennis.</u>',
-                'css' => '!bg-amber-200',
-                'date' => now()->startOfMonth()->addDays(3),
-            ],
-            [
-                'label' => 'Event at same day',
-                'description' => 'Hey there!',
-                'css' => '!bg-amber-200',
-                'date' => now()->startOfMonth()->addDays(3),
-            ],
-            [
-                'label' => 'Laracon',
-                'description' => 'Let`s go!',
-                'css' => '!bg-blue-200',
-                'range' => [now()->startOfMonth()->addDays(13), now()->startOfMonth()->addDays(15)],
-            ],
-        ];
+        // Call the function to prepare the events
+        $this->events = $this->prepareEvents();
+    }
+
+    public function prepareEvents()
+    {
+        $user = Auth::user();
+
+        // Fetch tasks for the authenticated user
+        $tasks = Tasks::where('employee_id', $user->id)->get();
+
+        $events = [];
+
+        foreach ($tasks as $task) {
+            // Handle Due Date (Red color)
+            if ($task->due_date) {
+                $dueDate = Carbon::parse($task->due_date); // Parse due date
+                $events[] = [
+                    'label' =>'Due Task:',
+                    'description' =>  $task->task_name,
+                    'css' => '!bg-amber-200', 
+                    'date' => $dueDate 
+                ];
+            }
+            // Handle Completed Date (Green color)
+            if ($task->complete_date) {
+                $completeDate = Carbon::parse($task->complete_date); // Parse complete date
+                $events[] = [
+                    'label' =>'Completed Task:',
+                    'description' => $task->task_name,
+                    'css' => '!bg-blue-200', // Green for completed task
+                    'date' => $completeDate 
+                ];
+            }
+        }
+
+        return $events;
     }
 
 
