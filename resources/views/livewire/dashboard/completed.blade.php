@@ -34,6 +34,17 @@
                             <strong class="text-red-500">Due Date:</strong>
                             <span>{{ \Carbon\Carbon::parse($task->due_date)->format('d-m-Y') }}</span>
                         </div>
+                        <div class="mt-2 flex items-center flex-wrap">
+                            <x-heroicon-o-clock class="w-5 h-5 text-gray-500 mr-2" />
+                            <strong class="text-green-500">Completed:</strong>
+                            <span>
+                                @if($task->complete_date)
+                                    {{ \Carbon\Carbon::parse($task->complete_date)->format('d-m-Y') }}
+                                @else
+                                    Not Completed
+                                @endif
+                            </span>
+                        </div>
                     </div>
                 </x-mary-card>
             @endforeach

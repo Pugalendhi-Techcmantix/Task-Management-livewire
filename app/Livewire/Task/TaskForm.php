@@ -17,6 +17,7 @@ class TaskForm extends Form
     public $status;
     public $employee_id;
     public $due_date;
+    public $complete_date;
 
     public function rules()
     {
@@ -41,6 +42,7 @@ class TaskForm extends Form
             'employee_id' => $tasks->employee_id,
             'status' => $tasks->status,
             'due_date' => $tasks->due_date,
+            'complete_date' => $tasks->complete_date,
         ]);
     }
 
@@ -53,6 +55,7 @@ class TaskForm extends Form
             'area' => $this->area,
             'task_name' => $this->task_name,
             'due_date' => $this->due_date,
+            'complete_date' => $this->complete_date,
             'employee_id' => $this->employee_id,
             'user_id' => $user_id,
             'status' => 1, // Default to Active on create
@@ -62,10 +65,14 @@ class TaskForm extends Form
     {
         // dd($this->all());
         $this->tasks->update([
+            'project_name' => $this->project_name,
+            'area' => $this->area,
             'task_name' => $this->task_name,
             'due_date' => $this->due_date,
+            'complete_date' => $this->complete_date ?: null, // Set to null if empty
             'status' => $this->status,
         ]);
+        
     }
 
     public function updating()

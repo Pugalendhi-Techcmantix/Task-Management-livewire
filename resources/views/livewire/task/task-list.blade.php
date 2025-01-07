@@ -1,11 +1,12 @@
-<div class="container mt-5">
-    <x-mary-card shadow class="shadow-xl p-11">
-        <div class="flex items-center justify-between">
-            <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
-                class="w-[450px] focus:outline-none" />
+<div class="container ">
+    <x-mary-card shadow class="shadow-xl p-11" title="Assign Task">
+        <x-slot:menu>
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'task.task-modal' })"
                 icon="o-plus" spinner />
-        </div>
+        </x-slot:menu>
+
+        <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search" class="focus:outline-none" />
+
         <div class="mt-4">
             <x-mary-table striped :headers="$headers" :rows="$tasks" :sort-by="$sortBy" show-empty-text with-pagination
                 per-page="perPage" :per-page-values="[2, 5, 10]">

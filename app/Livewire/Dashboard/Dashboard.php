@@ -25,6 +25,7 @@ class Dashboard extends Component
     public $totalincompleted;
     public $users;
     public $chartData = [];
+    public $events;
 
     public $confirm = false;
     public $selectedUserId;
@@ -44,6 +45,27 @@ class Dashboard extends Component
         $this->chartData = [
             'labels' => ['Completed', 'Incompleted', 'Pending', 'In Progress', 'On Hold'],
             'series' => [$completed, $incompleted, $pending, $inProgress, $onHold],
+        ];
+
+        $this->events = [
+            [
+                'label' => 'Day off',
+                'description' => 'Playing <u>tennis.</u>',
+                'css' => '!bg-amber-200',
+                'date' => now()->startOfMonth()->addDays(3),
+            ],
+            [
+                'label' => 'Event at same day',
+                'description' => 'Hey there!',
+                'css' => '!bg-amber-200',
+                'date' => now()->startOfMonth()->addDays(3),
+            ],
+            [
+                'label' => 'Laracon',
+                'description' => 'Let`s go!',
+                'css' => '!bg-blue-200',
+                'range' => [now()->startOfMonth()->addDays(13), now()->startOfMonth()->addDays(15)],
+            ],
         ];
     }
 

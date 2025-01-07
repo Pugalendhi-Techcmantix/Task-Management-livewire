@@ -17,6 +17,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
+    {{-- Vanilla Calendar --}}
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.css"
+        rel="stylesheet">
+
     <!-- Livewire Styles -->
     @livewireStyles
     <!-- Vite Integration for JS and CSS -->

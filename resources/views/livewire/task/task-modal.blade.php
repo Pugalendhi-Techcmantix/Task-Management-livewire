@@ -21,6 +21,7 @@
             @endif
             <x-mary-textarea label="Task Name" wire:model="form.task_name" placeholder="Enter Task " />
             <x-mary-datetime label="Due date" wire:model="form.due_date" />
+            <x-mary-datetime label="Completion date" wire:model="form.complete_date" />
 
         </div>
         <x-slot:actions>

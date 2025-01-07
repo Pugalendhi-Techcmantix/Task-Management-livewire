@@ -171,6 +171,16 @@
                 </div>
             </x-mary-card>
         </div>
+
+        <div class="mt-4">
+          
+              
+      
+
+            <x-mary-calendar :events="$events" sunday-start />
+
+           
+        </div>
     @endif
 
 </div>

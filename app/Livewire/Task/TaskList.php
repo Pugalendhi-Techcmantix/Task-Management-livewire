@@ -34,14 +34,15 @@ class TaskList extends Component
         $headers = [
             ['key' => 'id', 'label' => 'S.No', 'sortable' => true,],
             ['key' => 'project_name', 'label' => 'Project Name', 'sortable' => true, 'class' => 'truncate'],
-            ['key' => 'area', 'label' => 'Area', 'sortable' => true],
+            ['key' => 'area', 'label' => 'Area', 'sortable' => true,'class' => 'truncate'],
             ['key' => 'task_name', 'label' => 'Task Name', 'sortable' => true, 'class' => 'truncate'],
-            ['key' => 'employee.name', 'label' => 'Employee', 'sortable' => false],
-            ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => false],
-            ['key' => 'due_date', 'label' => 'Due Date ', 'sortable' => true,],
-            ['key' => 'status', 'label' => 'Status', 'sortable' => true],
-            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true,],
-            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true,],
+            ['key' => 'employee.name', 'label' => 'Employee', 'sortable' => false,'class' => 'truncate'],
+            ['key' => 'user.name', 'label' => 'Assigned By', 'sortable' => false,'class' => 'truncate'],
+            ['key' => 'due_date', 'label' => 'Due Date ', 'sortable' => true,'class' => 'truncate'],
+            ['key' => 'complete_date', 'label' => 'Complete Date ', 'sortable' => true,'class' => 'truncate'],
+            ['key' => 'status', 'label' => 'Status', 'sortable' => true,'class' => 'truncate'],
+            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true,'class' => 'truncate'],
+            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true,'class' => 'truncate'],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
       
@@ -53,6 +54,7 @@ class TaskList extends Component
                     ->orWhere('area', 'like', '%' . $this->search . '%')
                     ->orWhere('task_name', 'like', '%' . $this->search . '%')
                     ->orWhere('due_date', 'like', '%' . $this->search . '%')
+                    ->orWhere('complete_date', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%')
                     ->orWhereHas('employee', function ($query) {
