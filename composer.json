@@ -16,7 +16,8 @@
         "livewire-ui/modal": "^2.0",
         "livewire/livewire": "^3.5",
         "livewire/volt": "*",
-        "maatwebsite/excel": "^1.1",
+        "maatwebsite/excel": "^3.1",
+        "mpdf/mpdf": "^8.2",
         "robsontenorio/mary": "^1.41",
         "tymon/jwt-auth": "^2.1"
     },

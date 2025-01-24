@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Task;
 
+use App\Exports\TaskExport;
 use App\Models\Tasks;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TaskList extends Component
 {
@@ -33,7 +35,10 @@ class TaskList extends Component
         $this->confirmDelete = false;
         $this->dispatch('refresh-role-table');
     }
-
+    public function export()
+    {
+        return Excel::download(new TaskExport(), 'tasks.xlsx');
+    }
     public function render()
     {
         $headers = [
