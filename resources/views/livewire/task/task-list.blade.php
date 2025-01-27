@@ -1,12 +1,15 @@
 <div class="container ">
     <x-mary-card shadow class="shadow-xl p-11" title="Assign Task">
         <x-slot:menu>
-            <x-mary-button label="Download" icon="o-arrow-down-tray" wire:click="export"  class="btn-outline" spinner/>
+            <x-mary-button label="Download" icon="o-arrow-down-tray" wire:click="export" class="btn-outline" spinner />
+            <x-mary-button label="Import" icon="o-plus" wire:click="importOpen" class="btn-outline" spinner />
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'task.task-modal' })"
                 icon="o-plus" spinner />
+
         </x-slot:menu>
 
-        <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search" class="focus:outline-none" />
+        <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
+            class="focus:outline-none" />
 
         <div class="mt-4">
             <x-mary-table striped :headers="$headers" :rows="$tasks" :sort-by="$sortBy" show-empty-text with-pagination
@@ -44,6 +47,16 @@
         <x-slot:actions>
             <x-mary-button label="{{ __('Cancel') }}" wire:click="confirmDelete = false" spinner />
             <x-mary-button label="{{ __('Confirm') }}" wire:click="destroy" class="btn-primary" spinner />
+        </x-slot>
+    </x-mary-modal>
+
+
+    <x-mary-modal wire:model="confirmOpen" title="Are you sure?">
+        <x-mary-file wire:model="file" label="Upload the Task Excel File:" hint="Only xlsx, xls, csv"
+            accept=".xlsx, .xls, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv" />
+        <x-slot:actions>
+            <x-mary-button label="{{ __('Cancel') }}" wire:click="confirmOpen = false" spinner />
+            <x-mary-button label="{{ __('Confirm') }}" wire:click="import" class="btn-primary" spinner />
         </x-slot>
     </x-mary-modal>
 </div>

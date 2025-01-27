@@ -63,7 +63,6 @@ class TaskForm extends Form
     }
     public function update()
     {
-        // dd($this->all());
         $this->tasks->update([
             'project_name' => $this->project_name,
             'area' => $this->area,

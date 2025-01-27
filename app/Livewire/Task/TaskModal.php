@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Task;
 
-use App\Models\Employee;
 use App\Models\Roles;
 use App\Models\Tasks;
 use App\Models\User;
@@ -12,6 +11,9 @@ class TaskModal extends ModalComponent
 {
 
     public TaskForm $form;
+    public $isCompletionDateEnabled = false;
+
+    public $employee = [];  // Store only regular employees here as key-value pairs
 
     public $statusOptions = [
         [
@@ -32,7 +34,6 @@ class TaskModal extends ModalComponent
         ],
     ];
 
-    public $employee = [];  // Store only regular employees here as key-value pairs
     public function mount($task_id = null)
     {
 
@@ -46,12 +47,16 @@ class TaskModal extends ModalComponent
                 ];
             })->toArray();
         }
+
         if (!is_null($task_id)) {
             $task = Tasks::findOrFail($task_id);
             $this->form->setValue($task);
         }
     }
-
+    public function updateCompletionDateState()
+    {
+        $this->isCompletionDateEnabled = $this->form->status == 4;
+    }
 
     protected function rules()
     {

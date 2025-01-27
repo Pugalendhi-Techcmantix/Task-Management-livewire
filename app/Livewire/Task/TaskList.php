@@ -3,15 +3,19 @@
 namespace App\Livewire\Task;
 
 use App\Exports\TaskExport;
+use App\Imports\TaskImport;
 use App\Models\Tasks;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
+use Mary\Traits\Toast;
 
 class TaskList extends Component
 {
-
-
-    public $search = '', $task_id, $confirmDelete = false;
+    use Toast;
+    use WithFileUploads;
+    public $file; // For handling the uploaded file
+    public $search = '', $task_id, $confirmDelete = false, $confirmOpen = false;
     public int $perPage = 10; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
     protected $listeners = ['refresh-tasks-table' => '$refresh'];
@@ -29,11 +33,38 @@ class TaskList extends Component
         $this->task_id = $task_id; // Assign the employee ID to delete
     }
 
+
     public function destroy()
     {
         Tasks::findOrfail($this->task_id)->delete();
         $this->confirmDelete = false;
         $this->dispatch('refresh-role-table');
+    }
+
+    public function importOpen()
+    {
+        $this->confirmOpen = true;
+    }
+
+    // Function to handle the import process
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|mimes:xlsx,xls,csv', // Validate the file format
+        ]);
+
+        // Import the Excel file and save data to the database
+        Excel::import(new  TaskImport(), $this->file);
+        $this->confirmOpen = false;
+        $this->toast(
+            type: 'successs',
+            title: 'Done!',
+            description: 'Succesfully Added!.',
+            position: 'toast-top toast-end',
+            icon: 'o-check-badge',
+            css: 'alert-info',
+            redirectTo: null
+        );
     }
     public function export()
     {

@@ -13,15 +13,16 @@
     <x-mary-form wire:submit.prevent="save" class="p-5">
         @csrf
         <div class="grid grid-cols-2 gap-3">
-            <x-mary-input label="Project Name" wire:model="form.project_name" placeholder="Enter Project name"/>
-            <x-mary-input label="Area" wire:model="form.area" placeholder="Enter Area"  />
-            <x-mary-select label="Employee" wire:model="form.employee_id" :options="$employee" placeholder="Select"/>
+            <x-mary-input label="Project Name" wire:model="form.project_name" placeholder="Enter Project name" />
+            <x-mary-input label="Area" wire:model="form.area" placeholder="Enter Area" />
+            <x-mary-select label="Employee" wire:model="form.employee_id" :options="$employee" placeholder="Select" />
             @if ($form->task_id)
-                <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />
+                <x-mary-select label="Status" :options="$statusOptions" wire:model="form.status"
+                    wire:change="updateCompletionDateState" placeholder="Select Status" />
             @endif
             <x-mary-textarea label="Task Name" wire:model="form.task_name" placeholder="Enter Task " />
             <x-mary-datetime label="Due date" wire:model="form.due_date" />
-            <x-mary-datetime label="Completion date" wire:model="form.complete_date" />
+            <x-mary-datetime label="Completion date" wire:model="form.complete_date" :disabled="!$isCompletionDateEnabled" />
 
         </div>
         <x-slot:actions>
