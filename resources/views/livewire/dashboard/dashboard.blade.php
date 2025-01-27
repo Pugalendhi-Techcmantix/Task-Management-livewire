@@ -42,7 +42,7 @@
 
 
     @if ($role == 1)
-        <div class="grid grid-cols-1 md:grid-cols-12 mt-5 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-12 mt-10 gap-5">
             <x-mary-card wire:ignore class="col-span-12 lg:col-span-4">
                 <canvas id="myChart"></canvas>
                 <script>
@@ -122,6 +122,9 @@
                     </x-mary-list-item>
                 @endforeach
             </x-mary-card>
+
+
+
             <x-mary-modal wire:model="confirm" title="Are you sure?">
                 <div>Click 'Confirm' to Sent Task Reminder.</div>
                 <x-slot:actions>
@@ -172,9 +175,47 @@
             </x-mary-card>
         </div>
 
-        <div class="mt-4">
-            <x-mary-calendar :events="$events" sunday-start weekend-highlight/>
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-12  gap-5 ">
+            <div class="col-span-12 lg:col-span-3 ">
+                <x-mary-calendar :events="$events" sunday-start weekend-highlight />
+            </div>
+            <div class="col-span-12 lg:col-span-9">
+                <x-mary-card class="" id="calendar"></x-mary-card>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var calendarEl = document.getElementById('calendar');
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            initialView: 'dayGridMonth',
+                            height: 650,
+                            events: [{
+                                    id: 1,
+                                    title: 'Due Task: Complete Report',
+                                    date: '2025-01-29',
+                                    className: 'bg-red-500  border-0',
+                                },
+                                {
+                                    id: 2,
+                                    title: 'Completed Task: Fix Bug',
+                                    date: '2025-01-30',
+                                    className: 'bg-green-500  border-0',
+                                },
+                                {
+                                    id: 3,
+                                    title: 'pending Task: Fix query',
+                                    date: '2025-01-31',
+                                    className: 'bg-yellow-500 border-0',
+                                },
+                            ],
+                        });
+
+                        calendar.render();
+                    });
+                </script>
+            </div>
         </div>
     @endif
+
+
+
 
 </div>

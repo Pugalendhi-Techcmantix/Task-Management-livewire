@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.css"
         rel="stylesheet">
-
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <!-- Livewire Styles -->
     @livewireStyles
     <!-- Vite Integration for JS and CSS -->
@@ -104,6 +104,7 @@
     @livewire('livewire-ui-modal')
     <!-- Livewire Scripts -->
     @livewireScripts
+    @livewireCalendarScripts
 
 </body>
 

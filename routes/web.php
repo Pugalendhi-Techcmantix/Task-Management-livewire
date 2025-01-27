@@ -30,6 +30,7 @@ Route::get('/completed', function () {
     return view('completed');
 })->name('completed');
 
+
 Route::get('/support-page', function () {
     return view('support-page');
 })->name('support-page');
