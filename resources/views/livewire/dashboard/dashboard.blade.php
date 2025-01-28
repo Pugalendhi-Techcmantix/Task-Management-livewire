@@ -175,47 +175,38 @@
             </x-mary-card>
         </div>
 
-        <div class="mt-5 grid grid-cols-1 md:grid-cols-12  gap-5 ">
-            <div class="col-span-12 lg:col-span-3 ">
-                <x-mary-calendar :events="$events" sunday-start weekend-highlight />
-            </div>
-            <div class="col-span-12 lg:col-span-9">
-                <x-mary-card class="" id="calendar"></x-mary-card>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var calendarEl = document.getElementById('calendar');
-                        var calendar = new FullCalendar.Calendar(calendarEl, {
-                            initialView: 'dayGridMonth',
-                            height: 650,
-                            events: [{
-                                    id: 1,
-                                    title: 'Due Task: Complete Report',
-                                    date: '2025-01-29',
-                                    className: 'bg-red-500  border-0',
-                                },
-                                {
-                                    id: 2,
-                                    title: 'Completed Task: Fix Bug',
-                                    date: '2025-01-30',
-                                    className: 'bg-green-500  border-0',
-                                },
-                                {
-                                    id: 3,
-                                    title: 'pending Task: Fix query',
-                                    date: '2025-01-31',
-                                    className: 'bg-yellow-500 border-0',
-                                },
-                            ],
-                        });
+        <div class="mt-5   gap-5 ">
 
-                        calendar.render();
+            <x-mary-card class="" id="calendar"></x-mary-card>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var calendarEl = document.getElementById('calendar');
+
+                    // Initialize FullCalendar
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        height: 650,
+                        events: @json($events), // Pass the events array from Livewire
+
+                        eventContent: function(info) {
+                            // Wrap event title text with a container
+                            return {
+                                html: '<div class="text-wrap font-bold">' + info.event.title + '</div>'
+                            };
+                        },
+
                     });
-                </script>
-            </div>
+
+
+                    calendar.render();
+                });
+            </script>
+          
+            
+        
         </div>
     @endif
 
-
-
+    
 
 </div>

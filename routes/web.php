@@ -29,6 +29,9 @@ Route::get('/hold', function () {
 Route::get('/completed', function () {
     return view('completed');
 })->name('completed');
+Route::get('/sample', function () {
+    return view('task-kanban-board');
+})->name('completed');
 
 
 Route::get('/support-page', function () {

@@ -52,6 +52,8 @@ class TaskModal extends ModalComponent
             $task = Tasks::findOrFail($task_id);
             $this->form->setValue($task);
         }
+
+        $this->updateCompletionDateState();
     }
     public function updateCompletionDateState()
     {

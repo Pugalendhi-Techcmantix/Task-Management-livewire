@@ -25,7 +25,8 @@ class Dashboard extends Component
     public $totalincompleted;
     public $users;
     public $chartData = [];
-    public $events;
+    public $events = [];
+
 
     public $confirm = false;
     public $selectedUserId;
@@ -48,43 +49,83 @@ class Dashboard extends Component
         ];
 
         // Call the function to prepare the events
-        $this->events = $this->prepareEvents();
+        // Fetch and assign events
+        $this->events = $this->calendarEvents();
+
+        // Debugging
+        // dd($this->events);
     }
 
-    public function prepareEvents()
+    public function calendarEvents()
     {
         $user = Auth::user();
 
         // Fetch tasks for the authenticated user
         $tasks = Tasks::where('employee_id', $user->id)->get();
 
-        $events = [];
+        // Map tasks to events
+        $events = $tasks->map(function ($task, $index) {
+            $taskEvents = [];
 
-        foreach ($tasks as $task) {
-            // Handle Due Date (Red color)
-            if ($task->due_date) {
-                $dueDate = Carbon::parse($task->due_date); // Parse due date
-                $events[] = [
-                    'label' =>'Due Task:',
-                    'description' =>  $task->task_name,
-                    'css' => '!bg-amber-200', 
-                    'date' => $dueDate 
+            // Get today's date for comparison
+            $today = Carbon::today();
+
+            // Due Task - Check if due today and not completed
+            if ($task->due_date && Carbon::parse($task->due_date)->isToday() && $task->status != 4) {
+                $taskEvents[] = [
+                    'id' => $index + 1, // Unique ID
+                    'title' => 'Due: ' . $task->task_name,
+                    'date' => Carbon::parse($task->due_date)->toDateString(),
+                    'className' => 'bg-red-500 border-0', // Highlighted for due tasks
                 ];
             }
-            // Handle Completed Date (Green color)
-            if ($task->complete_date) {
-                $completeDate = Carbon::parse($task->complete_date); // Parse complete date
-                $events[] = [
-                    'label' =>'Completed Task:',
-                    'description' => $task->task_name,
-                    'css' => '!bg-blue-200', // Green for completed task
-                    'date' => $completeDate 
+
+            // Completed Task
+            if ($task->status == 4) {
+                $taskEvents[] = [
+                    'id' => $index + 2, // Unique ID
+                    'title' => 'Completed: ' . $task->task_name,
+                    'date' => Carbon::parse($task->complete_date)->toDateString(),
+                    'className' => 'bg-green-500 border-0', // Green for completed tasks
                 ];
             }
-        }
 
-        return $events;
+            // Pending Task - For future due dates
+            if ($task->status == 1 && Carbon::parse($task->due_date)->isFuture()) {
+                $taskEvents[] = [
+                    'id' => $index + 3, // Unique ID
+                    'title' => 'Pending: ' . $task->task_name,
+                    'date' => Carbon::parse($task->due_date)->toDateString(),
+                    'className' => 'bg-yellow-500 border-0', // Yellow for pending tasks
+                ];
+            }
+
+            // In Progress Task
+            if ($task->status == 2) {
+                $taskEvents[] = [
+                    'id' => $index + 4, // Unique ID
+                    'title' => 'In Progress: ' . $task->task_name,
+                    'date' => Carbon::parse($task->updated_at)->toDateString(),
+                    'className' => 'bg-blue-500 border-0', // Blue for in-progress tasks
+                ];
+            }
+
+            // On Hold Task
+            if ($task->status == 3) {
+                $taskEvents[] = [
+                    'id' => $index + 5, // Unique ID
+                    'title' => 'On Hold: ' . $task->task_name,
+                    'date' => Carbon::parse($task->updated_at)->toDateString(),
+                    'className' => 'bg-gray-500 border-0', // Gray for on-hold tasks
+                ];
+            }
+
+            return $taskEvents; // Return events for this task
+        })->flatten(1)->values()->toArray(); // Flatten, re-index, and convert to array
+
+        return $events; // Return the prepared events
     }
+
 
 
     public function openModal($userId)
