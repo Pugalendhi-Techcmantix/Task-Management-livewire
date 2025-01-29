@@ -126,9 +126,6 @@
                 </x-mary-list-item>
             @endforeach
         </x-mary-card>
-
-
-
         <x-mary-modal wire:model="confirm" title="Are you sure?">
             <div>Click 'Confirm' to Sent Task Reminder.</div>
             <x-slot:actions>
@@ -136,6 +133,79 @@
                 <x-mary-button label="{{ __('Confirm') }}" wire:click="sendReminder" class="btn-primary" spinner />
             </x-slot>
         </x-mary-modal>
+    </div>
+
+
+
+    <div class="grid grid-cols-1 md:grid-cols-12  mt-10 gap-5 ">
+        <x-mary-card class="col-span-12 lg:col-span-4" title="Employees Progress" separator>
+            <x-slot:menu>
+                <span class="font-semibold">Total Employees:</span>
+                <span class="text-lg font-semibold text-red-500">{{ $employeescount }}</span>
+            </x-slot:menu>
+            <x-mary-carousel :slides="$slides" without-indicators>
+                @scope('content', $slide)
+                    <div class="bg-white rounded-lg  ">
+                        <!-- Name and Description -->
+                        <div class="flex justify-between mx-12">
+                            <h2 class="text-2xl font-bold text-error">{{ $slide['name'] }}</h2>
+
+                            {{-- <h2 class="text-2xl font-bold text-success">{{ $slide['total'] }}</h2> --}}
+                            <x-mary-button label="Task Total:" :badge="$slide['total']" class="btn-sm btn-ghost" />
+                        </div>
+
+                        <!-- Progress Bars -->
+                        <div class="mx-14 py-5">
+                            <!-- Pending Progress -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Pending</span>
+                                    <span
+                                        class="text-sm font-medium text-gray-700">{{ $slide['progress']['pending'] }}</span>
+                                </div>
+                                <x-mary-progress value="{{ $slide['progress']['pending'] }}" max="100"
+                                    class="progress-warning h-3 " />
+                            </div>
+
+                            <!-- Hold Progress -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Hold</span>
+                                    <span class="text-sm font-medium text-gray-700">{{ $slide['progress']['hold'] }}</span>
+                                </div>
+                                <x-mary-progress value="{{ $slide['progress']['hold'] }}" max="100"
+                                    class="progress-error h-3" />
+                            </div>
+
+                            <!-- Process Progress -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Process</span>
+                                    <span
+                                        class="text-sm font-medium text-gray-700">{{ $slide['progress']['process'] }}</span>
+                                </div>
+                                <x-mary-progress value="{{ $slide['progress']['process'] }}" max="100"
+                                    class="progress-info h-3" />
+                            </div>
+
+                            <!-- Completed Progress -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Completed</span>
+                                    <span
+                                        class="text-sm font-medium text-gray-700">{{ $slide['progress']['completed'] }}</span>
+                                </div>
+                                <x-mary-progress value="{{ $slide['progress']['completed'] }}" max="100"
+                                    class="progress-success  h-3" />
+                            </div>
+                        </div>
+                    </div>
+                @endscope
+            </x-mary-carousel>
+        </x-mary-card>
+        <x-mary-card class="col-span-12 lg:col-span-8">
+            
+        </x-mary-card>
     </div>
 
 </div>

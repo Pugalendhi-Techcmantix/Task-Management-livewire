@@ -26,7 +26,8 @@ class Dashboard extends Component
     public $currentTime;
     public $tasks;
     public $totalCount;
-
+    public $slides = [];
+    public $employeescount;
     public function mount()
     {
         $this->username = Auth::user()->name;
@@ -34,6 +35,7 @@ class Dashboard extends Component
         $this->cardsCount();
         $this->chart();
         $this->remainders();
+        $this->slides = $this->getTaskProgress();
     }
 
     public function updateTime()
@@ -67,8 +69,8 @@ class Dashboard extends Component
     {
         $today = Carbon::today();
         // Get tasks where the due_date is today
-        $this->tasks = Tasks::with('employee') 
-            ->whereDate('due_date', $today) 
+        $this->tasks = Tasks::with('employee')
+            ->whereDate('due_date', $today)
             ->get();
         $this->totalCount = $this->tasks->count();
     }
@@ -129,6 +131,37 @@ class Dashboard extends Component
             css: 'alert-info',
             redirectTo: null
         );
+    }
+
+
+    public function getTaskProgress()
+    {
+        // Fetch only employees (role_id = 2)
+        $employees = User::where('role_id', 2)->get();
+        $this->employeescount = User::where('role_id', 2)->count();
+
+        $slides = $employees->map(function ($user,$index) {
+            // Count tasks based on status
+            $pending = Tasks::where('employee_id', $user->id)->where('status', 1)->count();
+            $process = Tasks::where('employee_id', $user->id)->where('status', 2)->count();
+            $hold = Tasks::where('employee_id', $user->id)->where('status', 3)->count();
+            $completed = Tasks::where('employee_id', $user->id)->where('status', 4)->count();
+            // Calculate total tasks
+            $totalTasks = $pending + $process + $hold + $completed;
+
+            return [
+                'name' =>($index + 1) . '. ' . $user->name,
+                'progress' => [
+                    'pending' => $pending,
+                    'hold' => $hold,
+                    'process' => $process,
+                    'completed' => $completed,
+                ],
+                'total' => $totalTasks,
+            ];
+        });
+
+        return $slides->toArray();
     }
 
 
