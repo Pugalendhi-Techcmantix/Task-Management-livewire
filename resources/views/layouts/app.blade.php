@@ -84,7 +84,7 @@
             </aside>
 
             <!-- Main Content (Scrollable) -->
-            <main class="flex-grow p-4 overflow-auto">
+            <main class="flex-grow p-6 overflow-auto">
                 <!-- Page Content -->
                 {{ $slot }}
             </main>

@@ -32,7 +32,7 @@ class UserDashboard extends Component
     // Function to update the time
     public function updateTime()
     {
-        $this->currentTime = Carbon::now('Asia/Kolkata')->format('d-m-Y H:i:s');
+        $this->currentTime = Carbon::now('Asia/Kolkata')->format('d-m-Y H:i:s A');
     }
     public function cardsCount()
     {

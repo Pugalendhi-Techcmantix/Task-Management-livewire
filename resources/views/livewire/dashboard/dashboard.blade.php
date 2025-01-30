@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container">
     <div class="mb-5 font-bold ">
         <h1>Welcome {{ $username }} <x-mary-loading class="loading-ring text-success" /></h1>
         <div wire:poll.1s="updateTime">
@@ -97,7 +97,7 @@
         </x-mary-card>
 
 
-        <x-mary-card title="Send Task Reminder" class="col-span-12 lg:col-span-8">
+        <x-mary-card title="Send Task Reminder" class="col-span-12 lg:col-span-8" separator>
             <x-slot:menu>
                 <span class="font-semibold">Total:</span>
                 <span class="text-lg font-semibold text-red-500">{{ $totalCount }}</span>
@@ -138,7 +138,7 @@
 
 
     <div class="grid grid-cols-1 md:grid-cols-12  mt-10 gap-5 ">
-        <x-mary-card class="col-span-12 lg:col-span-4" title="Employees Progress" separator>
+        <x-mary-card class="col-span-12 lg:col-span-4" title="Employees Progress"  separator>
             <x-slot:menu>
                 <span class="font-semibold">Total Employees:</span>
                 <span class="text-lg font-semibold text-red-500">{{ $employeescount }}</span>
@@ -147,15 +147,15 @@
                 @scope('content', $slide)
                     <div class="bg-white rounded-lg  ">
                         <!-- Name and Description -->
-                        <div class="flex justify-between mx-12">
+                        <div class="flex justify-between  mx-12">
                             <h2 class="text-2xl font-bold text-error">{{ $slide['name'] }}</h2>
 
                             {{-- <h2 class="text-2xl font-bold text-success">{{ $slide['total'] }}</h2> --}}
-                            <x-mary-button label="Task Total:" :badge="$slide['total']" class="btn-sm btn-ghost" />
+                            <x-mary-button label="Task Total:" :badge="$slide['total']"  class="btn-sm btn-ghost" />
                         </div>
 
                         <!-- Progress Bars -->
-                        <div class="mx-14 py-5">
+                        <div class="mx-14  py-5">
                             <!-- Pending Progress -->
                             <div>
                                 <div class="flex justify-between mb-1">
@@ -185,7 +185,7 @@
                                         class="text-sm font-medium text-gray-700">{{ $slide['progress']['process'] }}</span>
                                 </div>
                                 <x-mary-progress value="{{ $slide['progress']['process'] }}" max="100"
-                                    class="progress-info h-3" />
+                                    class="progress-info h-3" indeterminate  />
                             </div>
 
                             <!-- Completed Progress -->
@@ -203,8 +203,8 @@
                 @endscope
             </x-mary-carousel>
         </x-mary-card>
-        <x-mary-card class="col-span-12 lg:col-span-8">
-            
+        <x-mary-card class="col-span-12 lg:col-span-8" title="Projects" separator>
+            @livewire('project.project-details')
         </x-mary-card>
     </div>
 
