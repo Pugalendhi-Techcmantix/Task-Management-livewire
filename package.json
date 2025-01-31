@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@alpinejs/focus": "^3.14.7",
-        "apexcharts": "^4.3.0"
+        "apexcharts": "^4.3.0",
+        "sortablejs": "^1.15.6"
     }
 }

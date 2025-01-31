@@ -31,7 +31,7 @@ Route::get('/completed', function () {
 })->name('completed');
 Route::get('/sample', function () {
     return view('task-kanban-board');
-})->name('completed');
+})->name('sample');
 
 
 Route::get('/support-page', function () {

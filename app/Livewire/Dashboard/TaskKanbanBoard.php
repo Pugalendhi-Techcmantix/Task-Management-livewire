@@ -2,33 +2,49 @@
 
 namespace App\Livewire\Dashboard;
 
-use Illuminate\Support\Collection;
-use LivewireKanbanBoard\LivewireKanbanBoard;
+use App\Models\Tasks;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
-class TaskKanbanBoard extends LivewireKanbanBoard
+class TaskKanbanBoard extends Component
 {
-    public function statuses(): Collection
+
+    public $tasks;
+    public $statuses = [
+        1 => 'Pending',
+        2 => 'Progress',
+        3 => 'Hold',
+        4 => 'Completed'
+    ];
+
+    public function mount()
     {
-        return collect([
-            ['id' => 'registered', 'title' => 'Registered'],
-            ['id' => 'awaiting_confirmation', 'title' => 'Awaiting Confirmation'],
-            ['id' => 'confirmed', 'title' => 'Confirmed'],
-            ['id' => 'delivered', 'title' => 'Delivered'],
-        ]);
+        $this->fetchTasks();
     }
 
-    public function records(): Collection
+    public function fetchTasks()
     {
-        return collect([
-            ['id' => 'task-1', 'title' => 'Design the login page', 'status' => 'registered'],
-            ['id' => 'task-2', 'title' => 'Implement authentication API', 'status' => 'awaiting_confirmation'],
-            ['id' => 'task-3', 'title' => 'Write unit tests for user module', 'status' => 'confirmed'],
-            ['id' => 'task-4', 'title' => 'Deploy app to staging server', 'status' => 'delivered'],
-        ]);
+
+        $this->tasks = Tasks::where('employee_id', Auth::id())->get();
     }
 
-    // public function render()
-    // {
-    //     return view('livewire.dashboard.task-kanban-board');
-    // }
+    // This method is triggered when the task is dropped into a new status column
+    public function updateTaskStatus($taskId, $newStatusId)
+    {
+        // Find the task and update its status
+        $task = Tasks::find($taskId);
+        if ($task && $task->employee_id == Auth::id()) {
+            $task->status = $newStatusId;
+            $task->save();
+        }
+
+        // Re-fetch tasks to reflect the updated status
+        $this->fetchTasks();
+    }
+
+
+    public function render()
+    {
+        return view('livewire.dashboard.task-kanban-board');
+    }
 }

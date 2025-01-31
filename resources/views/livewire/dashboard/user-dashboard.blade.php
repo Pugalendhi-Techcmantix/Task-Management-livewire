@@ -45,7 +45,6 @@
     </div>
 
     <div class="mt-5 gap-5 " wire:ignore>
-
         <x-mary-card class="" id="calendar"></x-mary-card>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -71,6 +70,5 @@
             });
         </script>
     </div>
-
 
 </div>
