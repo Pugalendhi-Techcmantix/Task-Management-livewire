@@ -71,6 +71,7 @@ class Dashboard extends Component
         // Get tasks where the due_date is today
         $this->tasks = Tasks::with('employee')
             ->whereDate('due_date', $today)
+            ->whereIn('status', [1, 2, 3]) // Only get tasks with status 1, 2, or 3
             ->get();
         $this->totalCount = $this->tasks->count();
     }
