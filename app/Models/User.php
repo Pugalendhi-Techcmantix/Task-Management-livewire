@@ -44,11 +44,12 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'time' => 'array', // Ensure the 'time' column is cast as an array
         ];
     }
     public function getStatusLabelAttribute()
     {
-        $statusLabel = $this->status === 1 ? 'Active' : 'Suspended';
+        $statusLabel = $this->status === 1 ? 'Active' : 'In Active';
 
         return [
             'status' => $statusLabel,

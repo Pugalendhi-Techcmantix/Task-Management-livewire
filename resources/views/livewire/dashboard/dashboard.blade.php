@@ -138,7 +138,7 @@
 
 
     <div class="grid grid-cols-1 md:grid-cols-12  mt-10 gap-5 ">
-        <x-mary-card class="col-span-12 lg:col-span-4" title="Employees Progress"  separator>
+        <x-mary-card class="col-span-12 lg:col-span-4" title="Employees Progress" separator>
             <x-slot:menu>
                 <span class="font-semibold">Total Employees:</span>
                 <span class="text-lg font-semibold text-red-500">{{ $employeescount }}</span>
@@ -151,7 +151,7 @@
                             <h2 class="text-2xl font-bold text-error">{{ $slide['name'] }}</h2>
 
                             {{-- <h2 class="text-2xl font-bold text-success">{{ $slide['total'] }}</h2> --}}
-                            <x-mary-button label="Task Total:" :badge="$slide['total']"  class="btn-sm btn-ghost" />
+                            <x-mary-button label="Task Total:" :badge="$slide['total']" class="btn-sm btn-ghost" />
                         </div>
 
                         <!-- Progress Bars -->
@@ -185,7 +185,7 @@
                                         class="text-sm font-medium text-gray-700">{{ $slide['progress']['process'] }}</span>
                                 </div>
                                 <x-mary-progress value="{{ $slide['progress']['process'] }}" max="100"
-                                    class="progress-info h-3" indeterminate  />
+                                    class="progress-info h-3" indeterminate />
                             </div>
 
                             <!-- Completed Progress -->

@@ -2,7 +2,7 @@
     <x-mary-card shadow class="shadow-xl p-11">
         <div class="flex items-center justify-between">
             <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
-                class="w-[450px] focus:outline-none"  />
+                class="w-[450px] focus:outline-none" />
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'employee.employee-modal' })"
                 icon="o-plus" spinner />
         </div>
@@ -16,6 +16,21 @@
                     @scope('cell_status', $st)
                         <x-mary-badge :value="$st->statusLabel['status']" :class="$st->status === 1 ? 'bg-green-500 text-white' : 'bg-red-500 text-white'" />
                     @endscope
+                    @scope('cell_time', $time)
+                        <div>
+                            @php
+                                // Decode if time is stored as a JSON string
+                                $timeData = is_array($time->time) ? $time->time : json_decode($time->time, true);
+                            @endphp
+
+                            @if (is_array($timeData))
+                                {{ $timeData['morning'] ?? 'N/A' }} - {{ $timeData['evening'] ?? 'N/A' }}
+                            @else
+                                N/A
+                            @endif
+                        </div>
+                    @endscope
+
                     @scope('cell_actions', $employee)
                         <div class="flex gap-3">
                             <x-mary-button

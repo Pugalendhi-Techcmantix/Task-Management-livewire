@@ -2,7 +2,7 @@
     <x-mary-card shadow class="shadow-xl p-11" title="Assign Task">
         <x-slot:menu>
             <x-mary-button label="Download" icon="o-arrow-down-tray" wire:click="export" class="btn-outline" spinner />
-            <x-mary-button label="Import" icon="o-plus" wire:click="importOpen" class="btn-outline" spinner />
+            <x-mary-button label="Import" icon="o-arrow-small-up" wire:click="importOpen" class="btn-outline" spinner />
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'task.task-modal' })"
                 icon="o-plus" spinner />
 

@@ -18,7 +18,7 @@ class EmployeeModal extends ModalComponent
         ],
         [
             'id' => 2,
-            'name' => 'Suspended',
+            'name' => 'In Active',
 
         ],
     ];

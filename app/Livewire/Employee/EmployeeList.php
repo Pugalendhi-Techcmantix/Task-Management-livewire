@@ -51,14 +51,15 @@ class EmployeeList extends Component
     {
         $headers = [
             ['key' => 'id', 'label' => 'S.No', 'sortable' => true, 'class' => 'w-20'],
-            ['key' => 'name', 'label' => 'Name', 'sortable' => true],
-            ['key' => 'email', 'label' => 'Email', 'sortable' => true],
-            ['key' => 'age', 'label' => 'Age', 'sortable' => true],
-            ['key' => 'role.name', 'label' => 'Role', 'sortable' => true,],
-            ['key' => 'position', 'label' => 'Position', 'sortable' => true],
-            ['key' => 'salary', 'label' => 'Salary', 'sortable' => true],
-            ['key' => 'status', 'label' => 'Status', 'sortable' => true,],
-            ['key' => 'joining_date', 'label' => 'D.O.J', 'format' => ['date', 'd-m-Y'], 'sortable' => true,],
+            ['key' => 'name', 'label' => 'Name', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'email', 'label' => 'Email', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'age', 'label' => 'Age', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'role.name', 'label' => 'Role', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'position', 'label' => 'Position', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'salary', 'label' => 'Salary', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'status', 'label' => 'Status', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'time', 'label' => 'In-Out-Time','class'=>'truncate'],
+            ['key' => 'joining_date', 'label' => 'D.O.J', 'format' => ['date', 'd-m-Y'], 'sortable' => true,'class'=>'truncate'],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting

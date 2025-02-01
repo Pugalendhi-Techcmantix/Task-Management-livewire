@@ -74,9 +74,19 @@ class ProjectDetails extends Component
     {
         // $firstTab = Tasks::where('id', 1)->first();
         // $this->selectedTab = $firstTab->project_name . '-tab';
+        // if (!$this->selectedTab) { // ✅ Only set if empty
+        //     $firstTab = Tasks::where('id', 1)->first();
+        //     $this->selectedTab = $firstTab->project_name . '-tab';
+        // }
+
         if (!$this->selectedTab) { // ✅ Only set if empty
             $firstTab = Tasks::where('id', 1)->first();
-            $this->selectedTab = $firstTab->project_name . '-tab';
+
+            if ($firstTab) {
+                $this->selectedTab = $firstTab->project_name . '-tab';
+            } else {
+                $this->selectedTab = ''; // Default to empty string if no record is found
+            }
         }
         return view('livewire.project.project-details');
     }

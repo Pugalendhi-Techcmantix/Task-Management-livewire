@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('position');
             $table->integer('salary');
             $table->date('joining_date');
-            $table->tinyInteger('status')->default(1)->nullable()->comment('1 = Active, 2 = Suspended'); // Add a meaningful comment
+            $table->tinyInteger('status')->default(2)->nullable()->comment('1 = Active, 2 = In Active'); // Add a meaningful comment
+            $table->json('time')->nullable()->comment('Stores time-related JSON data');
             $table->unsignedBigInteger('role_id')->nullable()->comment('1 = Admin, 2 = Employee');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
