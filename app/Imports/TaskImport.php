@@ -34,10 +34,10 @@ class TaskImport implements ToCollection
 
             // Find the Employee ID from the Users table
             $Employee = User::where('name', $Employee)->first();
-            if (!$Employee) {
-                Log::error("Employee not found in row {$key}: {$Employee}");
-                continue; // Skip this row if employee not found
-            }
+            // if (!$Employee) {
+            //     Log::error("Employee not found in row {$key}: {$Employee}");
+            //     continue; // Skip this row if employee not found
+            // }
 
 
             // Convert Excel serial date to a Carbon date object

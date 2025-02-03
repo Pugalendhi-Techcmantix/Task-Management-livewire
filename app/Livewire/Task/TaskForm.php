@@ -26,7 +26,6 @@ class TaskForm extends Form
             'area' => 'required|string|max:255',
             'task_name' => 'required|string',
             'employee_id' => 'required',
-            'due_date' => 'required'
         ];
     }
 

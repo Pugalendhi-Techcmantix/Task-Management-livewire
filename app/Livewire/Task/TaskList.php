@@ -5,10 +5,16 @@ namespace App\Livewire\Task;
 use App\Exports\TaskExport;
 use App\Imports\TaskImport;
 use App\Models\Tasks;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 use Mary\Traits\Toast;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 
 class TaskList extends Component
 {
@@ -19,6 +25,9 @@ class TaskList extends Component
     public int $perPage = 10; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
     protected $listeners = ['refresh-tasks-table' => '$refresh'];
+
+    public $importErrors = []; // Store validation errors
+    public $validData = []; // Store valid rows for import
 
     public $statusLabels = [
         1 => 'Pending',
@@ -44,18 +53,61 @@ class TaskList extends Component
     public function importOpen()
     {
         $this->confirmOpen = true;
+        $this->importErrors = []; // Reset errors
+        $this->validData = []; // Reset valid data
+        $this->file = null; // Clear the file input field
     }
 
-    // Function to handle the import process
     public function import()
     {
         $this->validate([
-            'file' => 'required|mimes:xlsx,xls,csv', // Validate the file format
+            'file' => 'required|mimes:xlsx,xls,csv', // Validate file format
         ]);
 
-        // Import the Excel file and save data to the database
-        Excel::import(new  TaskImport(), $this->file);
+        $filePath = $this->file->getRealPath(); // Get file path
+        $spreadsheet = IOFactory::load($filePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray(); // Convert sheet to an array
+
+        $this->importErrors = []; // Reset errors
+        $this->validData = []; // Reset valid data
+
+        foreach ($rows as $key => $row) {
+            if ($key === 0) continue; // Skip header row
+
+            $project = trim($row[1]);
+            $area = trim($row[2]);
+            $task = trim($row[3]);
+            $due_date = trim($row[4]);
+            $employeeName = trim($row[5]);
+
+            // Validate Employee
+            $employee = User::where('name', $employeeName)->first();
+            if (!$employee) {
+                // $this->importErrors[] = "Row " . ($key + 1) . ": Employee '$employeeName' not found.";
+                $this->importErrors[] = "Row " . ($key + 1) . ", Column: Employee : {$employeeName} not found.";
+                continue;
+            }
+            // Store valid data for import
+            $this->validData[] = [
+                'project_name' => $project,
+                'area' => $area,
+                'task_name' => $task,
+                'employee_id' => $employee->id,
+                'user_id' => Auth::id(),
+            ];
+        }
+
+        if (!empty($this->importErrors)) {
+            return; // Stop execution if errors exist
+        }
+
+        // Now, use Excel::import for batch inserting
+        Excel::import(new TaskImport(), $this->file);
+
+
         $this->confirmOpen = false;
+
         $this->toast(
             type: 'successs',
             title: 'Done!',
@@ -66,6 +118,9 @@ class TaskList extends Component
             redirectTo: null
         );
     }
+
+
+
     public function export()
     {
         return Excel::download(new TaskExport(), 'tasks.xlsx');

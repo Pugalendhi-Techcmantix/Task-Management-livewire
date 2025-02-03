@@ -51,12 +51,20 @@
     </x-mary-modal>
 
 
-    <x-mary-modal wire:model="confirmOpen" title="Are you sure?">
+    <x-mary-modal wire:model="confirmOpen" title="Upload Your File?">
         <x-mary-file wire:model="file" label="Upload the Task Excel File:" hint="Only xlsx, xls, csv"
             accept=".xlsx, .xls, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/csv" />
+        @if (!empty($importErrors))
+            <div class="max-h-60 overflow-auto"> <!-- Adjusted max height and scroll behavior -->
+                @foreach ($importErrors as $error)
+                    <x-mary-alert class="alert-warning mb-2" title="Validation Error"
+                        description="{{ html_entity_decode($error) }}" />
+                @endforeach
+            </div>
+        @endif
         <x-slot:actions>
-            <x-mary-button label="{{ __('Cancel') }}" wire:click="confirmOpen = false" spinner />
-            <x-mary-button label="{{ __('Confirm') }}" wire:click="import" class="btn-primary" spinner />
+            <x-mary-button label="Cancel" wire:click="confirmOpen = false" />
+            <x-mary-button label="Upload" wire:click="import" class="btn-primary" spinner />
         </x-slot>
     </x-mary-modal>
 </div>

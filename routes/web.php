@@ -39,6 +39,9 @@ Route::get('/dashboard', function () {
 //     return view('support-page');
 // })->name('support-page');
 
+Route::get('/chat-box', function () {
+    return view('chat-box');
+})->name('chat-box');
 
 Route::middleware('auth', RoleMiddleware::class)->group(function () {
 
