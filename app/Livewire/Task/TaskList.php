@@ -50,6 +50,11 @@ class TaskList extends Component
         $this->dispatch('refresh-role-table');
     }
 
+    public function deleteAllMessages()
+    {
+        Tasks::truncate(); // Deletes all records from the chats table
+    }
+
     public function importOpen()
     {
         $this->confirmOpen = true;

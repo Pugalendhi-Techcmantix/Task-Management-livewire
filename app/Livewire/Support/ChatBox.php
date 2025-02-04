@@ -12,6 +12,8 @@ class ChatBox extends Component
     public $messages;
     public $newMessage;
     public $users;
+
+
     public function sendMessage()
     {
         // Trim message to remove extra spaces
@@ -51,6 +53,12 @@ class ChatBox extends Component
         // Fetch messages in ascending order (oldest first)
         $this->messages = Chat::orderBy('created_at', 'asc')->get();
     }
+
+    public function deleteAllMessages()
+    {
+        Chat::truncate(); // Deletes all records from the chats table
+    }
+
 
 
     public function render()

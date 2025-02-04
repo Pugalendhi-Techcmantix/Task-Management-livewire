@@ -107,5 +107,23 @@
     @livewireCalendarScripts
 
 </body>
+<!-- Floating Chat Button -->
+<div class="fixed bottom-16 right-10 z-50">
+    <x-mary-popover position="top-start" offset="10">
+        <x-slot:trigger>
+            <x-mary-button icon="o-chat-bubble-bottom-center-text"
+                class="btn-error btn-circle shadow-lg" />
+        </x-slot:trigger>
+        <x-slot:content>
+            <div class="w-[430px] h-[550px]  rounded-lg overflow-hidden">
+                @livewire('support.chat-box')
+            </div>
+        </x-slot:content>
+    </x-mary-popover>
+</div>
+
+
+
+
 
 </html>

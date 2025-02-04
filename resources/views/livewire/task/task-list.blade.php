@@ -1,6 +1,7 @@
 <div class="container ">
     <x-mary-card shadow class="shadow-xl p-11" title="Assign Task">
         <x-slot:menu>
+            <x-mary-button label="Delete All" icon="o-trash" wire:click="deleteAllMessages" class="btn-outline" spinner />
             <x-mary-button label="Download" icon="o-arrow-down-tray" wire:click="export" class="btn-outline" spinner />
             <x-mary-button label="Import" icon="o-arrow-small-up" wire:click="importOpen" class="btn-outline" spinner />
             <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'task.task-modal' })"
@@ -49,7 +50,6 @@
             <x-mary-button label="{{ __('Confirm') }}" wire:click="destroy" class="btn-primary" spinner />
         </x-slot>
     </x-mary-modal>
-
 
     <x-mary-modal wire:model="confirmOpen" title="Upload Your File?">
         <x-mary-file wire:model="file" label="Upload the Task Excel File:" hint="Only xlsx, xls, csv"

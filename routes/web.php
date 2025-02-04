@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -10,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
 
-Route::get('/', function () {
+Route::get('login', function () {
     return view('auth.login');
 })->middleware(['auth', 'verified'])->name('login');
 
@@ -19,25 +18,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/pending', function () {
-//     return view('pending');
-// })->name('pending');
-// Route::get('/progress', function () {
-//     return view('progress');
-// })->name('progress');
-// Route::get('/hold', function () {
-//     return view('hold');
-// })->name('hold');
-// Route::get('/completed', function () {
-//     return view('completed');
-// })->name('completed');
-// Route::get('/sample', function () {
-//     return view('task-kanban-board');
-// })->name('sample');
-
-// Route::get('/support-page', function () {
-//     return view('support-page');
-// })->name('support-page');
 
 Route::get('/chat-box', function () {
     return view('chat-box');

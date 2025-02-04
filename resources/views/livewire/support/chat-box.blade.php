@@ -1,13 +1,17 @@
 <div class="grid  grid-cols-1 md:grid-cols-12">
-    <x-mary-card class="bg-black col-span-12 lg:col-span-4" title="ChatBox">
+    <x-mary-card class="bg-black col-span-12 lg:col-span-12" title="ChatBox">
         <x-slot:title>
             <span class="text-white">ChatBox</span>
         </x-slot:title>
         <x-slot:menu>
             <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
                 class="focus:outline-none border-0 size-8" />
-            <x-mary-dropdown  icon="o-ellipsis-vertical" class="btn-xs btn-circle">
-                <x-mary-menu-item title="Clear Chat" icon="o-trash" />
+            <x-mary-dropdown icon="o-ellipsis-vertical" class="btn-xs btn-circle">
+                <x-mary-menu-item title="info" icon="o-information-circle" />
+                @if (Auth::user()->role_id == 1)
+                    <x-mary-menu-item title="Clear Chat" wire:click="deleteAllMessages" icon="o-trash" />
+                @endif
+
             </x-mary-dropdown>
         </x-slot:menu>
         <div class="text-white flex ">
@@ -38,8 +42,11 @@
 
         <x-slot:actions>
             <x-mary-input type="text" wire:model="newMessage" class="border-0 focus:outline-none"
-                placeholder="Type a message" />
+                wire:keydown.enter="sendMessage" placeholder="Type a message" />
             <x-mary-button wire:click="sendMessage" icon-right="m-arrow-right-circle">Send</x-mary-button>
         </x-slot:actions>
     </x-mary-card>
+
+
+
 </div>
