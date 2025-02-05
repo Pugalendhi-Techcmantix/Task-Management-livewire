@@ -19,7 +19,7 @@
                 <div>{{ $user->name }} , </div>
             @endforeach
         </div>
-        <div wire:poll.1s="chatget" class="max-h-96 overflow-auto  scrollbar-thin border-2 bg-gray-100 px-10 ">
+        <div wire:poll.1s="chatget" class="min-h-96 max-h-96 overflow-auto  scrollbar-thin border-2 bg-gray-100 px-10 ">
             @foreach ($messages as $message)
                 <div class="py-2 flex {{ $message->user_id == Auth::id() ? 'justify-end' : '' }}">
                     <div class="{{ $message->user_id == Auth::id() ? 'bg-green-300' : 'bg-white' }} p-2 rounded-md">
