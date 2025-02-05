@@ -1,65 +1,32 @@
 <?php
 
-
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
 
-Route::get('login', function () {
-    return view('auth.login');
-})->middleware(['auth', 'verified'])->name('login');
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/chat-box', function () {
-    return view('chat-box');
-})->name('chat-box');
+Route::get('/', [CommonController::class, 'dashboard'])->middleware(['auth', 'verified']);
+Route::get('dashboard', [CommonController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('chat-box', [CommonController::class, 'chat_box'])->name('chat-box');
 
 Route::middleware('auth', RoleMiddleware::class)->group(function () {
-
-    Route::get('employee-list', [EmployeeController::class, 'index'])->name('employee-list');
-    Route::get('role-list', [RoleController::class, 'index'])->name('role-list');
-    Route::get('task-list', [TaskController::class, 'index'])->name('task-list');
-    Route::get('/support-list', function () {
-        return view('support-list');
-    })->name('support-list');
+    Route::get('employee-list', [AdminController::class, 'employee_list'])->name('employee-list');
+    Route::get('role-list', [AdminController::class, 'role_list'])->name('role-list');
+    Route::get('task-list', [AdminController::class, 'task_list'])->name('task-list');
+    Route::get('support-list', [AdminController::class, 'support_list'])->name('support-list');
 });
 
 
 Route::middleware(['auth', RoleMiddleware::class])->group(function () {
-
-    // User routes (These should only be accessed by users, not admins)
-    Route::get('/pending', function () {
-        return view('pending');
-    })->name('pending');
-
-    Route::get('/progress', function () {
-        return view('progress');
-    })->name('progress');
-
-    Route::get('/hold', function () {
-        return view('hold');
-    })->name('hold');
-
-    Route::get('/completed', function () {
-        return view('completed');
-    })->name('completed');
-
-    Route::get('/sample', function () {
-        return view('task-kanban-board');
-    })->name('sample');
-
-    Route::get('/support-page', function () {
-        return view('support-page');
-    })->name('support-page');
+    Route::get('pending', [UserController::class, 'pending'])->name('pending');
+    Route::get('progress', [UserController::class, 'progress'])->name('progress');
+    Route::get('hold', [UserController::class, 'hold'])->name('hold');
+    Route::get('completed', [UserController::class, 'completed'])->name('completed');
+    Route::get('support-page', [UserController::class, 'support_page'])->name('support-page');
+    Route::get('sample', [UserController::class, 'sample'])->name('sample');
 });
 
 Route::middleware('auth')->group(function () {
