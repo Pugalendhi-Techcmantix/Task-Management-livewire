@@ -70,7 +70,7 @@ class Dashboard extends Component
         $today = Carbon::today();
         // Get tasks where the due_date is today
         $this->tasks = Tasks::with('employee')
-            ->whereDate('due_date', $today)
+            ->whereDate('due_date', '<=', $today)
             ->whereIn('status', [1, 2, 3]) // Only get tasks with status 1, 2, or 3
             ->get();
         $this->totalCount = $this->tasks->count();
@@ -83,7 +83,7 @@ class Dashboard extends Component
         $today = Carbon::today();
         $this->tasksForReminder = Tasks::with('employee') // Include the project relation if needed
             ->where('employee_id', $userId)
-            ->whereDate('due_date', $today)
+            ->whereDate('due_date','<=', $today)
             ->get();
         $this->confirm = true; // Show the modal
     }
@@ -99,10 +99,11 @@ class Dashboard extends Component
                 title: 'Error!',
                 description: 'No tasks due today for this employee.',
                 position: 'toast-top toast-end',
-                icon: 'o-alert-circle',
+                icon: 'o-information-circle',
                 css: 'alert-error',
                 redirectTo: null
             );
+            $this->confirm = false; // Close the modal
             return;
         }
 
@@ -141,7 +142,7 @@ class Dashboard extends Component
         $employees = User::where('role_id', 2)->get();
         $this->employeescount = User::where('role_id', 2)->count();
 
-        $slides = $employees->map(function ($user,$index) {
+        $slides = $employees->map(function ($user, $index) {
             // Count tasks based on status
             $pending = Tasks::where('employee_id', $user->id)->where('status', 1)->count();
             $process = Tasks::where('employee_id', $user->id)->where('status', 2)->count();
@@ -151,7 +152,7 @@ class Dashboard extends Component
             $totalTasks = $pending + $process + $hold + $completed;
 
             return [
-                'name' =>($index + 1) . '. ' . $user->name,
+                'name' => ($index + 1) . '. ' . $user->name,
                 'progress' => [
                     'pending' => $pending,
                     'hold' => $hold,

@@ -33,6 +33,7 @@ class ChatBox extends Component
         ]);
 
         $this->newMessage = ''; // Reset input after sending
+        $this->chatget(); 
     }
 
 
