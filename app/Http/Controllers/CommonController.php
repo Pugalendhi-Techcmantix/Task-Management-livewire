@@ -18,4 +18,8 @@ class CommonController extends Controller
     {
         return view('chat-box');
     }
+    public function geminiai()
+    {
+        return view('gemini-ai');
+    }
 }

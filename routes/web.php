@@ -12,6 +12,8 @@ Route::get('/', [CommonController::class, 'login'])->middleware(['auth'])->name(
 // Route::get('/', [CommonController::class, 'dashboard'])->middleware(['auth', 'verified']);
 Route::get('dashboard', [CommonController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('chat-box', [CommonController::class, 'chat_box'])->middleware(['auth'])->name('chat-box');
+Route::get('geminiai', [CommonController::class, 'geminiai'])->name('geminiai');
+
 Route::middleware('auth', RoleMiddleware::class)->group(function () {
     Route::get('employee-list', [AdminController::class, 'employee_list'])->name('employee-list');
     Route::get('role-list', [AdminController::class, 'role_list'])->name('role-list');
