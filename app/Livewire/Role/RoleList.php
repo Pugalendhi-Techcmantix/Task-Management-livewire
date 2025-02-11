@@ -75,10 +75,10 @@ class RoleList extends Component
     public function render()
     {
         $headers = [
-            ['key' => 'id', 'label' => 'S.No', 'sortable' => true,],
-            ['key' => 'name', 'label' => 'Name', 'sortable' => true],
-            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true],
-            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true],
+            ['key' => 'id', 'label' => 'S.No', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'name', 'label' => 'Name', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'created_at', 'label' => 'Created At', 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'updated_at', 'label' => 'Updated At', 'sortable' => true,'class'=>'truncate'],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting

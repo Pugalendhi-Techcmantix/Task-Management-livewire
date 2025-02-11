@@ -45,21 +45,27 @@ class EmployeeList extends Component
         User::findOrFail($this->employee_id)->delete();
         $this->confirmDelete = false;
         $this->dispatch('refresh-employee-table');
-        $this->success("Deleted Successfully");
+        $this->toast(
+            type: 'success',
+            title: 'Deleted!',
+            description: 'Deleted successfully.',
+            position: 'toast-top toast-end',
+            icon: 'o-check-circle',
+            css: 'alert-success',
+        );
     }
     public function render()
     {
         $headers = [
             ['key' => 'id', 'label' => 'S.No', 'sortable' => true, 'class' => 'w-20'],
-            ['key' => 'name', 'label' => 'Name', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'email', 'label' => 'Email', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'age', 'label' => 'Age', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'role.name', 'label' => 'Role', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'position', 'label' => 'Position', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'salary', 'label' => 'Salary', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'status', 'label' => 'Status', 'sortable' => true,'class'=>'truncate'],
-            ['key' => 'time', 'label' => 'In-Out-Time','class'=>'truncate'],
-            ['key' => 'joining_date', 'label' => 'D.O.J', 'format' => ['date', 'd-m-Y'], 'sortable' => true,'class'=>'truncate'],
+            ['key' => 'name', 'label' => 'Name', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'email', 'label' => 'Email', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'age', 'label' => 'Age', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'role.name', 'label' => 'Role', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'position', 'label' => 'Position', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'salary', 'label' => 'Salary', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'status', 'label' => 'Status', 'sortable' => true, 'class' => 'truncate'],
+            ['key' => 'joining_date', 'label' => 'D.O.J', 'format' => ['date', 'd-m-Y'], 'sortable' => true, 'class' => 'truncate'],
             ['key' => 'actions', 'label' => 'Action', 'sortable' => false],
         ];
         // Fetch students with sorting

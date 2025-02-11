@@ -81,10 +81,6 @@
                     @endif
 
                 </x-mary-menu>
-
-                <!-- Gemini AI Button at the Bottom -->
-                <x-mary-button label="GeminiAi"
-                    class="w-full mt-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-2 rounded-lg transition hover:scale-105" />
             </aside>
 
             <!-- Main Content (Scrollable) -->
@@ -115,10 +111,12 @@
 <div class="fixed bottom-16 right-10 z-50">
     <x-mary-popover position="top-start" offset="10">
         <x-slot:trigger>
-            <x-mary-button icon="o-chat-bubble-bottom-center-text" class="btn-error btn-circle shadow-lg" />
+            <x-mary-button icon="o-chat-bubble-bottom-center-text"
+                class="btn-error btn-circle text-white font-bold shadow-lg" />
         </x-slot:trigger>
-        <x-slot:content>
-            <div class="w-[430px] h-[550px]  rounded-lg overflow-hidden">
+        <x-slot:content class="bg-black rounded-lg">
+            <!-- Responsive Chatbox -->
+            <div class="  md:w-[430px] lg:w-[430px]  md:h-[550px] lg:h-[550px] overflow-hidden">
                 @livewire('support.chat-box')
             </div>
         </x-slot:content>

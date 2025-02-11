@@ -1,6 +1,6 @@
 <div class="container mt-3">
     @if ($role == 2)
-        <div class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-5 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
             @foreach ($myTasks as $index => $task)
                 <x-mary-card class="p-4 shadow-lg" title="Task #{{ $index + 1 }}">
                     <x-slot:menu>

@@ -20,6 +20,8 @@ class UserDashboard extends Component
     public $events = [];
     public $currentTime;
     protected $listeners = ['updateTime'];
+    public bool $showDrawer1 = false;
+
 
     public function mount()
     {
@@ -33,6 +35,11 @@ class UserDashboard extends Component
     public function updateTime()
     {
         $this->currentTime = Carbon::now('Asia/Kolkata')->format('d-m-Y H:i:s A');
+    }
+
+    public function geminiai()
+    {
+        $this->showDrawer1 = true;
     }
     public function cardsCount()
     {

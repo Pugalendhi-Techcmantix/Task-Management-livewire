@@ -31,10 +31,6 @@
                 placeholder="Enter your Salary" />
 
             <x-mary-datetime label="D.O.J" wire:model="form.joining_date" placeholder="Enter your D.O.J" />
-
-            <x-mary-datetime label="In-Time" wire:model.defer="form.intime"  icon="o-calendar" type="time" />
-            <x-mary-datetime label="Out-Time" wire:model.defer="form.outtime"  icon="o-calendar" type="time" />
-
             @if ($form->employee_id)
                 <x-mary-select label="Status" wire:model="form.status" :options="$statusOptions" placeholder="Select Status" />
             @endif

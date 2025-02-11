@@ -11,13 +11,10 @@
                                 {{ $projects[$projectName]['totalTasks'] }}
                             </h1>
                             <h1 class="mb-3">Developers: {{ $projects[$projectName]['totalEmployees'] }}</h1>
-                            <div class="">
-                                {{-- <x-mary-drawer wire:model="showDrawer1" class="w-11/12 lg:w-1/3" title="Hello"
-                                subtitle="Livewire" separator with-close-button>
-                            </x-mary-drawer> --}}
+                            <div class="flex flex-wrap gap-3">
 
                                 @foreach ($projects[$projectName]['users'] as $user)
-                                    <x-mary-button :label="$user" class="bg-red-500/10 border-0 btn-sm "
+                                    <x-mary-button :label="$user" class="bg-red-500/10 border-0 btn-sm  "
                                         :tooltip="$user"
                                         wire:click="loadUserTasks('{{ $projectName }}', '{{ $user }}')" />
                                 @endforeach

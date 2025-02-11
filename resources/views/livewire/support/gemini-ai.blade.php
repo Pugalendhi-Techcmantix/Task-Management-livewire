@@ -1,18 +1,20 @@
-<div class="p-6 bg-white shadow-md rounded-lg min-h-[750px]">
-    <h2 class="text-xl font-semibold mb-4">💬 Ask Google Gemini AI</h2>
+<div class="p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-xl  font-semibold mb-4">💬 Ask AI</h2>
 
     <!-- Chat Messages -->
-    <div class="space-y-3 min-h-[600px] max-h-[600px] overflow-y-auto p-3 bg-gray-50 rounded border">
+    <div
+        class="space-y-3 min-h-[400px] sm:min-h-[500px] md:min-h-[600px] max-h-[600px] overflow-y-auto p-3 bg-gray-50 rounded border">
+
         @if ($response)
             <!-- User Message -->
-            <div class="flex justify-end mx-60">
+            <div class="flex justify-end ">
                 <div class="bg-blue-500 text-white p-3 rounded-lg text-right">
                     {{ $message }}
                 </div>
             </div>
 
             <!-- AI Response (Line by Line) -->
-            <div class="flex justify-start flex-col space-y-0 bg-gray-900 font-mono mx-60">
+            <div class="flex justify-start flex-col space-y-0 bg-gray-900 font-mono ">
                 @foreach (explode("\n", $response) as $line)
                     @php
                         // Trim the line to remove leading and trailing spaces
@@ -82,9 +84,12 @@
 
     <!-- Input Area -->
     <div class="mt-4 flex space-x-2">
-        <textarea wire:model="message" wire:keydown.enter="sendMessage" class="w-full border p-2 rounded" placeholder="Type your question..."></textarea>
-        <x-mary-button wire:click="sendMessage"  class="bg-blue-500 text-white rounded" spinner>
-          Send  ➤
+        <textarea wire:model="message" wire:keydown.enter="sendMessage" class="w-full border p-2 rounded"
+            placeholder="Type your question..."></textarea>
+        <x-mary-button wire:click="sendMessage"
+            class="bg-gradient-to-r from-blue-500 to-purple-600  text-white rounded-lg  transition hover:scale-105"
+            spinner>
+            Send ➤
         </x-mary-button>
     </div>
 </div>

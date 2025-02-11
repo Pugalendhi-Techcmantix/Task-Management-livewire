@@ -1,9 +1,18 @@
 <div class="container">
-    <div class="mb-5 font-bold ">
-        <h1>Welcome {{ $username }} <x-mary-loading class="loading-ring text-success" /></h1>
-        <div wire:poll.1s="updateTime">
-            {{ $currentTime }}
+    <div class="mb-5 font-bold flex justify-between ">
+        <div>
+            <h1>Welcome {{ $username }} <x-mary-loading class="loading-ring text-success" /></h1>
+            <div wire:poll.1s="updateTime">
+                {{ $currentTime }}
+            </div>
         </div>
+        <x-mary-button label="GeminiAi" wire:click="geminiai" wire:ignore
+            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold  rounded-lg transition hover:scale-105" />
+        <x-mary-drawer wire:model="showDrawer1"
+            class="w-11/12 lg:w-1/3 bg-gradient-to-r from-blue-500 to-purple-600  font-bold" title="💬 Geminiai" separator
+            with-close-button without-trap-focus>
+            @livewire('support.gemini-ai')
+        </x-mary-drawer>
     </div>
     <div class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <x-mary-card class="border-r-4 border-b-4 border-orange-300 shadow-xl flex items-center justify-center">

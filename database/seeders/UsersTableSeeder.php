@@ -27,7 +27,6 @@ class UsersTableSeeder extends Seeder
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 // 'status' => '1',
                 'role_id' => '1',
-                'time' => json_encode(['morning' => '09:00 AM', 'evening' => '06:00 PM']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -41,7 +40,6 @@ class UsersTableSeeder extends Seeder
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 // 'status' => '1',
                 'role_id' => '2',
-                'time' => json_encode(['morning' => '09:00 AM', 'evening' => '06:00 PM']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -55,7 +53,6 @@ class UsersTableSeeder extends Seeder
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 // 'status' => '1',
                 'role_id' => '2',
-                'time' => json_encode(['morning' => '09:00 AM', 'evening' => '06:00 PM']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -69,7 +66,6 @@ class UsersTableSeeder extends Seeder
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 // 'status' => '1',
                 'role_id' => '2',
-                'time' => json_encode(['morning' => '09:00 AM', 'evening' => '06:00 PM']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -83,7 +79,6 @@ class UsersTableSeeder extends Seeder
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 // 'status' => '1',
                 'role_id' => '2',
-                'time' => json_encode(['morning' => '09:00 AM', 'evening' => '06:00 PM']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -97,7 +92,6 @@ class UsersTableSeeder extends Seeder
                 'joining_date' => '2024-10-14', // Correct date format: Y-m-d
                 // 'status' => '1',
                 'role_id' => '2',
-                'time' => json_encode(['morning' => '09:00 AM', 'evening' => '06:00 PM']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

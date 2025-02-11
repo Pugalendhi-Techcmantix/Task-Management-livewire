@@ -1,11 +1,13 @@
 <div class="container ">
     <x-mary-card shadow class="shadow-xl p-11" title="Assign Task">
         <x-slot:menu>
-            <x-mary-button label="Delete All" icon="o-trash" wire:click="deleteAllMessages" class="btn-outline" spinner />
-            <x-mary-button label="Download" icon="o-arrow-down-tray" wire:click="export" class="btn-outline" spinner />
-            <x-mary-button label="Import" icon="o-arrow-small-up" wire:click="importOpen" class="btn-outline" spinner />
-            <x-mary-button label="Add" wire:click="$dispatch('openModal', { component: 'task.task-modal' })"
-                icon="o-plus" spinner />
+            <x-mary-dropdown>
+                <x-mary-menu-item title="Add" icon="o-plus"
+                    wire:click="$dispatch('openModal', { component: 'task.task-modal' })" spinner />
+                <x-mary-menu-item title="Import" icon="o-arrow-small-up" wire:click="importOpen" spinner />
+                <x-mary-menu-item title="Download" icon="o-arrow-down-tray" wire:click="export" spinner />
+                <x-mary-menu-item title="Delete All" icon="o-trash" wire:click="deleteAllMessages" spinner />
+            </x-mary-dropdown>
 
         </x-slot:menu>
 

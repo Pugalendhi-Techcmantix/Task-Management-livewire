@@ -28,6 +28,8 @@ class Dashboard extends Component
     public $totalCount;
     public $slides = [];
     public $employeescount;
+    public bool $showDrawer1 = false;
+
     public function mount()
     {
         $this->username = Auth::user()->name;
@@ -41,6 +43,10 @@ class Dashboard extends Component
     public function updateTime()
     {
         $this->currentTime = Carbon::now('Asia/Kolkata')->format('d-m-Y H:i:s A');
+    }
+    public function geminiai()
+    {
+        $this->showDrawer1 = true;
     }
 
     public function cardsCount()

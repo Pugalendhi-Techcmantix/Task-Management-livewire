@@ -72,6 +72,39 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->role_id == 1)
+                <x-responsive-nav-link :href="route('employee-list')" :active="request()->routeIs('employee-list')">
+                    {{ __('Employees') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('role-list')" :active="request()->routeIs('role-list')">
+                    {{ __('Roles') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('task-list')" :active="request()->routeIs('task-list')">
+                    {{ __('Tasks') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('support-list')" :active="request()->routeIs('support-list')">
+                    {{ __('Support Messages') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if (Auth::user()->role_id == 2)
+                <x-responsive-nav-link :href="route('pending')" :active="request()->routeIs('pending')">
+                    {{ __('Pending') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('progress')" :active="request()->routeIs('progress')">
+                    {{ __('Progress') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('hold')" :active="request()->routeIs('hold')">
+                    {{ __('Hold') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('completed')" :active="request()->routeIs('completed')">
+                    {{ __('Completed') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('support-page')" :active="request()->routeIs('support-page')">
+                    {{ __('Support') }}
+                </x-responsive-nav-link>
+            @endif
+
         </div>
 
         <!-- Responsive Settings Options -->

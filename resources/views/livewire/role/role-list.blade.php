@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <x-mary-card shadow class="shadow-xl p-11">
+    <x-mary-card shadow class="shadow-xl p-11" title="Roles">
         <div class="flex items-center justify-between">
             <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search"
                 class="w-96 focus:outline-none" />
