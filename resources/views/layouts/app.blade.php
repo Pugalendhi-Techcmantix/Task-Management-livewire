@@ -116,7 +116,7 @@
         </x-slot:trigger>
         <x-slot:content class="bg-black rounded-lg">
             <!-- Responsive Chatbox -->
-            <div class="  md:w-[430px] lg:w-[430px]  md:h-[550px] lg:h-[550px] overflow-hidden">
+            <div class="  md:w-[430px] lg:w-[430px]  md:h-[530px] lg:h-[530px] overflow-hidden">
                 @livewire('support.chat-box')
             </div>
         </x-slot:content>

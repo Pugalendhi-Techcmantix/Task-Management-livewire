@@ -18,7 +18,7 @@
             <div>{{ $user->name }} , </div>
         @endforeach
     </div>
-    <div wire:poll.1s="chatget" class="min-h-96 max-h-96 overflow-auto  scrollbar-thin border-2  bg-gray-100 px-10 ">
+    <div wire:poll.1s="chatget" class="min-h-96 max-h-96 overflow-auto  scrollbar-thin border-2  bg-gray-100 px-2 ">
         @php
             $colors = ['bg-red-500/40', 'bg-blue-500/40', 'bg-green-500/40', 'bg-yellow-500/40', 'bg-purple-500/40'];
         @endphp
@@ -66,8 +66,8 @@
     @endif
 
     <x-slot:actions>
-        <x-mary-input type="text" wire:model="newMessage" class="border-0 focus:outline-none"
+        <x-mary-input type="text" wire:model="newMessage" class="border-0 focus:outline-none size-8"
             wire:keydown.enter="sendMessage" placeholder="Type a message" autocomplete="off" />
-        <x-mary-button wire:click="sendMessage" icon-right="m-arrow-right-circle">Send</x-mary-button>
+        <x-mary-button wire:click="sendMessage" icon-right="m-arrow-right-circle" class="btn-sm">Send</x-mary-button>
     </x-slot:actions>
 </x-mary-card>

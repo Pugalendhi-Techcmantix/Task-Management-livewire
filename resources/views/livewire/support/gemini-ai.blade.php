@@ -1,4 +1,4 @@
-<div class="p-6 bg-white shadow-md rounded-lg">
+<div class="p-4 bg-white shadow-md rounded-lg">
     <h2 class="text-xl  font-semibold mb-4">💬 Ask AI</h2>
 
     <!-- Chat Messages -->
