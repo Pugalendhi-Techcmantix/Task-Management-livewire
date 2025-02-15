@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="mt-4">
                         <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> -->
-                        <img src="../techc.png" alt="techcmantix"  class="w-auto h-auto xs:w-6 xs:h-6">
+                        <img src="../techc.png" alt="techcmantix" class="w-auto h-auto xs:w-6 xs:h-6">
                     </a>
                 </div>
             </div>
@@ -35,8 +35,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('myprofile')">
+                            {{ __('MyProfile') }}
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Settings') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -118,8 +121,11 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-dropdown-link :href="route('myprofile')">
+                    {{ __('MyProfile') }}
+                </x-dropdown-link>
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Settings') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

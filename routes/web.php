@@ -13,6 +13,7 @@ Route::get('/', [CommonController::class, 'login'])->middleware(['auth'])->name(
 Route::get('dashboard', [CommonController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('chat-box', [CommonController::class, 'chat_box'])->middleware(['auth'])->name('chat-box');
 Route::get('geminiai', [CommonController::class, 'geminiai'])->name('geminiai');
+Route::get('myprofile', [CommonController::class, 'profile'])->name('myprofile');
 
 Route::middleware('auth', RoleMiddleware::class)->group(function () {
     Route::get('employee-list', [AdminController::class, 'employee_list'])->name('employee-list');

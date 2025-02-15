@@ -22,4 +22,9 @@ class CommonController extends Controller
     {
         return view('gemini-ai');
     }
+
+    public function profile()
+    {
+        return view('profile');
+    }
 }
