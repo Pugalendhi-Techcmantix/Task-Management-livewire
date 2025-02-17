@@ -11,7 +11,7 @@ class ChatBox extends Component
 {
     public $messages;
     public $newMessage;
-    public $users;
+    public $usersCount;
 
 
     public function sendMessage()
@@ -40,13 +40,8 @@ class ChatBox extends Component
     public function mount()
     {
         $this->chatget();  // Fetch initial messages when component mounts.
-        $this->users();
-    }
+        $this->usersCount = User::count();
 
-    public function users()
-    {
-        $this->users = User::get();
-        return $this->users;
     }
 
     public function chatget()
@@ -59,8 +54,6 @@ class ChatBox extends Component
     {
         Chat::truncate(); // Deletes all records from the chats table
     }
-
-
 
     public function render()
     {

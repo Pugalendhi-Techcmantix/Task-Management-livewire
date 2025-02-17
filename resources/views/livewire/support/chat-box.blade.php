@@ -3,8 +3,7 @@
         <span class="text-white">ChatBox</span>
     </x-slot:title>
     <x-slot:menu>
-        <x-mary-input icon="o-magnifying-glass" placeholder="Search" wire:model.live="search" autocomplete="off"
-            class="focus:outline-none border-0 size-8" />
+        <span class="font-bold text-white">Members {{ $usersCount }}</span>
         <x-mary-dropdown icon="o-ellipsis-vertical" class="btn-xs btn-circle">
             <x-mary-menu-item title="info" icon="o-information-circle" />
             @if (Auth::user()->role_id == 1)
@@ -13,11 +12,6 @@
 
         </x-mary-dropdown>
     </x-slot:menu>
-    <div class="text-white flex ">
-        @foreach ($users as $user)
-            <div>{{ $user->name }} , </div>
-        @endforeach
-    </div>
     <div wire:poll.1s="chatget" class="min-h-96 max-h-96 overflow-auto  scrollbar-thin border-2  bg-gray-100 px-2 ">
         @php
             $colors = ['bg-red-500/40', 'bg-blue-500/40', 'bg-green-500/40', 'bg-yellow-500/40', 'bg-purple-500/40'];
@@ -65,9 +59,9 @@
         </div>
     @endif
 
-    <x-slot:actions>
-        <x-mary-input type="text" wire:model="newMessage" class="border-0 focus:outline-none size-8"
-            wire:keydown.enter="sendMessage" placeholder="Type a message" autocomplete="off" />
-        <x-mary-button wire:click="sendMessage" icon-right="m-arrow-right-circle" class="btn-sm">Send</x-mary-button>
+    <x-slot:actions>    
+        <x-mary-textarea wire:model="newMessage" class="border-0 focus:outline-none size-8" placeholder="Type a message"
+            autocomplete="off" />
+        <x-mary-button wire:click="sendMessage" icon-right="m-arrow-right-circle" class="btn-sm" >Send</x-mary-button>
     </x-slot:actions>
 </x-mary-card>
