@@ -1,3 +1,3 @@
 <div>
-    @livewire('log.login')
+    @livewire('log.login-page')
 </div>

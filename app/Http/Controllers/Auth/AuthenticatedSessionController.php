@@ -36,11 +36,12 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $user = Auth::user();
 
-        if ($user instanceof User) { // Ensure $user is an instance of the User model
-            $user->status = 1;
-            $user->save();
-        }
-        // dd(Auth::user()->name);
+        // if ($user instanceof User) { // Ensure $user is an instance of the User model
+        //     $user->status = 1;
+        //     $user->save();
+        // }
+        $user = Auth::user();
+        $updatLog = User::where('id', $user->id)->update(['status' => 1]);
         // Session()->put('admin_name', Auth::user()->name);
         $request->session()->regenerate();
         return redirect()->intended(route('dashboard', absolute: false));
@@ -63,17 +64,19 @@ class AuthenticatedSessionController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        $user = Auth::user();
-        if ($user instanceof User) { // Ensure $user is an instance of the User model
-            $user->status = 2;
-            $user->save();
-        }
+        // if ($user instanceof User) { // Ensure $user is an instance of the User model
+        //     $user->status = 2;
+        //     $user->save();
+        // }
 
-        Auth::guard('web')->logout();
+        $user = Auth::user();
+        $updatLog = User::where('id', $user->id)->update(['status' => 2]);
+        // Auth::guard('web')->logout();
+        Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 }

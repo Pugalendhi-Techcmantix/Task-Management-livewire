@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('state')->nullable();; // State
-            $table->string('country')->nullable();; // Country
-            $table->text('about_me')->nullable(); // About Me (Long text, nullable)
-            $table->integer('number')->nullable(); // Phone number (Limited to 15 characters)
+            $table->string('state')->nullable();; 
+            $table->string('country')->nullable();
+            $table->text('about_me')->nullable(); 
+            $table->bigInteger('number')->nullable(); 
+            $table->bigInteger('experience')->nullable(); 
+            $table->bigInteger('projects')->nullable(); 
+            $table->bigInteger('awards')->nullable(); 
             $table->timestamps();
         });
     }

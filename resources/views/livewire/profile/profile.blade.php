@@ -2,9 +2,8 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
         <x-mary-card class="col-span-12 lg:col-span-4 relative flex flex-col" title="Profile">
             <x-slot:menu>
-                <x-mary-button wire:click="profileclick({{ $profile_id }})" icon="o-cog-8-tooth"
-                    class="btn-circle btn-ghost btn-sm" />
-                <x-mary-icon name="o-heart" class="cursor-pointer" />
+                <x-mary-button wire:click="profileclick" icon="o-cog-8-tooth" class="btn-circle btn-ghost btn-sm" />
+                <x-mary-icon name="o-heart" class="cursor-pointer text-pink-500" />
             </x-slot:menu>
             <x-mary-card class="bg-blue-500 relative z-10">
                 <div class="flex flex-col items-center text-white  font-bold text-center space-y-2">
@@ -133,7 +132,7 @@
                         <x-heroicon-o-code-bracket-square class="w-8 h-8 text-blue-500" />
                     </div>
                     <h2 class="text-3xl font-semibold text-blue-500">Experience</h2>
-                    <h2 class="text-3xl font-semibold text-gray-800">1+</h2>
+                    <h2 class="text-3xl font-semibold text-gray-800">{{ $experience }}</h2>
                 </div>
             </x-mary-card>
             <x-mary-card class="flex items-center justify-center ">
@@ -142,7 +141,7 @@
                         <x-heroicon-o-hand-raised class="w-8 h-8 text-green-500" />
                     </div>
                     <h2 class="text-3xl font-semibold text-green-500 ">Projects</h2>
-                    <h2 class="text-3xl font-semibold text-gray-800">2+</h2>
+                    <h2 class="text-3xl font-semibold text-gray-800">{{ $projects }}</h2>
                 </div>
             </x-mary-card>
             <x-mary-card class="flex items-center justify-center ">
@@ -151,7 +150,7 @@
                         <x-heroicon-o-trophy class="w-8 h-8 text-orange-500" />
                     </div>
                     <h2 class="text-3xl font-semibold text-orange-500">Awards</h2>
-                    <h2 class="text-3xl font-semibold text-gray-800">3+</h2>
+                    <h2 class="text-3xl font-semibold text-gray-800">{{ $awards }}</h2>
                 </div>
             </x-mary-card>
         </div>
@@ -229,9 +228,14 @@
             <x-mary-input label="Name" wire:model="name" placeholder="Enter Name" />
             <x-mary-input label="Email" type="email" wire:model="email" placeholder="Enter Email" />
             <x-mary-input label="Position" wire:model="position" placeholder="Enter Position" />
-            <x-mary-input label="Phone" type="number" wire:model="number" placeholder="Enter Ph.No" />
+            <x-mary-input label="Phone" type="number" wire:model="number" min="0" 
+                placeholder="Enter Ph.No" />
             <x-mary-input label="State" wire:model="state" placeholder="Enter State" />
             <x-mary-input label="Country" wire:model="country" placeholder="Enter Country" />
+            <x-mary-input label="Experience" type="number" wire:model="experience" min="0" />
+            <x-mary-input label="Projects" type="number" wire:model="projects" min="0" />
+            <x-mary-input label="Awards" type="number" wire:model="awards" min="0" />
+
             <x-mary-textarea label="About Me" wire:model="about_me" placeholder="Enter " />
 
 
