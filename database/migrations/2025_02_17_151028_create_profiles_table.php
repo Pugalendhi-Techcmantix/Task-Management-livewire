@@ -21,6 +21,9 @@ return new class extends Migration
             $table->bigInteger('experience')->nullable(); 
             $table->bigInteger('projects')->nullable(); 
             $table->bigInteger('awards')->nullable(); 
+            $table->string('photo')->nullable();
+            $table->json('personal_skills')->nullable();
+            $table->json('professional_skills')->nullable();
             $table->timestamps();
         });
     }
