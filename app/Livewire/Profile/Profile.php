@@ -15,9 +15,10 @@ class Profile extends Component
     use Toast;
     use WithFileUploads;
     public bool $openProfile = false;
-    public $name, $email, $position, $state, $country, $about_me, $number, $experience, $projects, $awards, $photo;
+    public $name, $email, $position, $state, $country, $about_me, $number,$job_experience, $projects, $awards, $photo;
     public $profile;
-    public $personal_skills = [],$professional_skills=[];
+    public $personal_skills = [], $professional_skills = [];
+    public $education = [], $experience = [];
 
     protected $listeners = ['refresh-profile' => '$refresh'];
 
@@ -33,12 +34,14 @@ class Profile extends Component
             $this->country = $this->profile->country;
             $this->about_me = $this->profile->about_me;
             $this->number = $this->profile->number;
-            $this->experience = $this->profile->experience;
+            $this->job_experience = $this->profile->job_experience;
             $this->projects = $this->profile->projects;
             $this->awards = $this->profile->awards;
             $this->photo = $this->profile->photo;
             $this->personal_skills = json_decode($this->profile->personal_skills, true) ?? [];
             $this->professional_skills = json_decode($this->profile->professional_skills, true) ?? [];
+            $this->education = json_decode($this->profile->education, true) ?? [];
+            $this->experience = json_decode($this->profile->experience, true) ?? [];
             // dd($this->personal_skills);
         }
         $this->name = Auth::user()->name;
@@ -46,11 +49,41 @@ class Profile extends Component
         $this->position = Auth::user()->position;
     }
 
+    // Add new education entry
+    public function addEducation()
+    {
+        $this->education[] = [
+            'degree' => '',
+            'institution' => '',
+            'year' => ''
+        ];
+    }
 
+    // Remove education entry
+    public function removeEducation($index)
+    {
+        unset($this->education[$index]);
+        $this->education = array_values($this->education); // Reindex the array
+    }
+
+    public function addExperience()
+    {
+        $this->experience[] = [
+            'role' => '',
+            'company' => '',
+            'year' => '',
+        ];
+    }
+
+    public function removeExperience($index)
+    {
+        unset($this->experience[$index]);
+        $this->experience = array_values($this->experience); // Reindex the array
+    }
 
     public function updateProfile()
     {
-        // dd(json_encode($this->professional_skills));
+        // dd(json_encode($this->education));
         $profile = ModelsProfile::where('user_id', Auth::id())->first();
         if ($this->photo instanceof UploadedFile) {
             // Store the file in the public disk under 'profile_images' folder
@@ -66,12 +99,14 @@ class Profile extends Component
                 'state' => $this->state,
                 'country' => $this->country,
                 'about_me' => $this->about_me,
-                'experience' => $this->experience,
+                'job_experience' => $this->job_experience,
                 'projects' => $this->projects,
                 'awards' => $this->awards,
                 'photo' => $photoPath,
                 'personal_skills' => json_encode($this->personal_skills),
                 'professional_skills' => json_encode($this->professional_skills),
+                'education' => json_encode($this->education),
+                'experience' => json_encode($this->experience),
             ]);
         } else {
             ModelsProfile::create([
@@ -79,13 +114,15 @@ class Profile extends Component
                 'state' => $this->state,
                 'country' => $this->country,
                 'about_me' => $this->about_me,
+                'job_experience' => $this->job_experience,
                 'number' => $this->number,
-                'experience' => $this->experience,
                 'projects' => $this->projects,
                 'awards' => $this->awards,
                 'photo' => $photoPath,
                 'personal_skills' => json_encode($this->personal_skills),
                 'professional_skills' => json_encode($this->professional_skills),
+                'education' => json_encode($this->education),
+                'experience' => json_encode($this->experience),
             ]);
         }
     }

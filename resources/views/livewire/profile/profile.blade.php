@@ -70,6 +70,7 @@
                     <p class="text-gray-500">No skills added yet.</p>
                 @endif
 
+
             </div>
 
             <div class="mt-5">
@@ -145,7 +146,7 @@
                         <x-heroicon-o-code-bracket-square class="w-8 h-8 text-blue-500" />
                     </div>
                     <h2 class="text-3xl font-semibold text-blue-500">Experience</h2>
-                    <h2 class="text-3xl font-semibold text-gray-800">{{ $experience }}+</h2>
+                    <h2 class="text-3xl font-semibold text-gray-800">{{ $job_experience }}+</h2>
                 </div>
             </x-mary-card>
             <x-mary-card class="flex items-center justify-center ">
@@ -168,70 +169,39 @@
             </x-mary-card>
         </div>
 
-        <x-mary-card title="Education" class="col-span-12 lg:col-span-4 ">
+        <x-mary-card title="Education" class="col-span-12 lg:col-span-4">
             <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                <li class="flex items-center gap-4 text-lg font-medium">
-                    <div class="bg-red-100 p-4 rounded-full w-fit mb-2">
-                        <x-heroicon-o-home-modern class="w-6 h-6 text-red-500" />
-                    </div>
-                    <p class=""><strong>MCA</strong> - Bishop Heber College Trichy.
-                        <br />
-                        2022-2024
-                    </p>
-                </li>
-                <li class="flex items-center gap-4 text-lg font-medium">
-                    <div class="bg-blue-100 p-4 rounded-full w-fit mb-2">
-                        <x-heroicon-o-home-modern class="w-6 h-6 text-blue-500" />
-                    </div>
-                    <p class=""><strong>BCA</strong> - Bishop Heber College Trichy.
-                        <br />
-                        2019-2022
-                    </p>
-                </li>
-                <li class="flex items-center gap-4 text-lg font-medium">
-                    <div class="bg-amber-100 p-4 rounded-full w-fit mb-2">
-                        <x-heroicon-o-building-library class="w-6 h-6 text-amber-500" />
-                    </div>
-                    <p class=""><strong>HSC</strong> - Bishop Heber Hr Sec School Trichy.
-                        <br />
-                        2018-2019
-                    </p>
-                </li>
-                <li class="flex items-center gap-4 text-lg font-medium">
-                    <div class="bg-lime-100 p-4 rounded-full w-fit mb-2">
-                        <x-heroicon-o-building-library class="w-6 h-6 text-lime-500" />
-                    </div>
-                    <p class=""><strong>SSLC</strong> - Bishop Heber Hr Sec School Trichy.
-                        <br />
-                        2016-2017
-                    </p>
-                </li>
-
+                @foreach ($education as $edu)
+                    <li class="flex items-center gap-4 text-lg font-medium">
+                        <div class="bg-lime-100 p-4 rounded-full w-fit mb-2">
+                            <x-heroicon-o-building-library class="w-6 h-6 text-lime-500" />
+                        </div>
+                        <p>
+                            <strong>{{ $edu['degree'] }}</strong> - {{ $edu['institution'] }}.
+                            <br />
+                            {{ $edu['year'] }}
+                        </p>
+                    </li>
+                @endforeach
+            </ul>
+        </x-mary-card>
+        <x-mary-card title="Experience" class="col-span-12 lg:col-span-4">
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                @foreach ($experience as $exp)
+                    <li class="flex items-center gap-4 text-lg font-medium">
+                        <div class="bg-red-100 p-4 rounded-full w-fit mb-2">
+                            <x-heroicon-o-home-modern class="w-6 h-6 text-red-500" />
+                        </div>
+                        <p>
+                            <strong>{{ $exp['role'] }}</strong> - {{ $exp['company'] }}.
+                            <br />
+                            {{ $exp['year'] }}
+                        </p>
+                    </li>
+                @endforeach
             </ul>
         </x-mary-card>
 
-        <x-mary-card title="Experience" class="col-span-12 lg:col-span-4 ">
-            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                <li class="flex items-center gap-4 text-lg font-medium">
-                    <div class="bg-red-100 p-4 rounded-full w-fit mb-2">
-                        <x-heroicon-o-home-modern class="w-6 h-6 text-red-500" />
-                    </div>
-                    <p class=""><strong>Techcmantix</strong> - Technology Pvt Ltd Trichy.
-                        <br />
-                        2024-Present
-                    </p>
-                </li>
-                <li class="flex items-center gap-4 text-lg font-medium">
-                    <div class="bg-blue-100 p-4 rounded-full w-fit mb-2">
-                        <x-heroicon-o-home-modern class="w-6 h-6 text-blue-500" />
-                    </div>
-                    <p class=""><strong>RockG</strong> - Micro Technology Pvt Ltd Trichy.
-                        <br />
-                        2023-2024
-                    </p>
-                </li>
-            </ul>
-        </x-mary-card>
     </div>
 
 
@@ -246,7 +216,7 @@
                     placeholder="Enter Ph.No" />
                 <x-mary-input label="State" wire:model="state" placeholder="Enter State" />
                 <x-mary-input label="Country" wire:model="country" placeholder="Enter Country" />
-                <x-mary-input label="Experience" type="number" wire:model="experience" min="0" />
+                <x-mary-input label="Job Experience" type="number" wire:model="job_experience" min="0" />
                 <x-mary-input label="Projects" type="number" wire:model="projects" min="0" />
                 <x-mary-input label="Awards" type="number" wire:model="awards" min="0" />
             </div>
@@ -266,16 +236,42 @@
                 <x-mary-file wire:model="photo" accept="image/png, image/jpeg"
                     hint="Only png/jpeg .. Please wait for the image to upload. This might take up to 1 minute. " />
             </div>
+            <div>
+                <div class="grid lg:grid-cols-4 gap-3 ">
+                    @foreach ($education as $index => $edu)
+                        <x-mary-input wire:model="education.{{ $index }}.degree" placeholder="Degree" />
+                        <x-mary-input wire:model="education.{{ $index }}.institution"
+                            placeholder="Institution" />
+                        <x-mary-input wire:model="education.{{ $index }}.year" placeholder="Year" />
+                        <x-mary-button wire:click="removeEducation({{ $index }})"
+                            class="btn-square btn-outline">-</x-mary-button>
+                    @endforeach
+                </div>
+
+                <button type="button" wire:click="addEducation"
+                    class="mt-3 px-4 py-2 bg-blue-500 text-white rounded">+ Add Education</button>
+            </div>
+            <div>
+                <div class="grid lg:grid-cols-4 gap-3 ">
+                    @foreach ($experience as $index => $exp)
+                        <x-mary-input wire:model="experience.{{ $index }}.role" placeholder="role" />
+                        <x-mary-input wire:model="experience.{{ $index }}.company" placeholder="company" />
+                        <x-mary-input wire:model="experience.{{ $index }}.year" placeholder="Year" />
+                        <x-mary-button wire:click="removeExperience({{ $index }})"
+                            class="btn-square btn-outline">-</x-mary-button>
+                    @endforeach
+                </div>
+
+                <button type="button" wire:click="addExperience"
+                    class="mt-3 px-4 py-2 bg-blue-500 text-white rounded">+ Add Experience</button>
+            </div>
+
+
 
             <x-mary-button label="Save"
                 class="bg-gradient-to-r border-0 from-red-500 to-blue-500 text-white w-52 flex shadow-lg"
                 type="submit" />
 
-            {{-- <x-slot:actions>
-                <x-mary-button class="btn-primary" type="submit">
-                    Save
-                </x-mary-button>
-            </x-slot:actions> --}}
         </x-mary-form>
     </x-mary-drawer>
 </div>

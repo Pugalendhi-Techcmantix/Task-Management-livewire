@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->text('about_me')->nullable(); 
             $table->bigInteger('number')->nullable(); 
-            $table->bigInteger('experience')->nullable(); 
+            $table->bigInteger('job_experience')->nullable(); 
             $table->bigInteger('projects')->nullable(); 
             $table->bigInteger('awards')->nullable(); 
             $table->string('photo')->nullable();
             $table->json('personal_skills')->nullable();
             $table->json('professional_skills')->nullable();
+            $table->json('education')->nullable();
+            $table->json('experience')->nullable();
             $table->timestamps();
         });
     }
