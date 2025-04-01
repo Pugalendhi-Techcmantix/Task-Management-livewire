@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sample;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SampleController extends Controller
 {
@@ -13,7 +14,10 @@ class SampleController extends Controller
             'username' => "required|string|max:255",
             'password' => "required|string|max:255|min:6",
         ]);
-        $user = Sample::create($req->all());
+        // Hash the password before saving
+        $data = $req->all();
+        $data['password'] = Hash::make($req->password);
+        $user = Sample::create($data);
         return response()->json([
             'success' => true,
             'message' => 'created',
@@ -97,10 +101,19 @@ class SampleController extends Controller
         }
 
         $validateData = $req->validate([
-            'username' => "required|string|max:255",
-            'password' => "string|max:255|min:6",
+            'username' => "sometimes|string|max:255|unique:samples,username,$id",
+            'password' => "nullable|string|max:255|min:6",
         ]);
+
+        // Check if password is provided and hash it before updating
+        if (!empty($validateData['password'])) {
+            $validateData['password'] = Hash::make($validateData['password']);
+        } else {
+            unset($validateData['password']); // Remove password field if it's not provided
+        }
+
         $user->update($validateData);
+
         return response()->json([
             'success' => true,
             'message' => 'User Updated',

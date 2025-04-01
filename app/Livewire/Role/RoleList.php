@@ -6,10 +6,13 @@ use App\Models\Roles;
 use App\Models\User;
 use Livewire\Component;
 use Mary\Traits\Toast;
+use Livewire\WithPagination;
+
 
 class RoleList extends Component
 {
     use Toast;
+    use WithPagination;
     public $search = '', $name, $role_id, $confirmDelete = false;
     public int $perPage = 5; // Number of items per page
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];

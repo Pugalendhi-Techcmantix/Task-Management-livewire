@@ -8,7 +8,6 @@ use Livewire\Component;
 class GeminiAi extends Component
 {
 
-
     public $message;
     public $response;
 
@@ -23,7 +22,7 @@ class GeminiAi extends Component
         $apiKey = env('GEMINI_API_KEY');
 
         try {
-            $response = $client->post("https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key={$apiKey}", [
+            $response = $client->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$apiKey}", [
                 'json' => [
                     'contents' => [
                         ['parts' => [['text' => $this->message]]]

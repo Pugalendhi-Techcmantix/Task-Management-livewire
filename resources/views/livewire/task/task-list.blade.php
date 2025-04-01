@@ -1,7 +1,7 @@
 <div class="container ">
     <x-mary-card shadow class="shadow-xl p-11" title="Assign Task">
         <x-slot:menu>
-            <x-mary-dropdown>
+            <x-mary-dropdown label="Actions">
                 <x-mary-menu-item title="Add" icon="o-plus"
                     wire:click="$dispatch('openModal', { component: 'task.task-modal' })" spinner />
                 <x-mary-menu-item title="Import" icon="o-arrow-small-up" wire:click="importOpen" spinner />

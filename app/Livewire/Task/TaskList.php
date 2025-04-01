@@ -15,11 +15,14 @@ use Maatwebsite\Excel\Facades\Excel;
 use Mary\Traits\Toast;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
+use Livewire\WithPagination;
+
 
 class TaskList extends Component
 {
     use Toast;
     use WithFileUploads;
+    use WithPagination;
     public $file; // For handling the uploaded file
     public $search = '', $task_id, $confirmDelete = false, $confirmOpen = false;
     public int $perPage = 10; // Number of items per page
